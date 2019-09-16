@@ -22,7 +22,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule, MatNativeDateModule,
-  MatProgressBarModule
+  MatProgressBarModule, MatProgressSpinnerModule
 } from '@angular/material';
 import {LoggedinComponent} from './components/loggedin.component';
 import {JwtModule} from '@auth0/angular-jwt';
@@ -84,6 +84,7 @@ import {FormsModule} from '@angular/forms';
     MatInputModule,
     FormsModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [

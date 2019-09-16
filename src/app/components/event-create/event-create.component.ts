@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Event} from '../../data/event';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {BackendService} from '../../services/backend.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-create',
@@ -10,10 +12,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 export class EventCreateComponent implements OnInit {
   event: Event;
   copyOf?: number;
+  sending: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EventCreateComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: EventCreateData) {
+    @Inject(MAT_DIALOG_DATA) public data: EventCreateData,
+    private backend: BackendService,
+    private router: Router) {
 
     if (data) {
       if (data.event) {
@@ -31,6 +36,30 @@ export class EventCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  submit() {
+    if (this.sending) {
+      return;
+    }
+
+    this.sending = true;
+    try {
+      if (this.event.eventId) {
+        // TODO: update
+      } else {
+        this.backend
+          .createEdition(this.event, this.copyOf)
+          .subscribe(targetId => {
+            this.router.navigate(['/', 'event', targetId]);
+            this.dialogRef.close();
+          });
+      }
+    } catch (e) {
+      e.print();
+      console.log(e);
+      this.sending = false;
+    }
   }
 
 }

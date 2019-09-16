@@ -12,5 +12,9 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <button mat-raised-button color="primary">{{event.eventId ? "Modifier" : copyOf ? "Copier" : "Créer" }} !</button>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="sending">{{event.eventId ? "Modifier" : copyOf ? "Copier" : "Créer" }} !</button>
 </form>
+
+<mat-card-footer>
+  <mat-progress-bar mode="indeterminate" *ngIf="sending"></mat-progress-bar>
+</mat-card-footer>
