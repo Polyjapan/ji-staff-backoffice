@@ -1,0 +1,26 @@
+<div fxLayout fxLayoutAlign="center">
+  <mat-card fxFlex="1 1 75%" fxFlex.lt-sm="1 1 95%" style="margin-top: 25px;">
+    <h1 mat-card-title>Sélection de l'événement</h1>
+    <h2 mat-card-subtitle>Choisissez l'événement avec lequel vous souhaitez travailler</h2>
+    <mat-divider></mat-divider>
+
+    <mat-action-list *ngIf="ev">
+      <mat-list-item *ngFor="let e of ev" [routerLink]="['/', 'event', e.eventId]">
+        <mat-icon matListIcon>{{e.isActive ? "folder_open" : "folder"}}</mat-icon>
+        <p matLine>{{e.name}}</p>
+        <p matLine>Débute le <b>{{e.eventBegin}}</b> - Actuellement <b>{{e.isActive ? "actif" : "inactif"}}</b></p>
+      </mat-list-item>
+      <mat-list-item *ngIf="ev.length == 0">
+        <p matLine><i>Aucune édition enregistrée...</i></p>
+      </mat-list-item>
+      <mat-list-item (click)="openBottomSheet()">
+        <mat-icon matListIcon>create_new_folder</mat-icon>
+        <p matLine>Nouvel événement</p>
+      </mat-list-item>
+    </mat-action-list>
+
+    <mat-card-footer *ngIf="!ev">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>
