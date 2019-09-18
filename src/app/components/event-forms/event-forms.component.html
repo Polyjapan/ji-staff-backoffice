@@ -1,0 +1,16 @@
+<h3>Gestion des formulaires</h3>
+
+<mat-action-list *ngIf="forms">
+  <mat-list-item *ngFor="let form of forms" [routerLink]="[form.formId]">
+    <mat-icon matListIcon>{{"folder"}}</mat-icon>
+    <p matLine>{{ form.name }}</p>
+    <p matLine>{{ form.hidden ? "Invisible" : form.requiresStaff ? "Staffs seulement" : "Visible par tous" }}</p>
+  </mat-list-item>
+  <mat-list-item *ngIf="forms.length == 0">
+    <p matLine><i>Aucun formulaire enregistré...</i></p>
+  </mat-list-item>
+  <mat-list-item (click)="create()">
+    <mat-icon matListIcon>create_new_folder</mat-icon>
+    <p matLine>Nouveau formulaire</p>
+  </mat-list-item>
+</mat-action-list>

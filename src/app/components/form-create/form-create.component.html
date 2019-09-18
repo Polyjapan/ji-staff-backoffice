@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>{{form.formId ? "Modifier" : "Créer" }} un formulaire</h2>
+
+<form mat-dialog-content (ngSubmit)="submit($event)" #ngform="ngForm">
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Nom du formulaire" [(ngModel)]="form.name" name="name" required maxlength="100">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Description courte" [(ngModel)]="form.shortDescription" name="shortDescription"
+           required maxlength="200">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <textarea matInput placeholder="Description complète" [(ngModel)]="form.description" name="description" required>
+    </textarea>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input type="number" matInput placeholder="Age minimal" [(ngModel)]="form.minAge" name="minAge" required>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input type="number" matInput placeholder="Age maximal" [(ngModel)]="form.maxAge" name="maxAge" required>
+  </mat-form-field>
+
+  <mat-checkbox name="hidden" [(ngModel)]="form.hidden">Formulaire caché pour tous</mat-checkbox>
+
+  <mat-checkbox name="requiresStaff" [disabled]="form.hidden" [(ngModel)]="form.requiresStaff">Visible seulement par
+    les staffs
+  </mat-checkbox>
+
+  <mat-form-field>
+    <input matInput type="datetime-local" placeholder="Fermeture automatique (facultatif)" [(ngModel)]="form.closeDate"
+           name="closeDate">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="sending || !ngform.form.valid">
+    {{form.formId ? "Modifier" : "Créer" }} !
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+  </button>
+
+</form>
+
+<mat-card-footer>
+</mat-card-footer>

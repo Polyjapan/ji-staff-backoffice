@@ -3,6 +3,7 @@ import {Event} from '../../data/event';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BackendService} from '../../services/backend.service';
 import {Router} from '@angular/router';
+import {InvalidationService} from '../../services/invalidation.service';
 
 @Component({
   selector: 'app-event-create',
@@ -18,7 +19,8 @@ export class EventCreateComponent implements OnInit {
     public dialogRef: MatDialogRef<EventCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EventCreateData,
     private backend: BackendService,
-    private router: Router) {
+    private router: Router,
+    private invalidate: InvalidationService) {
 
     if (data) {
       if (data.event) {
@@ -46,7 +48,11 @@ export class EventCreateComponent implements OnInit {
     this.sending = true;
     try {
       if (this.event.eventId) {
-        // TODO: update
+        this.backend.updateEdition(this.event)
+          .subscribe(u => {
+            this.invalidate.invalidate('event-' + this.event.eventId);
+            this.dialogRef.close();
+          });
       } else {
         this.backend
           .createEdition(this.event, this.copyOf)
