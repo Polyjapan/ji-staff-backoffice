@@ -3,9 +3,12 @@ import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../services/backend.service';
 import {Form} from '../../data/form';
 import {MatDialog} from '@angular/material';
-import {EventCreateComponent} from '../event-create/event-create.component';
 import {FormCreateComponent} from '../form-create/form-create.component';
-import {InvalidationService} from '../../services/invalidation.service';
+import {InvalidationService, SubscribedListener} from '../../services/invalidation.service';
+import {Event} from '../../data/event';
+import {FormPage} from '../../data/formpage';
+import {FormPageCreateComponent} from '../form-page-create/form-page-create.component';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-event-forms',
@@ -14,7 +17,11 @@ import {InvalidationService} from '../../services/invalidation.service';
 })
 export class EventFormsComponent implements OnInit {
   forms: Form[];
+  pages: Map<number, FormPage[]> = new Map();
   private evId: number;
+  private invalidators: SubscribedListener[] = [];
+  event: Event;
+  settingDefault: boolean;
 
   constructor(private ar: ActivatedRoute, private back: BackendService,
               private dialog: MatDialog, private inval: InvalidationService) {
@@ -22,21 +29,60 @@ export class EventFormsComponent implements OnInit {
 
   ngOnInit() {
     this.ar.data
-      .map(ev => ev.eventId)
-      .subscribe(id => {
-        this.evId = id;
+      .subscribe(ev => {
+        this.evId = ev.eventId;
+        this.event = ev.event;
         this.refreshForms();
 
-        this.inval.listen('forms-' + id, (tag) => this.refreshForms());
+        this.inval.listen('forms-' + this.evId, (tag) => this.refreshForms());
       });
   }
 
   private refreshForms() {
     this.forms = undefined;
-    this.back.getForms(this.evId).subscribe(forms => this.forms = forms);
+    this.back.getForms(this.evId).subscribe(forms => {
+      for (const inv of this.invalidators) {
+        inv.cancel();
+      }
+      this.invalidators.splice(0, this.invalidators.length);
+      this.forms = forms;
+
+      for (const form of this.forms) {
+        this.invalidators.push(this.inval.listen('pages-' + form.formId, (tag) => this.getPages(form.formId)));
+        this.inval.invalidate('pages-' + form.formId);
+      }
+    });
+  }
+
+  getPages(form: number) {
+    this.back.getPages(form).subscribe(pages => {
+      this.pages.set(form, pages);
+    });
   }
 
   create() {
-    this.dialog.open(FormCreateComponent, { data: FormCreateComponent.emptyForm(this.evId) });
+    this.dialog.open(FormCreateComponent, {data: FormCreateComponent.emptyForm(this.evId)});
+  }
+
+  update(form: Form) {
+    this.dialog.open(FormCreateComponent, {data: form});
+  }
+
+  setDefault(form: Form) {
+    this.settingDefault = true;
+    this.back.setDefaultForm(form.eventId, form.formId)
+      .subscribe(a => {
+        this.inval.invalidate(`event-${form.eventId}`);
+        this.settingDefault = false;
+        this.event.mainForm = form.formId;
+      });
+  }
+
+  date(form: Form) {
+    return new Date(form.closeDate);
+  }
+
+  createPage(form: Form) {
+    this.dialog.open(FormPageCreateComponent, {data: FormPageCreateComponent.emptyPage(form.formId)});
   }
 }

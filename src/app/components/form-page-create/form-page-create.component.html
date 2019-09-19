@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>{{page.pageId ? "Modifier" : "Créer" }} une page</h2>
+
+<form mat-dialog-content (ngSubmit)="submit($event)" #ngform="ngForm">
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Titre de la page" [(ngModel)]="page.name" name="name" required maxlength="100">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <textarea matInput placeholder="Description" [(ngModel)]="page.description" name="description" required>
+    </textarea>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input type="number" matInput placeholder="Age minimal" [(ngModel)]="page.minAge" name="minAge" required>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input type="number" matInput placeholder="Age maximal" [(ngModel)]="page.maxAge" name="maxAge" required>
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input type="number" matInput placeholder="Ordre" [(ngModel)]="page.ordering" name="ordering">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="sending || !ngform.form.valid">
+    {{page.pageId ? "Modifier" : "Créer" }} !
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+  </button>
+
+</form>

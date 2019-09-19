@@ -11,12 +11,13 @@ export class InvalidationService {
       this.observables.set(tag, []);
     }
 
+    const self = this;
     this.observables.get(tag).push(listener);
 
     return {
       cancel() {
-        if (this.observables.has(tag)) {
-          this.observables.get(tag).splice(this.observables.get(tag).indexOf(listener));
+        if (self.observables.has(tag)) {
+          self.observables.get(tag).splice(self.observables.get(tag).indexOf(listener));
         }
       }
     };

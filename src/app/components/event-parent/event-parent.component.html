@@ -1,11 +1,10 @@
-<mat-sidenav-container style="height: max-content;">
+<mat-sidenav-container style="min-height: calc(100% - /* hardcoded toolbar size */ 64px);">
 
   <mat-sidenav #nav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
                style="min-width: 15%;"
                [disableClose]="!mobileQuery.matches">
 
     <mat-nav-list>
-
       <a mat-list-item [routerLink]="['/']">
         <mat-icon>arrow_back</mat-icon>
         Retour</a>
@@ -26,8 +25,8 @@
         Candidatures refusées</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
 
+  <mat-sidenav-content>
     <div fxLayout fxLayoutAlign="center" fxLayoutGap="20px" style="margin-top: 25px;">
 
       <div fxFlex="1 1 95%" fxFlex.lt-sm="1 1 98%">

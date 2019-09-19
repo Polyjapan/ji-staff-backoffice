@@ -1,16 +1,59 @@
 <h3>Gestion des formulaires</h3>
 
-<mat-action-list *ngIf="forms">
-  <mat-list-item *ngFor="let form of forms" [routerLink]="[form.formId]">
-    <mat-icon matListIcon>{{"folder"}}</mat-icon>
-    <p matLine>{{ form.name }}</p>
-    <p matLine>{{ form.hidden ? "Invisible" : form.requiresStaff ? "Staffs seulement" : "Visible par tous" }}</p>
-  </mat-list-item>
-  <mat-list-item *ngIf="forms.length == 0">
-    <p matLine><i>Aucun formulaire enregistré...</i></p>
-  </mat-list-item>
-  <mat-list-item (click)="create()">
-    <mat-icon matListIcon>create_new_folder</mat-icon>
-    <p matLine>Nouveau formulaire</p>
-  </mat-list-item>
-</mat-action-list>
+<button mat-raised-button (click)="create()">
+  <mat-icon matListIcon>create_new_folder</mat-icon>
+  Nouveau formulaire
+</button>
+
+<br><br>
+
+<mat-accordion class="headers-align">
+  <mat-expansion-panel *ngFor="let form of forms">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{form.name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Visibilité : {{ form.hidden ? "Invisible" : form.requiresStaff ? "Staffs seulement" : "Visible par tous" }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <h3>Détails du formulaire :</h3>
+    <button (click)="update(form)" mat-raised-button style="margin-right: 8px;">Mettre à jour</button>
+    <button (click)="setDefault(form)"
+            mat-raised-button color="primary"
+            [disabled]="settingDefault || event.mainForm === form.formId">
+      {{event.mainForm === form.formId ? "Formulaire par défaut" : "Définir par défaut" }}</button>
+    <ul>
+      <li>Titre: {{form.name}}</li>
+      <li>Description courte: {{form.shortDescription}}</li>
+      <li>Description complète: {{form.description}}</li>
+      <li>Ages: de {{form.minAge}} à {{form.maxAge}}</li>
+      <li *ngIf="form.closeDate">Fermeture: {{date(form)}}</li>
+    </ul>
+
+    <h3>Pages</h3>
+
+    <mat-action-list *ngIf="pages.get(form.formId)">
+      <mat-list-item *ngFor="let page of pages.get(form.formId)" [routerLink]="[form.formId, 'pages', page.pageId]">
+        <mat-icon matListIcon>list_alt</mat-icon>
+        <p matLine>{{ page.name }}</p>
+        <p matLine>{{ page.description }}</p>
+      </mat-list-item>
+
+      <mat-list-item *ngIf="pages.get(form.formId).length == 0">
+        <p matLine><i>Aucune page enregistrée...</i></p>
+      </mat-list-item>
+
+      <mat-list-item (click)="createPage(form)">
+        <mat-icon matListIcon>create</mat-icon>
+        <p matLine>Nouvelle page</p>
+      </mat-list-item>
+    </mat-action-list>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<b *ngIf="forms && forms.length === 0">Aucun formulaire enregistré pour le moment.</b>
+
+<br>

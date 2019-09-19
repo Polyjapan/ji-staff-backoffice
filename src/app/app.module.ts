@@ -19,7 +19,7 @@ import {FlexModule} from '@angular/flex-layout';
 import {
   MatBottomSheetModule, MatCheckboxModule,
   MatChipsModule, MatDatepickerModule,
-  MatDialogModule,
+  MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule, MatNativeDateModule,
   MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule
@@ -42,6 +42,11 @@ import {EventFormsComponent} from './components/event-forms/event-forms.componen
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {FormCreateComponent} from './components/form-create/form-create.component';
+import { FormPageCreateComponent } from './components/form-page-create/form-page-create.component';
+import {FormPage} from './data/formpage';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormPageEditComponent } from './components/form-page-edit/form-page-edit.component';
+import { SetAdditionalFormComponent } from './components/set-additional-form/set-additional-form.component';
 
 @NgModule({
   declarations: [
@@ -57,13 +62,17 @@ import {FormCreateComponent} from './components/form-create/form-create.componen
     EventParentComponent,
     EventParamsComponent,
     EventFormsComponent,
-    FormCreateComponent
+    FormCreateComponent,
+    FormPageCreateComponent,
+    FormPageEditComponent,
+    SetAdditionalFormComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
     EventCreateComponent,
     PickCopyComponent,
-    FormCreateComponent
+    FormCreateComponent,
+    FormPageCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +110,9 @@ import {FormCreateComponent} from './components/form-create/form-create.componen
     MatSlideToggleModule,
     MatSelectModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule,
+    DragDropModule
   ],
   providers: [
     LoginService

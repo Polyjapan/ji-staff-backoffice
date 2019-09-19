@@ -6,6 +6,7 @@ import {InvalidationService} from '../../services/invalidation.service';
 import {Event} from '../../data/event';
 import {EventCreateData} from '../event-create/event-create.component';
 import {Form} from '../../data/form';
+import {slugify} from '../../utils';
 
 @Component({
   selector: 'app-form-create',
@@ -40,20 +41,6 @@ export class FormCreateComponent implements OnInit {
   ngOnInit() {
   }
 
-  private slugify(str: string) {
-    const a = 'àáäâãåăæąçćčđďèéěėëêęğǵḧìíïîįłḿǹńňñòóöôœøṕŕřßşśšșťțùúüûǘůűūųẃẍÿýźžż·/_,:;';
-    const b = 'aaaaaaaaacccddeeeeeeegghiiiiilmnnnnooooooprrsssssttuuuuuuuuuwxyyzzz------';
-    const p = new RegExp(a.split('').join('|'), 'g');
-
-    return str.toLowerCase().trim()
-      .replace(/\s+/g, '-') // Replace spaces with -
-      .replace(p, c => b.charAt(a.indexOf(c))) // Replace special characters
-      .replace(/&/g, '-and-') // Replace & with 'and'
-      .replace(/[^\w\-]+/g, '') // Remove all non-word characters
-      .replace(/\-\-+/g, '-') // Replace multiple - with single -
-      .trim();
-  }
-
   submit(event) {
     console.log(event);
 
@@ -63,7 +50,7 @@ export class FormCreateComponent implements OnInit {
     this.sending = true;
 
     // Update form short name
-    this.form.internalName = this.slugify(this.form.name);
+    this.form.internalName = slugify(this.form.name);
     if (this.form.closeDate && typeof this.form.closeDate !== 'number') {
       this.form.closeDate = Date.parse(this.form.closeDate as string);
     }

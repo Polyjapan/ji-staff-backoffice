@@ -1,0 +1,84 @@
+<mat-spinner *ngIf="!fields"></mat-spinner>
+
+<ng-container *ngIf="fields">
+
+
+  <h3>Paramètres de la page {{fields.page.name}}</h3>
+
+  <button mat-raised-button color="primary" (click)="update()">Modifier la page</button>
+  <br>
+
+  <ul>
+    <li>Description : {{fields.page.description}}</li>
+    <li>Âge : de {{fields.page.minAge}} à {{fields.page.maxAge}}</li>
+    <li *ngIf="fields.page.ordering">Ordre : {{fields.page.ordering}}</li>
+  </ul>
+
+  <mat-divider></mat-divider>
+
+  <h3>Contenu de la page</h3>
+
+  <ng-container *ngFor="let field of fields.fields">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ field.field.label ? field.field.label : '(sans titre)' }}</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form (ngSubmit)="updateField(field)" #ngForm="ngForm">
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="Nom interne (sans espace)" [(ngModel)]="field.field.name" name="name"
+                 (ngModelChange)="field.field.name = slugify(field.field.name)" required maxlength="100">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="Label" [(ngModel)]="field.field.label" name="label" required maxlength="100">
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="Texte d'aide" [(ngModel)]="field.field.helpText" name="helpText" required>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+          <mat-label>Type de champ</mat-label>
+          <mat-select [(ngModel)]="field.field.type" name="type">
+            <mat-option *ngFor="let ft of FieldTypes" [value]="ft">
+              {{humanReadableFieldType(ft)}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <ng-container *ngIf="hasAdditionals(field.field.type)">
+          <h4>Paramètres additionels</h4>
+
+          <app-set-additional-form *ngFor="let pair of field.additional | keyvalue" [formId]="formId" [pageId]="pageId" [field]="field" [key]="pair.key" [value]="pair.value">
+          </app-set-additional-form>
+
+          <app-set-additional-form [formId]="formId" [pageId]="pageId" [field]="field"></app-set-additional-form>
+
+        </ng-container>
+
+        <mat-checkbox name="required" [(ngModel)]="field.field.required">Champ obligatoire</mat-checkbox>
+
+        <mat-form-field style="width: 100%;">
+          <input matInput type="number" placeholder="Ordre du champ" [(ngModel)]="field.field.ordering" name="ordering">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="field.sending || ngForm.invalid">
+          {{field.field.fieldId ? "Modifier" : "Créer" }} !
+          <mat-progress-spinner *ngIf="field.sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+        </button>
+
+      </form>
+    </mat-expansion-panel>
+    <br>
+  </ng-container>
+
+  <i *ngIf="fields.fields.length === 0">Aucun champ pour le moment...</i>
+
+  <button mat-raised-button mat-icon-button color="warn" (click)="createField()"
+          style="position: fixed; float: right; right: 4%; bottom: 8%;">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <br><br>
+</ng-container>

@@ -5,11 +5,10 @@ import {RequireLoginComponent} from './components/require-login/require-login.co
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
 import {LoggedinComponent} from './components/loggedin.component';
 import {PickEditionComponent} from './components/pick-edition/pick-edition.component';
-import {EventComponent} from './components/event.component';
-import {TestComponent} from './components/test.component';
 import {EventParentComponent} from './components/event-parent/event-parent.component';
 import {EventParamsComponent} from './components/event-params/event-params.component';
 import {EventFormsComponent} from './components/event-forms/event-forms.component';
+import {FormPageEditComponent} from './components/form-page-edit/form-page-edit.component';
 
 
 const routes: Routes = [
@@ -19,6 +18,7 @@ const routes: Routes = [
         path: 'event/:id', component: EventParentComponent, children: [
           {path: '', pathMatch: 'full', component: EventParamsComponent},
           {path: 'forms', component: EventFormsComponent},
+          {path: 'forms/:formId/pages/:pageId', component: FormPageEditComponent},
         ]
       },
       {path: '', pathMatch: 'full', component: PickEditionComponent},

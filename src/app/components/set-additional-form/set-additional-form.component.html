@@ -1,0 +1,19 @@
+<form (ngSubmit)="submit(key, value)" #form="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Clé (sans espace)" name="key" [(ngModel)]="newKey"
+           (ngModelChange)="newKey = slugify(newKey)" required minlength="3" maxlength="100" #key>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Valeur" name="value" #value [(ngModel)]="newValue" required minlength="1" maxlength="100">
+  </mat-form-field>
+
+
+  <button mat-icon-button type="submit" [disabled]="form.invalid">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <button *ngIf="!isNew()" mat-icon-button (click)="deleteAdditional()">
+    <mat-icon>remove</mat-icon>
+  </button>
+</form>
