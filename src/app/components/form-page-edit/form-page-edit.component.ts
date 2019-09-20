@@ -21,6 +21,7 @@ export class FormPageEditComponent implements OnInit {
   FieldTypes = FieldTypes;
   humanReadableFieldType = humanReadableFieldType;
   hasAdditionals = hasAdditionals;
+  sending: {field: FormField, additional: {}}[];
 
   constructor(private back: BackendService, private ar: ActivatedRoute, private dialog: MatDialog) {
   }
@@ -44,24 +45,22 @@ export class FormPageEditComponent implements OnInit {
     this.dialog.open(FormPageCreateComponent, {data: this.fields.page});
   }
 
-  slugify(name: string) {
-    return slugify(name);
-  }
-
   updateField(field: {field: FormField, additional: {}}) {
-    field.sending = true;
+    this.sending.push(field);
 
     if (field.field.fieldId) {
       this.back.updateField(this.formId, this.pageId, field.field).subscribe(fieldId => {
-        field.sending = false;
+        this.sending.splice(this.sending.indexOf(field));
       });
     } else {
       this.back.createField(this.formId, this.pageId, field.field).subscribe(fieldId => {
-        for (const k of field.additional.keys()) {
-          this.back.setAdditional(this.formId, this.pageId, this.fieldId, k, field.additional.get(k));
+        for (const k in field.additional) {
+          if (typeof k === 'string') {
+            this.back.setAdditional(this.formId, this.pageId, fieldId, k, field.additional[k]);
+          }
         }
         field.field.fieldId = fieldId;
-        field.sending = false;
+        this.sending.splice(this.sending.indexOf(field));
       });
     }
   }

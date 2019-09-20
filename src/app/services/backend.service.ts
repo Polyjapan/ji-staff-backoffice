@@ -71,7 +71,7 @@ export class BackendService {
   }
 
   getPage(form: number, page: number): Observable<PageResult> {
-    return this.http.get<PageResult>(this.baseFrontUrl + '/forms/' + form + '/pages/' + page);
+    return this.http.get<PageResult>(this.baseApiUrl + '/forms/' + form + '/pages/' + page);
   }
 
   createPage(form: number, page: FormPage): Observable<number> {

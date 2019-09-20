@@ -21,21 +21,20 @@
   <ng-container *ngFor="let field of fields.fields">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title>{{ field.field.label ? field.field.label : '(sans titre)' }}</mat-panel-title>
+        <mat-panel-title>{{ field.field.name ? field.field.name : '(sans titre)' }}</mat-panel-title>
       </mat-expansion-panel-header>
 
       <form (ngSubmit)="updateField(field)" #ngForm="ngForm">
         <mat-form-field style="width: 100%;">
-          <input matInput placeholder="Nom interne (sans espace)" [(ngModel)]="field.field.name" name="name"
-                 (ngModelChange)="field.field.name = slugify(field.field.name)" required maxlength="100">
-        </mat-form-field>
-
-        <mat-form-field style="width: 100%;">
-          <input matInput placeholder="Label" [(ngModel)]="field.field.label" name="label" required maxlength="100">
+          <input matInput placeholder="Nom du champ" [(ngModel)]="field.field.name" name="name" required maxlength="100">
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
           <input matInput placeholder="Texte d'aide" [(ngModel)]="field.field.helpText" name="helpText" required>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="Placeholder (valeur par défaut)" [(ngModel)]="field.field.label" name="label" required maxlength="100">
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
