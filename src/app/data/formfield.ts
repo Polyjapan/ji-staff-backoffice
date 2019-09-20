@@ -49,8 +49,8 @@ export class FormField {
   fieldId?: number;
   pageId: number;
   name: string;
-  label: string;
-  helpText: string;
+  placeholder: string;
+  helpText?: string;
   required: boolean;
   type: FieldType;
   ordering?: number;

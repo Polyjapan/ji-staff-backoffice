@@ -21,7 +21,7 @@ export class FormPageEditComponent implements OnInit {
   FieldTypes = FieldTypes;
   humanReadableFieldType = humanReadableFieldType;
   hasAdditionals = hasAdditionals;
-  sending: {field: FormField, additional: {}}[];
+  sending: {field: FormField, additional: {}}[] = [];
 
   constructor(private back: BackendService, private ar: ActivatedRoute, private dialog: MatDialog) {
   }
