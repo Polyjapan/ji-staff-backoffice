@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginFailedComponent} from './components/login-failed/login-failed.component';
 import {RequireLoginComponent} from './components/require-login/require-login.component';
 import {PermissionAuthGuard} from './services/permission-auth-guard.service';
@@ -28,6 +28,11 @@ const routes: Routes = [
   },
   {path: 'require-login', component: RequireLoginComponent},
   {path: 'login-failed', component: LoginFailedComponent},
+  {
+    path: '**',
+    canActivate: [PermissionAuthGuard],
+    redirectTo: ''
+  }
 ];
 
 @NgModule({
