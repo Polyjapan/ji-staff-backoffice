@@ -29,22 +29,42 @@
       </ul>
     </mat-card-content>
   </mat-card>
-
-  <mat-card>
+  <mat-card class="admin">
     <mat-card-header>
-      <mat-card-title>Administrer la candidature</mat-card-title>
+      <mat-card-title>Statut: <b>{{readable(application.state)}}</b></mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button *ngIf="application.state !== ApplicationState.Accepted">ACCEPTER</button>
+      <button mat-button *ngIf="application.state !== ApplicationState.Refused">REFUSER</button>
+      <button mat-button *ngIf="application.state !== ApplicationState.RequestedChanges">DEMANDER DES CHANGEMENTS</button>
+      <button mat-button *ngIf="application.state !== ApplicationState.Sent">METTRE EN ATTENTE</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <h2>Commentaires</h2>
+
+  <mat-card class="admin">
+    <mat-card-header>
+      <mat-card-title>Publier un commentaire</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngFor="let comment of comments"
+            [class.comment-public]="comment.comment.userVisible"
+            [class.comment-private]="!comment.comment.userVisible"
+  >
+    <mat-card-header>
+      <mat-card-title>{{date(comment.comment.timestamp)}} <mat-icon>{{comment.comment.userVisible ? 'visibility' : 'visibility_off'}}</mat-icon></mat-card-title>
+      <mat-card-subtitle>{{comment.author.firstName}} ({{comment.author.email}})</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
-        <b>Etat actuel : </b> {{application.state}} <br>
-        Ici, les commentaires
+        {{comment.comment.value}}
       </p>
     </mat-card-content>
-    <mat-card-actions>
-
-      <button mat-button>ACCEPTER</button>
-      <button mat-button>REFUSER</button>
-      <button mat-button>DEMANDER DES CHANGEMENTS</button>
-    </mat-card-actions>
   </mat-card>
+
 </ng-container>

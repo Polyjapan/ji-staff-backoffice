@@ -57,8 +57,8 @@ export class BackendService {
     return this.http.get<Form[]>(this.baseApiUrl + '/editions/' + event + '/forms');
   }
 
-  getForm(formId: number): Observable<Form[]> {
-    return this.http.get<Form[]>(this.baseFrontUrl + '/forms/' + formId);
+  getForm(formId: number): Observable<Form> {
+    return this.http.get<Form>(this.baseFrontUrl + '/forms/' + formId);
   }
 
   createForm(form: Form): Observable<number> {

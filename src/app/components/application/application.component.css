@@ -1,3 +1,15 @@
 mat-card {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.admin {
+  background-color: rgba(200, 0, 0, 0.1);
+}
+
+.comment-public {
+  background-color: rgba(0, 200, 0, 0.1);
+}
+
+.comment-private {
+  background-color: rgba(0, 0, 200, 0.1);
 }

@@ -10,6 +10,7 @@ import {EventHomeComponent} from './components/event-home/event-home.component';
 import {EventFormsComponent} from './components/event-forms/event-forms.component';
 import {FormPageEditComponent} from './components/form-page-edit/form-page-edit.component';
 import {ApplicationComponent} from './components/application/application.component';
+import {FormApplicationsListingComponent} from './components/form-applications-listing/form-applications-listing.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
           {path: '', pathMatch: 'full', component: EventHomeComponent},
           {path: 'forms', component: EventFormsComponent},
           {path: 'forms/:formId/pages/:pageId', component: FormPageEditComponent},
+          {path: 'forms/:formId/applications', component: FormApplicationsListingComponent},
           {path: 'applications/:id', component: ApplicationComponent},
         ]
       },

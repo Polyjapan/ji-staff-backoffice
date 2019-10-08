@@ -50,6 +50,7 @@ import { SetAdditionalFormComponent } from './components/set-additional-form/set
 import { ApplicationsListingComponent } from './components/applications-listing/applications-listing.component';
 import {MatTableModule} from '@angular/material/table';
 import { ApplicationComponent } from './components/application/application.component';
+import { FormApplicationsListingComponent } from './components/form-applications-listing/form-applications-listing.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ApplicationComponent } from './components/application/application.compo
     FormPageEditComponent,
     SetAdditionalFormComponent,
     ApplicationsListingComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    FormApplicationsListingComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,

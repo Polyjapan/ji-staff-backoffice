@@ -1,22 +1,59 @@
-<table *ngIf="applications" mat-table [dataSource]="applications">
+<ng-container *ngIf="!state" >
+  <div fxLayout fxLayoutAlign="center" fxLayoutGap="10px">
+    <mat-form-field fxFlex="1 1 100%">
+      <mat-label>Filtrer par état</mat-label>
+      <mat-select (selectionChange)="filteredByState($event.value)">
+        <mat-option [value]="null">Aucun filtre</mat-option>
+        <mat-option *ngFor="let state of ApplicationStates" [value]="state">{{readable(state)}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
+    <mat-form-field fxFlex="1 1 100%">
+      <input #filter type="text" matInput placeholder="Filtrer par contenu" (keyup)="filteredByValue($event.target.value)">
+    </mat-form-field>
+  </div>
+
+  <br>
+</ng-container>
+
+<table *ngIf="applications" mat-table [dataSource]="applications">
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{app.applicationId}} </td>
+    <th mat-header-cell *matHeaderCellDef> ID</th>
+    <td mat-cell *matCellDef="let app"> {{app.applicationId}} </td>
   </ng-container>
 
   <ng-container matColumnDef="user">
-    <th mat-header-cell *matHeaderCellDef> Nom </th>
-    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{app.user.firstName + ' ' + app.user.lastName}} </td>
+    <th mat-header-cell *matHeaderCellDef> Nom</th>
+    <td mat-cell *matCellDef="let app"> {{app.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email</th>
+    <td mat-cell *matCellDef="let app"> {{app.email}} </td>
   </ng-container>
 
   <ng-container matColumnDef="state">
-    <th mat-header-cell *matHeaderCellDef> Etat </th>
-    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{readable(app.state)}} </td>
+    <th mat-header-cell *matHeaderCellDef> Etat</th>
+    <td mat-cell *matCellDef="let app"> {{readable(app.state)}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['id', 'user', 'state']"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'user', 'state']"></tr>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions</th>
+    <td mat-cell *matCellDef="let app">
+
+      <button mat-button (click)="open(app.applicationId)">Voir</button>
+
+      <!--
+      <button mat-button color="primary" *ngIf="app.state !== ApplicationState.Accepted" (click)="open(app.applicationId)">Accepter</button>
+      <button mat-button color="warn" *ngIf="app.state !== ApplicationState.Refused" (click)="open(app.applicationId)">Refuser</button>
+      <button mat-button color="accent" *ngIf="app.state === ApplicationState.Refused || app.state === ApplicationState.Accepted" (click)="open(app.applicationId)">Mettre en attente</button>
+      -->
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'user', 'email', 'state', 'actions']"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'user', 'email', 'state', 'actions']"></tr>
 
   <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
 </table>

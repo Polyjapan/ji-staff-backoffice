@@ -83,7 +83,7 @@ export class FormPageEditComponent implements OnInit {
   deleteField(field: number) {
     if (confirm('Voulez vous vraiment supprimer ce champ de formulaire ?')) {
       this.fields.fields.splice(this.fields.fields.findIndex(v => v.field.fieldId === field), 1);
-      this.back.deleteField(this.formId, this.pageId, field);
+      this.back.deleteField(this.formId, this.pageId, field).subscribe(_ => {});
     }
   }
 }

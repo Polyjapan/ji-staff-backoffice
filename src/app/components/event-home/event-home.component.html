@@ -5,14 +5,9 @@
 
 <br>
 <h3>Réponses en attente</h3>
-<p>Liste, par formulaire, les réponses envoyées mais pas encore acceptées ou refusées.</p>
+<p>Liste, par formulaire, les réponses envoyées mais pas encore acceptées ou refusées. Vous pouvez obtenir une liste complète des réponses via le menu <b><a [routerLink]="['forms']">Formulaires</a></b>.</p>
 
 <ng-container *ngFor="let form of forms">
   <h1>{{form.name}}</h1>
-  <app-applications-listing [form]="form.formId"></app-applications-listing>
-</ng-container>
-
-<ng-container *ngFor="let form of forms">
-  <h1>{{form.name}} only sent</h1>
   <app-applications-listing [form]="form.formId" [state]="ApplicationState.Sent"></app-applications-listing>
 </ng-container>
