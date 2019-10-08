@@ -1,0 +1,18 @@
+<h3>Résumé de l'événement</h3>
+<p>Actif : <mat-slide-toggle (change)="toggleActivate($event)" [disabled]="updatingActivation" [checked]="event.isActive"></mat-slide-toggle> <mat-spinner diameter="17" style="display: inline-block;" *ngIf="updatingActivation"></mat-spinner></p>
+
+<button mat-raised-button (click)="edit()"><mat-icon>create</mat-icon> Modifier l'événement</button>
+
+<br>
+<h3>Réponses en attente</h3>
+<p>Liste, par formulaire, les réponses envoyées mais pas encore acceptées ou refusées.</p>
+
+<ng-container *ngFor="let form of forms">
+  <h1>{{form.name}}</h1>
+  <app-applications-listing [form]="form.formId"></app-applications-listing>
+</ng-container>
+
+<ng-container *ngFor="let form of forms">
+  <h1>{{form.name}} only sent</h1>
+  <app-applications-listing [form]="form.formId" [state]="ApplicationState.Sent"></app-applications-listing>
+</ng-container>

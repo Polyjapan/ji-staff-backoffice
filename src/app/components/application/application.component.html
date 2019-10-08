@@ -1,0 +1,50 @@
+<h2>Visualisation d'une réponse</h2>
+
+<mat-spinner *ngIf="!application"></mat-spinner>
+
+<ng-container *ngIf="application">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Détails du candidat</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <b>Nom : </b> {{application.user.firstName}} {{application.user.lastName.toUpperCase()}} <br>
+        <b>Email : </b> {{application.user.email}} <br>
+        <b>Date de naissance : </b> {{application.user.birthDate}} <br>
+        <b>Adresse : </b> {{application.user.address}} <br>
+        <b>N° de téléphone : </b> {{application.user.phone}} <br>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngFor="let app of application.content">
+    <mat-card-header>
+      <mat-card-title>{{app.page.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{app.page.description}}</p>
+      <ul>
+        <li *ngFor="let field of app.fields"><b>{{field.field.name}} :</b> {{field.value ? field.value : '(manquant)'}}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Administrer la candidature</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <b>Etat actuel : </b> {{application.state}} <br>
+        Ici, les commentaires
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+
+      <button mat-button>ACCEPTER</button>
+      <button mat-button>REFUSER</button>
+      <button mat-button>DEMANDER DES CHANGEMENTS</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

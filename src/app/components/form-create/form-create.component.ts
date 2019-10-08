@@ -69,7 +69,6 @@ export class FormCreateComponent implements OnInit {
           .createForm(this.form)
           .subscribe(targetId => {
             this.invalidate.invalidate('forms-' + this.form.eventId);
-            this.router.navigate(['/', 'event', this.form.eventId, 'forms', targetId]);
             this.dialogRef.close();
           });
       }

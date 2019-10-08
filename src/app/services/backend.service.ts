@@ -7,6 +7,9 @@ import {Form} from '../data/form';
 import {FormPage} from '../data/formpage';
 import {PageResult} from '../data/pageresult';
 import {FormField} from '../data/formfield';
+import {ApplicationState} from '../data/state';
+import {ApplicationListing, ApplicationResult, CommentWithAuthor} from '../data/applications';
+import {Comment} from '../data/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +99,27 @@ export class BackendService {
 
   deleteAdditional(form: number, page: number, field: number, key: string): Observable<void> {
     return this.http.delete<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field + '/' + key);
+  }
+
+  getApplications(form: number, state?: ApplicationState): Observable<ApplicationListing[]> {
+    const queryParams = state ? '?state=' + state : '';
+    return this.http.get<ApplicationListing[]>(this.baseApiUrl + '/forms/' + form + '/applications' + queryParams);
+  }
+
+  getApplication(application: number): Observable<ApplicationResult> {
+    return this.http.get<ApplicationResult>(this.baseApiUrl + '/applications/content/' + application);
+  }
+
+  getComments(application: number): Observable<CommentWithAuthor[]> {
+    return this.http.get<CommentWithAuthor[]>(this.baseApiUrl + '/applications/comments/' + application);
+  }
+
+  addComment(application: number, comment: Comment): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/applications/comments/' + application, comment);
+  }
+
+  setState(application: number, state: ApplicationState): Observable<void> {
+    return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, state);
   }
 }
 

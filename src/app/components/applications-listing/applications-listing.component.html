@@ -1,0 +1,22 @@
+<table *ngIf="applications" mat-table [dataSource]="applications">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{app.applicationId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="user">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{app.user.firstName + ' ' + app.user.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef> Etat </th>
+    <td mat-cell *matCellDef="let app" (click)="open(app.applicationId)"> {{readable(app.state)}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'user', 'state']"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'user', 'state']"></tr>
+
+  <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+</table>

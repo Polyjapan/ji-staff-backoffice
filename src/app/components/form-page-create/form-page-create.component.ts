@@ -57,7 +57,6 @@ export class FormPageCreateComponent implements OnInit {
           .createPage(this.page.formId, this.page)
           .subscribe(targetId => {
             this.invalidate.invalidate('pages-' + this.page.formId);
-            this.router.navigate(['page', targetId]);
             this.dialogRef.close();
           });
       }

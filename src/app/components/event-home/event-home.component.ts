@@ -7,15 +7,19 @@ import 'rxjs-compat/add/operator/filter';
 import {MatDialog, MatSlideToggleChange} from '@angular/material';
 import {EventCreateComponent, EventCreateData} from '../event-create/event-create.component';
 import {InvalidationService} from '../../services/invalidation.service';
+import {Form} from '../../data/form';
+import {ApplicationState} from '../../data/state';
 
 @Component({
-  selector: 'app-event-params',
-  templateUrl: './event-params.component.html',
-  styleUrls: ['./event-params.component.css']
+  selector: 'app-event-home',
+  templateUrl: './event-home.component.html',
+  styleUrls: ['./event-home.component.css']
 })
-export class EventParamsComponent implements OnInit {
+export class EventHomeComponent implements OnInit {
+  forms: Form[];
   event: Event;
   updatingActivation = false;
+  ApplicationState = ApplicationState;
 
   constructor(private ar: ActivatedRoute, private back: BackendService, private dialog: MatDialog,
               private invalidate: InvalidationService) {
@@ -25,7 +29,11 @@ export class EventParamsComponent implements OnInit {
     this.ar.data
       .filter(d => d.event)
       .map(d => d.event)
-      .subscribe(ev => this.event = ev);
+      .subscribe(ev => {
+        this.event = ev;
+        this.refreshForms();
+        this.invalidate.listen('forms-' + this.event.eventId, (tag) => this.refreshForms());
+      });
   }
 
   edit() {
@@ -42,5 +50,10 @@ export class EventParamsComponent implements OnInit {
         this.invalidate.invalidate('event-' + this.event.eventId);
         this.updatingActivation = false;
       });
+  }
+
+  private refreshForms() {
+    this.forms = undefined;
+    this.back.getForms(this.event.eventId).subscribe(forms => this.forms = forms);
   }
 }

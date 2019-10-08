@@ -21,8 +21,8 @@ import {
   MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule, MatNativeDateModule,
-  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule
+  MatInputModule, MatNativeDateModule, MatPaginatorModule,
+  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatTabsModule
 } from '@angular/material';
 import {LoggedinComponent} from './components/loggedin.component';
 import {JwtModule} from '@auth0/angular-jwt';
@@ -37,7 +37,7 @@ import {PickCopyComponent} from './components/pick-edition/pick-copy.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestComponent} from './components/test.component';
 import {EventParentComponent} from './components/event-parent/event-parent.component';
-import {EventParamsComponent} from './components/event-params/event-params.component';
+import {EventHomeComponent} from './components/event-home/event-home.component';
 import {EventFormsComponent} from './components/event-forms/event-forms.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
@@ -47,6 +47,9 @@ import {FormPage} from './data/formpage';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormPageEditComponent } from './components/form-page-edit/form-page-edit.component';
 import { SetAdditionalFormComponent } from './components/set-additional-form/set-additional-form.component';
+import { ApplicationsListingComponent } from './components/applications-listing/applications-listing.component';
+import {MatTableModule} from '@angular/material/table';
+import { ApplicationComponent } from './components/application/application.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +63,14 @@ import { SetAdditionalFormComponent } from './components/set-additional-form/set
     PickCopyComponent,
     TestComponent,
     EventParentComponent,
-    EventParamsComponent,
+    EventHomeComponent,
     EventFormsComponent,
     FormCreateComponent,
     FormPageCreateComponent,
     FormPageEditComponent,
-    SetAdditionalFormComponent
+    SetAdditionalFormComponent,
+    ApplicationsListingComponent,
+    ApplicationComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
@@ -112,7 +117,10 @@ import { SetAdditionalFormComponent } from './components/set-additional-form/set
     MatRadioModule,
     MatCheckboxModule,
     MatExpansionModule,
-    DragDropModule
+    DragDropModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     LoginService
