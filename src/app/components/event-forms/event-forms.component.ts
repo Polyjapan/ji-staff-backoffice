@@ -68,6 +68,16 @@ export class EventFormsComponent implements OnInit {
     this.dialog.open(FormCreateComponent, {data: form});
   }
 
+  delete(form: Form) {
+    if (this.event.mainForm === form.formId)
+      return;
+
+    if (confirm('Voulez vous vraiment supprimer ce formulaire ? Cette action est irréversible.')) {
+      this.forms.splice(this.forms.indexOf(form), 1);
+      this.back.deleteForm(form.formId).subscribe(res => this.refreshForms());
+    }
+  }
+
   setDefault(form: Form) {
     this.settingDefault = true;
     this.back.setDefaultForm(form.eventId, form.formId)

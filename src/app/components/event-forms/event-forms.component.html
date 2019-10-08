@@ -20,6 +20,7 @@
 
     <h3>Détails du formulaire :</h3>
     <button (click)="update(form)" mat-raised-button style="margin-right: 8px;">Mettre à jour</button>
+    <button (click)="delete(form)" [disabled]="event.mainForm === form.formId" mat-raised-button color="warn" style="margin-right: 8px;">Supprimer</button>
     <button (click)="setDefault(form)"
             mat-raised-button color="primary"
             [disabled]="settingDefault || event.mainForm === form.formId">

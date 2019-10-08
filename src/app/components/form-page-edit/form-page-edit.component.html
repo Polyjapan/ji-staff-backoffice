@@ -6,6 +6,7 @@
   <h3>Paramètres de la page {{fields.page.name}}</h3>
 
   <button mat-raised-button color="primary" (click)="update()">Modifier la page</button>
+  <button mat-raised-button color="warn" (click)="delete()">Supprimer la page</button>
   <br>
 
   <ul>
@@ -65,6 +66,9 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="field.sending || ngForm.invalid">
           {{field.field.fieldId ? "Modifier" : "Créer" }} !
           <mat-progress-spinner *ngIf="field.sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+        </button>
+        <button mat-raised-button color="warn" *ngIf="field.field.fieldId" (click)="deleteField(field.field.fieldId)">
+          Supprimer
         </button>
 
       </form>

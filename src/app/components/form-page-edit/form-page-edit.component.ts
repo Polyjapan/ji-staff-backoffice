@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PageResult} from '../../data/pageresult';
 import {BackendService} from '../../services/backend.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {FormPageCreateComponent} from '../form-page-create/form-page-create.component';
 import {slugify} from '../../utils';
@@ -23,7 +23,7 @@ export class FormPageEditComponent implements OnInit {
   hasAdditionals = hasAdditionals;
   sending: {field: FormField, additional: {}}[] = [];
 
-  constructor(private back: BackendService, private ar: ActivatedRoute, private dialog: MatDialog) {
+  constructor(private back: BackendService, private ar: ActivatedRoute, private dialog: MatDialog, private router: Router) {
   }
 
   ngOnInit() {
@@ -70,5 +70,20 @@ export class FormPageEditComponent implements OnInit {
     field.pageId = this.pageId;
     field.required = false;
     this.fields.fields.push({field, additional: new Map()});
+  }
+
+  delete() {
+    if (confirm('Voulez vous vraiment supprimer cette page ?')) {
+      this.back.deletePage(this.formId, this.pageId).subscribe(res => {
+        this.router.navigate(['/', 'event', this.eventId]);
+      });
+    }
+  }
+
+  deleteField(field: number) {
+    if (confirm('Voulez vous vraiment supprimer ce champ de formulaire ?')) {
+      this.fields.fields.splice(this.fields.fields.findIndex(v => v.field.fieldId === field), 1);
+      this.back.deleteField(this.formId, this.pageId, field);
+    }
   }
 }

@@ -65,6 +65,10 @@ export class BackendService {
     return this.http.post<number>(this.baseApiUrl + '/forms', form);
   }
 
+  deleteForm(id: number): Observable<void> {
+    return this.http.delete<void>(this.baseApiUrl + '/forms/' + id);
+  }
+
   updateForm(form: Form): Observable<number> {
     return this.http.put<number>(this.baseApiUrl + '/forms/' + form.formId, form);
   }
@@ -77,6 +81,10 @@ export class BackendService {
     return this.http.get<PageResult>(this.baseApiUrl + '/forms/' + form + '/pages/' + page);
   }
 
+  deletePage(form: number, id: number): Observable<void> {
+    return this.http.delete<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + id);
+  }
+
   createPage(form: number, page: FormPage): Observable<number> {
     return this.http.post<number>(this.baseApiUrl + '/forms/' + form + '/pages', page);
   }
@@ -87,6 +95,10 @@ export class BackendService {
 
   createField(form: number, page: number, field: FormField): Observable<number> {
     return this.http.post<number>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields', field);
+  }
+
+  deleteField(form: number, page: number, field: number): Observable<void> {
+    return this.http.delete<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field);
   }
 
   updateField(form: number, page: number, field: FormField): Observable<number> {
