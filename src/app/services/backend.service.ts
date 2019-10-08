@@ -131,7 +131,10 @@ export class BackendService {
   }
 
   setState(application: number, state: ApplicationState): Observable<void> {
-    return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, state);
+    return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, '"'  + state + '"',
+      {headers: {
+        'Content-Type': 'application/json'
+      }});
   }
 }
 
