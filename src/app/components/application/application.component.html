@@ -9,11 +9,15 @@
     </mat-card-header>
     <mat-card-content>
       <p>
-        <b>Nom : </b> {{application.user.firstName}} {{application.user.lastName.toUpperCase()}} <br>
-        <b>Email : </b> {{application.user.email}} <br>
+        <b>Nom : </b> {{application.user.profile.details.firstName}} {{application.user.profile.details.lastName.toUpperCase()}} <br>
+        <b>Email : </b> {{application.user.profile.email}} <br>
         <b>Date de naissance : </b> {{application.user.birthDate}} <br>
-        <b>Adresse : </b> {{application.user.address}} <br>
-        <b>N° de téléphone : </b> {{application.user.phone}} <br>
+        <b>Adresse : </b>
+        {{application.user.profile.address.address}} <br>
+        {{application.user.profile.address.addressComplement}} <br>
+        {{application.user.profile.address.postCode}} {{application.user.profile.address.city}} <br>
+        {{application.user.profile.address.country.toUpperCase()}} <br>
+        <b>N° de téléphone : </b> {{application.user.profile.details.phoneNumber}} <br>
       </p>
     </mat-card-content>
   </mat-card>
@@ -48,7 +52,7 @@
       <mat-card-title>Publier un commentaire</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form #form="ngForm" (ngSubmit)="sendComment(form)">
+      <form (ngSubmit)="sendComment()">
         <mat-form-field style="display: block">
           <mat-label>Contenu</mat-label>
           <textarea name="content" matInput [mat-autosize]="true" [(ngModel)]="postingComment"></textarea>

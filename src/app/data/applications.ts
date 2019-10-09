@@ -1,11 +1,11 @@
-import {User} from './user';
+import {FullUser, ReducedUser, User} from './user';
 import {ApplicationState} from './state';
 import {FormField} from './formfield';
 import {FormPage} from './formpage';
 import {Comment} from './comment';
 
 export class ApplicationListing {
-  user: User;
+  user: ReducedUser;
   state: ApplicationState;
   applicationId: number;
 }
@@ -21,12 +21,12 @@ export class FilledPage {
 }
 
 export class ApplicationResult {
-  user: User;
+  user: FullUser;
   state: ApplicationState;
   content: FilledPage[];
 }
 
 export class CommentWithAuthor {
-  author: User;
+  author: ReducedUser;
   comment: Comment;
 }
