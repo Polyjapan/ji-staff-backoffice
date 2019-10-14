@@ -50,10 +50,12 @@
         <ng-container *ngIf="hasAdditionals(field.field.type)">
           <h4>Paramètres additionels</h4>
 
-          <app-set-additional-form *ngFor="let pair of field.additional | keyvalue" [formId]="formId" [pageId]="pageId" [field]="field" [key]="pair.key" [value]="pair.value">
+          <div cdkDropList (cdkDropListDropped)="drop(field, $event)" class="additional-list">
+          <app-set-additional-form cdkDrag *ngFor="let v of field.additional; let index = index" [formId]="formId" [pageId]="pageId" [field]="field" [ordering]="index" [value]="v">
           </app-set-additional-form>
+          </div>
 
-          <app-set-additional-form [formId]="formId" [pageId]="pageId" [field]="field"></app-set-additional-form>
+          <app-set-additional-form [formId]="formId" [pageId]="pageId" [field]="field" [ordering]="field.additional.length"></app-set-additional-form>
 
         </ng-container>
 

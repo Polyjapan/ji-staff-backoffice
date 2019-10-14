@@ -12,51 +12,52 @@ import {isUndefined} from 'util';
 export class SetAdditionalFormComponent implements OnInit {
   @Input() formId: number;
   @Input() pageId: number;
-  @Input() field: { field: FormField, additional: {} };
-  @Input() key?: string;
+  @Input() field: { field: FormField, additional: string[] };
+  @Input() ordering: number;
   @Input() value?: string;
 
-  newKey: string;
   newValue: string;
 
   constructor(private back: BackendService) {
   }
 
   ngOnInit() {
-    this.newKey = this.key;
     this.newValue = this.value;
   }
 
-  submit(key: HTMLInputElement, value: HTMLInputElement) {
-    if (this.key !== this.newKey && this.key) {
+  submit(value: HTMLInputElement) {
+    if (this.value !== this.newValue && this.value) {
       this.deleteAdditional();
     }
 
     this.addAdditional();
 
     if (this.isNew()) {
-      key.value = '';
       value.value = '';
-      key.select();
     }
   }
 
   isNew(): boolean {
-    return isUndefined(this.key);
+    return isUndefined(this.value);
   }
 
   addAdditional() {
-    this.field.additional[this.newKey] = this.newValue;
+    if (this.ordering < this.field.additional.length) {
+      this.field.additional.push(this.field.additional[this.ordering]);
+      this.field.additional[this.ordering] = this.newValue;
+    } else {
+      this.field.additional.push(this.newValue);
+    }
 
     if (this.field.field.fieldId) {
-      this.back.setAdditional(this.formId, this.pageId, this.field.field.fieldId, this.newKey, this.newValue).subscribe(_ => {});
+      this.back.setAdditional(this.formId, this.pageId, this.field.field.fieldId, this.ordering, this.newValue).subscribe(_ => {});
     }
   }
 
   deleteAdditional() {
-    this.field.additional[this.key] = undefined;
+    this.field.additional.splice(this.ordering, 1);
     if (this.field.field.fieldId) {
-      this.back.deleteAdditional(this.formId, this.pageId, this.field.field.fieldId, this.key).subscribe(_ => {});;
+      this.back.deleteAdditional(this.formId, this.pageId, this.field.field.fieldId, this.value).subscribe(_ => {});;
     }
   }
 

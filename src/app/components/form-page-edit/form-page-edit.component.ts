@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {PageResult} from '../../data/pageresult';
+import {FieldAndAdditional, PageResult} from '../../data/pageresult';
 import {BackendService} from '../../services/backend.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {FormPageCreateComponent} from '../form-page-create/form-page-create.component';
-import {slugify} from '../../utils';
-import {FieldType, FormField, humanReadableFieldType, FieldTypes, hasAdditionals} from '../../data/formfield';
-import {NgForm} from '@angular/forms';
+import {FieldTypes, FormField, hasAdditionals, humanReadableFieldType} from '../../data/formfield';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-form-page-edit',
@@ -21,7 +21,7 @@ export class FormPageEditComponent implements OnInit {
   FieldTypes = FieldTypes;
   humanReadableFieldType = humanReadableFieldType;
   hasAdditionals = hasAdditionals;
-  sending: {field: FormField, additional: {}}[] = [];
+  sending: FieldAndAdditional[] = [];
 
   constructor(private back: BackendService, private ar: ActivatedRoute, private dialog: MatDialog, private router: Router) {
   }
@@ -45,7 +45,7 @@ export class FormPageEditComponent implements OnInit {
     this.dialog.open(FormPageCreateComponent, {data: this.fields.page});
   }
 
-  updateField(field: {field: FormField, additional: {}}) {
+  updateField(field: FieldAndAdditional) {
     this.sending.push(field);
 
     if (field.field.fieldId) {
@@ -56,7 +56,8 @@ export class FormPageEditComponent implements OnInit {
       this.back.createField(this.formId, this.pageId, field.field).subscribe(fieldId => {
         for (const k in field.additional) {
           if (typeof k === 'string') {
-            this.back.setAdditional(this.formId, this.pageId, fieldId, k, field.additional[k]);
+            // todo
+            this.back.setAdditional(this.formId, this.pageId, fieldId, 0, field.additional[k]);
           }
         }
         field.field.fieldId = fieldId;
@@ -69,7 +70,7 @@ export class FormPageEditComponent implements OnInit {
     const field = new FormField();
     field.pageId = this.pageId;
     field.required = false;
-    this.fields.fields.push({field, additional: new Map()});
+    this.fields.fields.push({field, additional: []});
   }
 
   delete() {
@@ -83,7 +84,28 @@ export class FormPageEditComponent implements OnInit {
   deleteField(field: number) {
     if (confirm('Voulez vous vraiment supprimer ce champ de formulaire ?')) {
       this.fields.fields.splice(this.fields.fields.findIndex(v => v.field.fieldId === field), 1);
-      this.back.deleteField(this.formId, this.pageId, field).subscribe(_ => {});
+      this.back.deleteField(this.formId, this.pageId, field).subscribe(_ => {
+      });
     }
+  }
+
+  drop(field: FieldAndAdditional, event: CdkDragDrop<string[]>) {
+    // Need to move all the items
+    // If item moved upwards, we need to shift all the items +1
+    // If item moved downwards, we need to shift all the items -1
+
+    const factor = (event.previousIndex > event.currentIndex) ? 1 : -1;
+    const min = event.previousIndex > event.currentIndex ? event.currentIndex : event.previousIndex;
+    const max = event.previousIndex > event.currentIndex ? event.previousIndex : event.currentIndex;
+
+    for (let i = min; i <= max; ++i) {
+      this.back.setAdditional(this.formId, this.pageId, field.field.fieldId, i + factor, field.additional[i]).subscribe(_ => {
+      });
+    }
+
+    this.back.setAdditional(this.formId, this.pageId, field.field.fieldId, event.currentIndex,
+      field.additional[event.previousIndex]).subscribe(_ => {
+    });
+    moveItemInArray(field.additional, event.previousIndex, event.currentIndex);
   }
 }

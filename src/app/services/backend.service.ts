@@ -105,12 +105,13 @@ export class BackendService {
     return this.http.put<number>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field.fieldId, field);
   }
 
-  setAdditional(form: number, page: number, field: number, key: string, value: string): Observable<void> {
-    return this.http.put<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field + '/' + key, value);
+  setAdditional(form: number, page: number, field: number, ordering: number, value: string): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field + '/setAdditional',
+      [value, ordering]);
   }
 
-  deleteAdditional(form: number, page: number, field: number, key: string): Observable<void> {
-    return this.http.delete<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field + '/' + key);
+  deleteAdditional(form: number, page: number, field: number, value: string): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/forms/' + form + '/pages/' + page + '/fields/' + field + '/deleteAdditional', value);
   }
 
   getApplications(form: number, state?: ApplicationState): Observable<ApplicationListing[]> {
@@ -131,10 +132,12 @@ export class BackendService {
   }
 
   setState(application: number, state: ApplicationState): Observable<void> {
-    return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, '"'  + state + '"',
-      {headers: {
-        'Content-Type': 'application/json'
-      }});
+    return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, '"' + state + '"',
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
   }
 }
 
