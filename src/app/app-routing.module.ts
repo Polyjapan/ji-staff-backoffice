@@ -11,6 +11,7 @@ import {EventFormsComponent} from './components/event-forms/event-forms.componen
 import {FormPageEditComponent} from './components/form-page-edit/form-page-edit.component';
 import {ApplicationComponent} from './components/application/application.component';
 import {FormApplicationsListingComponent} from './components/form-applications-listing/form-applications-listing.component';
+import {StaffsListingComponent} from './components/staffs-listing/staffs-listing.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
           {path: 'forms/:formId/pages/:pageId', component: FormPageEditComponent},
           {path: 'forms/:formId/applications', component: FormApplicationsListingComponent},
           {path: 'applications/:id', component: ApplicationComponent},
+          {path: 'staffs', component: StaffsListingComponent},
         ]
       },
       {path: '', pathMatch: 'full', component: PickEditionComponent},

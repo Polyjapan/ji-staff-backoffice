@@ -10,6 +10,8 @@ import {FormField} from '../data/formfield';
 import {ApplicationState} from '../data/state';
 import {ApplicationListing, ApplicationResult, CommentWithAuthor} from '../data/applications';
 import {Comment} from '../data/comment';
+import {StaffListEntry} from '../data/staffs';
+import {UserHistory} from '../data/user';
 
 @Injectable({
   providedIn: 'root'
@@ -139,6 +141,15 @@ export class BackendService {
         }
       });
   }
+
+  getStaffs(event: number): Observable<StaffListEntry[]> {
+    return this.http.get<StaffListEntry[]>(this.baseApiUrl + '/staffs/' + event);
+  }
+
+  getUserHistory(user: number): Observable<UserHistory> {
+    return this.http.get<UserHistory>(this.baseApiUrl + '/users/' + user);
+  }
+
 }
 
 

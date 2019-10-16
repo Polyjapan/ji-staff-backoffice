@@ -4,6 +4,7 @@ import {MediaMatcher} from '@angular/cdk/layout';
 import {Event} from '../../data/event';
 import {BackendService} from '../../services/backend.service';
 import {InvalidationService, SubscribedListener} from '../../services/invalidation.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-event-parent',
@@ -21,7 +22,8 @@ export class EventParentComponent implements OnInit {
   private currentOutlet: RouterOutlet;
 
   constructor(private ar: ActivatedRoute, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-              private back: BackendService, private inval: InvalidationService) {
+              private back: BackendService, private inval: InvalidationService,
+              private location: Location) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this.mobileQueryListener);
@@ -67,6 +69,10 @@ export class EventParentComponent implements OnInit {
   ngOnInit(): void {
     this.ar.paramMap.map(data => data.get('id'))
       .subscribe(id => this.changeEvId(this.ar.snapshot.paramMap.get('id')));
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
 

@@ -51,6 +51,7 @@ import { ApplicationsListingComponent } from './components/applications-listing/
 import {MatTableModule} from '@angular/material/table';
 import { ApplicationComponent } from './components/application/application.component';
 import { FormApplicationsListingComponent } from './components/form-applications-listing/form-applications-listing.component';
+import { StaffsListingComponent } from './components/staffs-listing/staffs-listing.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { FormApplicationsListingComponent } from './components/form-applications
     SetAdditionalFormComponent,
     ApplicationsListingComponent,
     ApplicationComponent,
-    FormApplicationsListingComponent
+    FormApplicationsListingComponent,
+    StaffsListingComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,

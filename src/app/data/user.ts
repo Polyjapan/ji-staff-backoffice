@@ -1,3 +1,6 @@
+import {ApplicationState} from './state';
+import {Form} from './form';
+import {Event} from './event';
 
 export class User {
   userId: number;
@@ -39,4 +42,23 @@ export class UserProfile {
 export class FullUser {
   profile: UserProfile;
   birthDate: Date;
+}
+
+export class ApplicationHistory {
+  application: number;
+  state: ApplicationState;
+  form: Form;
+  event: Event;
+}
+
+export class StaffHistory {
+  staffNumber: number;
+  application: number;
+  event: Event;
+}
+
+export class UserHistory {
+  profile: UserProfile;
+  staffings: StaffHistory[];
+  applications: ApplicationHistory[];
 }

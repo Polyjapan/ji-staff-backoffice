@@ -3,6 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {Router, UrlTree} from '@angular/router';
 import {UserSession} from './auth.module';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,8 @@ export class AuthService {
   public logout(): void {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('id_token');
+
+    window.location.replace(environment.auth.apiurl + '/logout?app=' + environment.auth.clientId)
   }
 
   public getToken(): UserSession {
