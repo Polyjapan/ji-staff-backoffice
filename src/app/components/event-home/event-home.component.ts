@@ -18,11 +18,28 @@ import {ApplicationState} from '../../data/state';
 export class EventHomeComponent implements OnInit {
   forms: Form[];
   event: Event;
+  states: Map<ApplicationState, number>;
   updatingActivation = false;
   ApplicationState = ApplicationState;
 
   constructor(private ar: ActivatedRoute, private back: BackendService, private dialog: MatDialog,
               private invalidate: InvalidationService) {
+  }
+
+  get totalApplications() {
+    let sum = 0;
+    for (const a of this.states.values()) {
+      sum += a;
+    }
+    return sum;
+  }
+
+  countApplications(state) {
+    if (this.states.has(state)) {
+      return this.states.get(state);
+    } else {
+      return 0;
+    }
   }
 
   ngOnInit() {
@@ -32,6 +49,13 @@ export class EventHomeComponent implements OnInit {
       .subscribe(ev => {
         this.event = ev;
         this.refreshForms();
+        this.back.getEditionStats(this.event.eventId).subscribe(map => {
+          this.states = new Map();
+
+          for (const pair of map) {
+            this.states.set(pair[0], pair[1]);
+          }
+        });
         this.invalidate.listen('forms-' + this.event.eventId, (tag) => this.refreshForms());
       });
   }

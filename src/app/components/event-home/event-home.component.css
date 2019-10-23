@@ -1,3 +1,11 @@
 mat-spinner {
   left: -25px;
 }
+
+.stat {
+  text-align: center;
+}
+
+.digit {
+  font-size: 5rem;
+}

@@ -4,6 +4,28 @@
 <button mat-raised-button (click)="edit()"><mat-icon>create</mat-icon> Modifier l'événement</button>
 
 <br>
+<h3>Statistiques</h3>
+<div fxLayout="row" *ngIf="states">
+  <div class="stat" fxFlex>
+    <h3 class="digit">{{countApplications(ApplicationState.Accepted)}}</h3>
+    <p class="name">staffs</p>
+  </div>
+  <div class="stat" fxFlex>
+    <h3 class="digit">{{totalApplications}}</h3>
+    <p class="name">candidatures totales</p>
+  </div>
+  <div class="stat" fxFlex>
+    <h3 class="digit">{{countApplications(ApplicationState.Sent)}}</h3>
+    <p class="name">candidatures en attente</p>
+  </div>
+  <div class="stat" fxFlex>
+
+    <h3 class="digit">{{countApplications(ApplicationState.Refused)}}</h3>
+    <p class="name">candidatures refusées</p>
+  </div>
+</div>
+
+<br>
 <h3>Réponses en attente</h3>
 <p>Liste, par formulaire, les réponses envoyées mais pas encore acceptées ou refusées. Vous pouvez obtenir une liste complète des réponses via le menu <b><a [routerLink]="['forms']">Formulaires</a></b>.</p>
 

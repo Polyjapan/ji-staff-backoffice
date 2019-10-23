@@ -31,6 +31,10 @@ export class BackendService {
     return this.http.get<Event>(this.baseApiUrl + '/editions/' + id);
   }
 
+  getEditionStats(id: number): Observable<[ApplicationState, number][]> {
+    return this.http.get<[ApplicationState, number][]>(this.baseApiUrl + '/stats/' + id);
+  }
+
   createEdition(edition: Event, copyOf?: number): Observable<number> {
     // TODO: better check the date, or the server will do it for us
     return this.http.post<number>(this.baseApiUrl + '/editions', {
