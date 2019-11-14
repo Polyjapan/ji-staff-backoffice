@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BackendService} from '../../services/backend.service';
-import {StaffListEntry} from '../../data/staffs';
+import {BackendService} from '../../../services/backend.service';
+import {StaffListEntry} from '../../../data/staffs';
 import {MatTableDataSource} from '@angular/material';
 
 @Component({

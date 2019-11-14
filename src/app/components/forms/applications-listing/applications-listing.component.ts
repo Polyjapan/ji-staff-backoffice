@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ApplicationState, ApplicationStates, readableState} from '../../data/state';
-import {BackendService} from '../../services/backend.service';
-import {ApplicationListing} from '../../data/applications';
+import {ApplicationState, ApplicationStates, readableState} from '../../../data/state';
+import {BackendService} from '../../../services/backend.service';
+import {ApplicationListing} from '../../../data/applications';
 import {MatTableDataSource} from '@angular/material';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';

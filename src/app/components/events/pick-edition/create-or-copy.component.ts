@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
-import {Event} from '../../data/event';
+import {BackendService} from '../../../services/backend.service';
+import {Event} from '../../../data/event';
 import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatDialog} from '@angular/material';
 import {EventCreateComponent} from '../event-create/event-create.component';
 import {PickCopyComponent} from './pick-copy.component';

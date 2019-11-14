@@ -1,9 +1,9 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, RouterOutlet} from '@angular/router';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {Event} from '../../data/event';
-import {BackendService} from '../../services/backend.service';
-import {InvalidationService, SubscribedListener} from '../../services/invalidation.service';
+import {Event} from '../../../data/event';
+import {BackendService} from '../../../services/backend.service';
+import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
 import {Location} from '@angular/common';
 
 @Component({

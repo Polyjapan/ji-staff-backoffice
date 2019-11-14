@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormField} from '../../data/formfield';
-import {BackendService} from '../../services/backend.service';
-import {slugify} from '../../utils';
+import {FormField} from '../../../data/formfield';
+import {BackendService} from '../../../services/backend.service';
+import {slugify} from '../../../utils';
 import {isUndefined} from 'util';
 
 @Component({

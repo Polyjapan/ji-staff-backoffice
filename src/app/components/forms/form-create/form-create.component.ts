@@ -1,12 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import {Router} from '@angular/router';
-import {InvalidationService} from '../../services/invalidation.service';
-import {Event} from '../../data/event';
-import {EventCreateData} from '../event-create/event-create.component';
-import {Form} from '../../data/form';
-import {slugify} from '../../utils';
+import {InvalidationService} from '../../../services/invalidation.service';
+import {Event} from '../../../data/event';
+import {EventCreateData} from '../../events/event-create/event-create.component';
+import {Form} from '../../../data/form';
+import {slugify} from '../../../utils';
 
 @Component({
   selector: 'app-form-create',

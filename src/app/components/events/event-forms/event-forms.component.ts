@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BackendService} from '../../services/backend.service';
-import {Form} from '../../data/form';
+import {BackendService} from '../../../services/backend.service';
+import {Form} from '../../../data/form';
 import {MatDialog} from '@angular/material';
-import {FormCreateComponent} from '../form-create/form-create.component';
-import {InvalidationService, SubscribedListener} from '../../services/invalidation.service';
-import {Event} from '../../data/event';
-import {FormPage} from '../../data/formpage';
-import {FormPageCreateComponent} from '../form-page-create/form-page-create.component';
+import {FormCreateComponent} from '../../forms/form-create/form-create.component';
+import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
+import {Event} from '../../../data/event';
+import {FormPage} from '../../../data/formpage';
+import {FormPageCreateComponent} from '../../forms/form-page-create/form-page-create.component';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 
 @Component({

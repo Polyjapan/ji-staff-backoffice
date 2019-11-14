@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BackendService} from '../../services/backend.service';
-import {Form} from '../../data/form';
+import {BackendService} from '../../../services/backend.service';
+import {Form} from '../../../data/form';
 
 @Component({
   selector: 'app-form-applications-listing',

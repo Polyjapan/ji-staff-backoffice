@@ -13,8 +13,8 @@ import {LayoutModule} from '@angular/cdk/layout';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-import {RequireLoginComponent} from './components/require-login/require-login.component';
-import {LoginFailedComponent} from './components/login-failed/login-failed.component';
+import {RequireLoginComponent} from './components/accounts/require-login/require-login.component';
+import {LoginFailedComponent} from './components/accounts/login-failed/login-failed.component';
 import {FlexModule} from '@angular/flex-layout';
 import {
   MatBottomSheetModule, MatCheckboxModule,
@@ -29,29 +29,29 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {AuthModule, tokenGetter} from './services/auth.module';
 import {LoginService} from './services/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {PickEditionComponent} from './components/pick-edition/pick-edition.component';
+import {PickEditionComponent} from './components/events/pick-edition/pick-edition.component';
 import {environment} from '../environments/environment';
-import {EventCreateComponent} from './components/event-create/event-create.component';
-import {CreateOrCopyComponent} from './components/pick-edition/create-or-copy.component';
-import {PickCopyComponent} from './components/pick-edition/pick-copy.component';
+import {EventCreateComponent} from './components/events/event-create/event-create.component';
+import {CreateOrCopyComponent} from './components/events/pick-edition/create-or-copy.component';
+import {PickCopyComponent} from './components/events/pick-edition/pick-copy.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestComponent} from './components/test.component';
-import {EventParentComponent} from './components/event-parent/event-parent.component';
-import {EventHomeComponent} from './components/event-home/event-home.component';
-import {EventFormsComponent} from './components/event-forms/event-forms.component';
+import {EventParentComponent} from './components/events/event-parent/event-parent.component';
+import {EventHomeComponent} from './components/events/event-home/event-home.component';
+import {EventFormsComponent} from './components/events/event-forms/event-forms.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
-import {FormCreateComponent} from './components/form-create/form-create.component';
-import { FormPageCreateComponent } from './components/form-page-create/form-page-create.component';
+import {FormCreateComponent} from './components/forms/form-create/form-create.component';
+import { FormPageCreateComponent } from './components/forms/form-page-create/form-page-create.component';
 import {FormPage} from './data/formpage';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import { FormPageEditComponent } from './components/form-page-edit/form-page-edit.component';
-import { SetAdditionalFormComponent } from './components/set-additional-form/set-additional-form.component';
-import { ApplicationsListingComponent } from './components/applications-listing/applications-listing.component';
+import { FormPageEditComponent } from './components/forms/form-page-edit/form-page-edit.component';
+import { SetAdditionalFormComponent } from './components/forms/set-additional-form/set-additional-form.component';
+import { ApplicationsListingComponent } from './components/forms/applications-listing/applications-listing.component';
 import {MatTableModule} from '@angular/material/table';
-import { ApplicationComponent } from './components/application/application.component';
-import { FormApplicationsListingComponent } from './components/form-applications-listing/form-applications-listing.component';
-import { StaffsListingComponent } from './components/staffs-listing/staffs-listing.component';
+import { ApplicationComponent } from './components/forms/application/application.component';
+import { FormApplicationsListingComponent } from './components/forms/form-applications-listing/form-applications-listing.component';
+import { StaffsListingComponent } from './components/events/staffs-listing/staffs-listing.component';
 
 @NgModule({
   declarations: [

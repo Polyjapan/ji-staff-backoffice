@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BackendService} from '../../services/backend.service';
+import {BackendService} from '../../../services/backend.service';
 import 'rxjs-compat/add/operator/mergeMap';
-import {Event} from '../../data/event';
+import {Event} from '../../../data/event';
 import 'rxjs-compat/add/operator/filter';
 import {MatDialog, MatSlideToggleChange} from '@angular/material';
 import {EventCreateComponent, EventCreateData} from '../event-create/event-create.component';
-import {InvalidationService} from '../../services/invalidation.service';
-import {Form} from '../../data/form';
-import {ApplicationState} from '../../data/state';
+import {InvalidationService} from '../../../services/invalidation.service';
+import {Form} from '../../../data/form';
+import {ApplicationState} from '../../../data/state';
 
 @Component({
   selector: 'app-event-home',

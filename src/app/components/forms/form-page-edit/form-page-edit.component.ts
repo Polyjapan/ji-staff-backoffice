@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FieldAndAdditional, PageResult} from '../../data/pageresult';
-import {BackendService} from '../../services/backend.service';
+import {FieldAndAdditional, PageResult} from '../../../data/pageresult';
+import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {FormPageCreateComponent} from '../form-page-create/form-page-create.component';
-import {FieldTypes, FormField, hasAdditionals, humanReadableFieldType} from '../../data/formfield';
+import {FieldTypes, FormField, hasAdditionals, humanReadableFieldType} from '../../../data/formfield';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 

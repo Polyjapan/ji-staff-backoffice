@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BackendService} from '../../services/backend.service';
-import {Event} from '../../data/event';
+import {BackendService} from '../../../services/backend.service';
+import {Event} from '../../../data/event';
 import {MatBottomSheet, MatDialog} from '@angular/material';
 import {CreateOrCopyComponent} from './create-or-copy.component';
 import {EventCreateComponent} from '../event-create/event-create.component';

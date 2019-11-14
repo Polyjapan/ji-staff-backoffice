@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {Form} from '../../data/form';
-import {BackendService} from '../../services/backend.service';
+import {Form} from '../../../data/form';
+import {BackendService} from '../../../services/backend.service';
 import {Router} from '@angular/router';
-import {InvalidationService} from '../../services/invalidation.service';
-import {FormPage} from '../../data/formpage';
+import {InvalidationService} from '../../../services/invalidation.service';
+import {FormPage} from '../../../data/formpage';
 
 @Component({
   selector: 'app-form-page-create',
