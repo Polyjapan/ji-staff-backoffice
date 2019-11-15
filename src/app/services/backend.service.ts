@@ -150,6 +150,10 @@ export class BackendService {
     return this.http.get<StaffListEntry[]>(this.baseApiUrl + '/staffs/' + event);
   }
 
+  exportStaffs(event: number): Observable<Blob> {
+    return this.http.get(this.baseApiUrl + '/staffs/' + event + '.csv', {responseType: 'blob'});
+  }
+
   getUserHistory(user: number): Observable<UserHistory> {
     return this.http.get<UserHistory>(this.baseApiUrl + '/users/' + user);
   }

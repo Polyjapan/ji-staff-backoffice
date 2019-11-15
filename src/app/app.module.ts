@@ -22,7 +22,7 @@ import {
   MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule, MatNativeDateModule, MatPaginatorModule,
-  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatTabsModule
+  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatSortModule, MatTabsModule
 } from '@angular/material';
 import {LoggedinComponent} from './components/loggedin.component';
 import {JwtModule} from '@auth0/angular-jwt';
@@ -124,7 +124,8 @@ import { StaffsListingComponent } from './components/events/staffs-listing/staff
     DragDropModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     LoginService

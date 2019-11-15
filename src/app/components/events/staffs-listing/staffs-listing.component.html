@@ -1,20 +1,22 @@
 <h2>Liste des staffs</h2>
 
+<button mat-raised-button *ngIf="staffs" (click)="downloadList()"><mat-icon>save</mat-icon> Télécharger</button>
+
 <mat-spinner *ngIf="!staffs"></mat-spinner>
 
-<table *ngIf="staffs" mat-table [dataSource]="staffs">
+<table *ngIf="staffs" mat-table [dataSource]="staffs" matSort>
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header start="asca"> ID</th>
     <td mat-cell *matCellDef="let staff"> #{{staff.staffNumber}} </td>
   </ng-container>
 
   <ng-container matColumnDef="user">
-    <th mat-header-cell *matHeaderCellDef> Nom</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom</th>
     <td mat-cell *matCellDef="let staff"> {{staff.user.details.firstName}} {{staff.user.details.lastName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef> Email</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
     <td mat-cell *matCellDef="let staff"> {{staff.user.email}} </td>
   </ng-container>
 

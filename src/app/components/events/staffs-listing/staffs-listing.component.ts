@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../../services/backend.service';
 import {StaffListEntry} from '../../../data/staffs';
-import {MatTableDataSource} from '@angular/material';
+import {MatSort, MatTableDataSource} from '@angular/material';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-staffs-listing',
@@ -12,6 +13,7 @@ import {MatTableDataSource} from '@angular/material';
 export class StaffsListingComponent implements OnInit {
   evId: number;
   staffs: MatTableDataSource<StaffListEntry>;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(private ar: ActivatedRoute, private backend: BackendService, private router: Router) {
   }
@@ -24,16 +26,27 @@ export class StaffsListingComponent implements OnInit {
       });
   }
 
-  private refresh() {
-    this.backend.getStaffs(this.evId).subscribe(staffs => this.staffs = new MatTableDataSource<StaffListEntry>(staffs));
-  }
-
   openApplication(applicationId: number) {
     this.router.navigate(['applications', applicationId], {relativeTo: this.ar.parent});
+  }
+
+  downloadList() {
+    this.backend.exportStaffs(this.evId).subscribe(blob => {
+      if (blob) {
+        FileSaver.saveAs(blob, 'staffs-' + this.evId + '.csv');
+      }
+    });
   }
 
   openHistory(staff: number) {
     alert('Fonctionalité indisponible.');
     // this.router.navigate(['applications', applicationId]);
+  }
+
+  private refresh() {
+    this.backend.getStaffs(this.evId).subscribe(staffs => {
+      this.staffs = new MatTableDataSource<StaffListEntry>(staffs);
+      this.staffs.sort = this.sort;
+    });
   }
 }
