@@ -1,0 +1,18 @@
+<h1>Choix du projet de planning</h1>
+
+<mat-action-list *ngIf="myProjects">
+  <mat-list-item *ngFor="let p of myProjects" [routerLink]="['/', 'event', eventId, 'scheduling', p.projectId]">
+    <mat-icon matListIcon>folder</mat-icon>
+    <p matLine>{{p.projectTitle}}</p>
+    <p matLine>Maximum <b>{{p.maxTimePerStaff}} heures</b> de shift par staff</p>
+  </mat-list-item>
+  <mat-list-item *ngIf="myProjects.length == 0">
+    <p matLine><i>Aucun projet enregistré...</i></p>
+  </mat-list-item>
+  <mat-list-item (click)="openBottomSheet()">
+    <mat-icon matListIcon>create_new_folder</mat-icon>
+    <p matLine>Nouveau projet</p>
+  </mat-list-item>
+</mat-action-list>
+
+<mat-spinner *ngIf="!myProjects"></mat-spinner>
