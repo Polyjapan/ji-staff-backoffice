@@ -13,6 +13,8 @@ import {ApplicationComponent} from './components/forms/application/application.c
 import {FormApplicationsListingComponent} from './components/forms/form-applications-listing/form-applications-listing.component';
 import {StaffsListingComponent} from './components/events/staffs-listing/staffs-listing.component';
 import {SchedulingProjectsComponent} from './components/scheduling/scheduling-projects/scheduling-projects.component';
+import {SchedulingProjectOverviewComponent} from './components/scheduling/scheduling-project-overview/scheduling-project-overview.component';
+import {SchedulingTaskFlowComponent} from './components/scheduling/scheduling-task-flow/scheduling-task-flow.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
           {path: 'applications/:id', component: ApplicationComponent},
           {path: 'staffs', component: StaffsListingComponent},
           {path: 'scheduling', component: SchedulingProjectsComponent},
+          {path: 'scheduling/:id', component: SchedulingProjectOverviewComponent}, // likely temporary
+          {path: 'scheduling/:id/task', component: SchedulingTaskFlowComponent}, // temporary
         ]
       },
       {path: '', pathMatch: 'full', component: PickEditionComponent},

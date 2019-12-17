@@ -22,7 +22,7 @@ import {
   MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule, MatNativeDateModule, MatPaginatorModule,
-  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatSortModule, MatTabsModule
+  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatSortModule, MatStepperModule, MatTabsModule
 } from '@angular/material';
 import {LoggedinComponent} from './components/loggedin.component';
 import {JwtModule} from '@auth0/angular-jwt';
@@ -56,6 +56,8 @@ import { SchedulingProjectsComponent } from './components/scheduling/scheduling-
 import { SchedulingProjectCreateComponent } from './components/scheduling/scheduling-project-create/scheduling-project-create.component';
 import {CreateOrCopyProjectComponent} from './components/scheduling/scheduling-projects/create-or-copy.component';
 import {PickSchedulingCopyComponent} from './components/scheduling/scheduling-projects/pick-copy.component';
+import { SchedulingProjectOverviewComponent } from './components/scheduling/scheduling-project-overview/scheduling-project-overview.component';
+import { SchedulingTaskFlowComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-flow.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import {PickSchedulingCopyComponent} from './components/scheduling/scheduling-pr
     SchedulingProjectsComponent,
     SchedulingProjectCreateComponent,
     CreateOrCopyProjectComponent,
-    PickSchedulingCopyComponent
+    PickSchedulingCopyComponent,
+    SchedulingProjectOverviewComponent,
+    SchedulingTaskFlowComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
@@ -136,7 +140,8 @@ import {PickSchedulingCopyComponent} from './components/scheduling/scheduling-pr
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatStepperModule
   ],
   providers: [
     LoginService
