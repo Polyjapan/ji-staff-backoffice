@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Event} from '../data/event';
-import {SchedulingProject} from '../data/scheduling/schedulingProject';
+import {CreateSchedulingProject, SchedulingProject} from '../data/scheduling/schedulingProject';
 import {map} from 'rxjs/operators';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
@@ -26,6 +26,12 @@ export class SchedulingService {
       return retMap;
     }));
   }
+
+
+  createProject(event: number, data: CreateSchedulingProject): Observable<number> {
+    return this.http.post<number>(this.BASE + '/' + event + '/projects', data);
+  }
+
 }
 
 

@@ -53,6 +53,9 @@ import { ApplicationComponent } from './components/forms/application/application
 import { FormApplicationsListingComponent } from './components/forms/form-applications-listing/form-applications-listing.component';
 import { StaffsListingComponent } from './components/events/staffs-listing/staffs-listing.component';
 import { SchedulingProjectsComponent } from './components/scheduling/scheduling-projects/scheduling-projects.component';
+import { SchedulingProjectCreateComponent } from './components/scheduling/scheduling-project-create/scheduling-project-create.component';
+import {CreateOrCopyProjectComponent} from './components/scheduling/scheduling-projects/create-or-copy.component';
+import {PickSchedulingCopyComponent} from './components/scheduling/scheduling-projects/pick-copy.component';
 
 @NgModule({
   declarations: [
@@ -76,14 +79,20 @@ import { SchedulingProjectsComponent } from './components/scheduling/scheduling-
     ApplicationComponent,
     FormApplicationsListingComponent,
     StaffsListingComponent,
-    SchedulingProjectsComponent
+    SchedulingProjectsComponent,
+    SchedulingProjectCreateComponent,
+    CreateOrCopyProjectComponent,
+    PickSchedulingCopyComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
     EventCreateComponent,
     PickCopyComponent,
     FormCreateComponent,
-    FormPageCreateComponent
+    FormPageCreateComponent,
+    SchedulingProjectCreateComponent,
+    CreateOrCopyProjectComponent,
+    PickSchedulingCopyComponent
   ],
   imports: [
     BrowserModule,

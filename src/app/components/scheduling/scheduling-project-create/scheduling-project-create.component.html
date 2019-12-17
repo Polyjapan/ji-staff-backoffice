@@ -1,0 +1,39 @@
+<h2>{{ project.copyOf ? 'Copier' : 'Créer' }} un projet de planning</h2>
+
+
+<form>
+
+  <p *ngIf="project.copyOf">Le nom du projet de planning n'est volontairement pas copié, de sorte à ce que vous en
+    choisissiez un qui permette de différencier les projets entre eux.</p> <!-- En fait j'ai la flemme -->
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Nom du projet" [(ngModel)]="project.name" name="name">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput type="number" placeholder="Maximum d'heures par staff au total"
+           [(ngModel)]="project.maxHoursPerStaff" name="maxHoursPerStaff">
+  </mat-form-field>
+
+  <ng-container *ngIf="project.copyOf">
+    <mat-checkbox style="width: 100%;" [(ngModel)]="project.copySlots" name="copySlots">Copier les slots (i.e. cases de
+      planning exactes)
+    </mat-checkbox>
+    <br>
+    <mat-checkbox style="width: 100%;" [(ngModel)]="project.copyConstraints" name="copyConstraints">Copier les
+      contraintes
+    </mat-checkbox>
+    <br>
+  </ng-container>
+  <br>
+
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="sending">
+    {{project.copyOf ? "Copier" : "Créer" }} !
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+
+  </button>
+
+</form>
+
+<mat-card-footer>
+</mat-card-footer>

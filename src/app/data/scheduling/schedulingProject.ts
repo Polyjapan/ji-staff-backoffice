@@ -7,3 +7,10 @@ export class SchedulingProject {
   maxTimePerStaff: number;
 }
 
+export class CreateSchedulingProject {
+  name: string;
+  maxHoursPerStaff: number;
+  copyOf?: number;
+  copySlots?: boolean;
+  copyConstraints?: boolean;
+}
