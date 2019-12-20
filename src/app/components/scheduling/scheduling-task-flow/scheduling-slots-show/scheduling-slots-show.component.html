@@ -1,0 +1,15 @@
+<mat-spinner *ngIf="!slots"></mat-spinner>
+
+<ng-container *ngIf="slots">
+  <h2>Voici les slots de planning générés :</h2>
+
+  <ul>
+    <li *ngFor="let slot of slots">{{slot.staffsRequired}} staffs le {{slot.timeSlot.day}} de {{slot.timeSlot.start}} à {{slot.timeSlot.end}}</li>
+  </ul>
+
+  <p>Attention, la regénération des slots supprime les anciens slots du planning. Il faut donc le regénérer ensuite.</p>
+
+  <button mat-raised-button color="warn" (click)="regen()">(Re)générer les slots de planning</button>
+
+</ng-container>
+

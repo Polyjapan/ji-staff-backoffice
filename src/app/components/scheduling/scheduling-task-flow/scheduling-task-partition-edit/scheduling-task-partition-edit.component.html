@@ -1,0 +1,46 @@
+<h2>{{partition.taskPartitionId ? 'Modification' : 'Création' }} d'une plage horaire</h2>
+
+<form *ngIf="partition" #form="ngForm">
+  <mat-form-field style="width: 100%">
+    <input matInput type="number" placeholder="Nombre de staffs nécessaire" required name="staffsRequired" [(ngModel)]="partition.staffsRequired">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Durée du shift par défaut (minutes)" required type="number" name="shiftDuration" [(ngModel)]="partition.shiftDuration">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Date" required name="date" [matDatepicker]="dayDatePicker" [(ngModel)]="partition.slot.day">
+    <mat-datepicker-toggle matSuffix [for]="dayDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #dayDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field style="width: 45%; margin-right: 5%;">
+    <input matInput placeholder="Heure de début de la plage" required type="time" name="start" [(ngModel)]="partition.slot.start">
+  </mat-form-field>
+
+  <mat-form-field style="width: 50%;">
+    <input matInput placeholder="Heure de fin de la plage" required type="time" name="end" [(ngModel)]="partition.slot.end">
+  </mat-form-field>
+
+  <p>Le premier shift commence à l'heure de début de la plage, et le dernier se termine à l'heure de fin. Le
+    dernier shift peut donc être plus court que la durée normale de shift.</p>
+
+
+  <mat-checkbox style="width: 100%;" name="alternate" [(ngModel)]="partition.alternateShifts">
+    Alterner les shifts
+  </mat-checkbox>
+
+  <p>
+    Si vous sélectionnez cette option, les échanges de postes seront séparés. Le premier shift se terminera plus
+    tôt pour la moitié des staffs. Le dernier shift durera potentiellement plus longtemps pour la moitié des staffs.
+  </p>
+
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="sending || form.invalid">
+    Enregistrer !
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+
+  </button>
+
+</form>
+

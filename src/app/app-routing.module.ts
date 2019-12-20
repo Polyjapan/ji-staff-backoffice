@@ -29,8 +29,9 @@ const routes: Routes = [
           {path: 'applications/:id', component: ApplicationComponent},
           {path: 'staffs', component: StaffsListingComponent},
           {path: 'scheduling', component: SchedulingProjectsComponent},
-          {path: 'scheduling/:id', component: SchedulingProjectOverviewComponent}, // likely temporary
-          {path: 'scheduling/:id/task', component: SchedulingTaskFlowComponent}, // temporary
+          {path: 'scheduling/:project', component: SchedulingProjectOverviewComponent}, // likely temporary
+          {path: 'scheduling/:project/task/create', component: SchedulingTaskFlowComponent}, // temporary
+          {path: 'scheduling/:project/task/:task', component: SchedulingTaskFlowComponent}, // temporary
         ]
       },
       {path: '', pathMatch: 'full', component: PickEditionComponent},

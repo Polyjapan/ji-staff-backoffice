@@ -1,8 +1,8 @@
 import {SchedulingProject} from './schedulingProject';
 
-export class Task {
-  id: number;
-  project?: SchedulingProject;
+export class SchedulingTask {
+  id?: number;
+  projectId: number;
   name: string;
   minAge: number;
   minExperience: number;
@@ -11,7 +11,7 @@ export class Task {
 
 export class CreateUpdateTask {
   name: string;
-  minAge: string;
-  minExperience: string;
+  minAge: number;
+  minExperience: number;
   difficulties: number[];
 }

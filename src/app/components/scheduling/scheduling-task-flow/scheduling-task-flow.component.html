@@ -1,27 +1,23 @@
-<mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step>
+<h2>Gestion d'un poste au planning</h2>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<mat-horizontal-stepper [linear]="true" #stepper *ngIf="!loading">
+  <mat-step #detailsStep>
     <ng-template matStepLabel>Détails du poste</ng-template>
-    <form>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+
+    <app-scheduling-task-create [task]="task" [stepper]="stepper" [step]="detailsStep"></app-scheduling-task-create>
+
+
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Plages horaires</ng-template>
-    <form>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
+
+    <app-scheduling-task-partitions *ngIf="task.id" [task]="task.id" [project]="projectId"></app-scheduling-task-partitions>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Génération des slots</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+
+    <app-scheduling-slots-show *ngIf="task.id" [task]="task.id" [project]="projectId"></app-scheduling-slots-show>
   </mat-step>
 </mat-horizontal-stepper>

@@ -58,6 +58,10 @@ import {CreateOrCopyProjectComponent} from './components/scheduling/scheduling-p
 import {PickSchedulingCopyComponent} from './components/scheduling/scheduling-projects/pick-copy.component';
 import { SchedulingProjectOverviewComponent } from './components/scheduling/scheduling-project-overview/scheduling-project-overview.component';
 import { SchedulingTaskFlowComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-flow.component';
+import { SchedulingTaskCreateComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-create/scheduling-task-create.component';
+import { SchedulingTaskPartitionsComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-partitions/scheduling-task-partitions.component';
+import { SchedulingTaskPartitionEditComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-partition-edit/scheduling-task-partition-edit.component';
+import { SchedulingSlotsShowComponent } from './components/scheduling/scheduling-task-flow/scheduling-slots-show/scheduling-slots-show.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +90,11 @@ import { SchedulingTaskFlowComponent } from './components/scheduling/scheduling-
     CreateOrCopyProjectComponent,
     PickSchedulingCopyComponent,
     SchedulingProjectOverviewComponent,
-    SchedulingTaskFlowComponent
+    SchedulingTaskFlowComponent,
+    SchedulingTaskCreateComponent,
+    SchedulingTaskPartitionsComponent,
+    SchedulingTaskPartitionEditComponent,
+    SchedulingSlotsShowComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
@@ -96,7 +104,8 @@ import { SchedulingTaskFlowComponent } from './components/scheduling/scheduling-
     FormPageCreateComponent,
     SchedulingProjectCreateComponent,
     CreateOrCopyProjectComponent,
-    PickSchedulingCopyComponent
+    PickSchedulingCopyComponent,
+    SchedulingTaskPartitionEditComponent
   ],
   imports: [
     BrowserModule,

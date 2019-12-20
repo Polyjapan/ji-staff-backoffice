@@ -1,0 +1,55 @@
+
+<mat-spinner *ngIf="!partitions"></mat-spinner>
+
+<table *ngIf="partitions && partitions.data.length > 0" mat-table [dataSource]="partitions">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID</th>
+    <td mat-cell *matCellDef="let part"> {{part.taskPartitionId}} </td>
+  </ng-container>
+  <ng-container matColumnDef="staffsRequired">
+    <th mat-header-cell *matHeaderCellDef> Nb Staffs</th>
+    <td mat-cell *matCellDef="let part"> {{part.staffsRequired}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="shiftDuration">
+    <th mat-header-cell *matHeaderCellDef> Durée shifts</th>
+    <td mat-cell *matCellDef="let part"> {{part.shiftDuration}} min </td>
+  </ng-container>
+
+  <ng-container matColumnDef="slotDay">
+    <th mat-header-cell *matHeaderCellDef> Jour</th>
+    <td mat-cell *matCellDef="let part"> {{part.slot.day}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="slotStart">
+    <th mat-header-cell *matHeaderCellDef> De</th>
+    <td mat-cell *matCellDef="let part"> {{part.slot.start}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="slotEnd">
+    <th mat-header-cell *matHeaderCellDef> À</th>
+    <td mat-cell *matCellDef="let part"> {{part.slot.end}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="alternateShifts">
+    <th mat-header-cell *matHeaderCellDef> Alternance</th>
+    <td mat-cell *matCellDef="let part"> {{part.alternateShifts ? 'Oui' : 'Non' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef> Modifier</th>
+    <td mat-cell *matCellDef="let part">
+      <button mat-icon-button (click)="edit(part)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="remove(part)"><mat-icon>delete</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['id', 'slotDay', 'slotStart', 'slotEnd', 'shiftDuration', 'staffsRequired', 'alternateShifts', 'edit']"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'slotDay', 'slotStart', 'slotEnd', 'shiftDuration', 'staffsRequired', 'alternateShifts', 'edit']"></tr>
+</table>
+
+<p *ngIf="partitions && partitions.data.length === 0">Aucune période pour le moment. Pourquoi ne pas en créer une ?</p>
+
+<br>
+
+<button mat-raised-button color="accent" (click)="create()">Créer une période</button>

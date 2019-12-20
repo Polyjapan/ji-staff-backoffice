@@ -1,0 +1,24 @@
+
+<form (change)="onEdit()" #form="ngForm">
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Nom du poste" required name="name" [(ngModel)]="task.name">
+  </mat-form-field>
+
+  <mat-form-field style="width: 45%; margin-right: 5%">
+    <input matInput placeholder="Age minimal" type="number" name="minAge" [(ngModel)]="task.minAge">
+  </mat-form-field>
+
+  <mat-form-field style="width: 50%;">
+    <input matInput placeholder="Expérience minimale" type="number" name="minExperience" [(ngModel)]="task.minExperience">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput placeholder="Capacités requises" disabled name="capacities" [(ngModel)]="task.difficulties">
+  </mat-form-field>
+
+  <!-- button to save/continue -- don't save if untouched -->
+  <button mat-raised-button color="accent" type="submit" [disabled]="sending || form.invalid" (click)="send()">Enregistrer
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+  </button>
+
+</form>
