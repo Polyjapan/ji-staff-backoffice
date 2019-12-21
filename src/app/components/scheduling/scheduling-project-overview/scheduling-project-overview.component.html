@@ -1,47 +1,45 @@
-<h1>Projet de planning tata</h1>
+<ng-container *ngIf="projectData">
+  <h1>Gestion du planning {{projectData.projectTitle}}</h1>
+  <p>Maximum <b>{{projectData.maxTimePerStaff}} heures</b> de staffing par jour, avec pauses
+    de <b>{{projectData.minBreakMinutes}} minutes</b> au minimum entre deux shifts.</p>
 
-<p>Un planning est réalisé en plusieurs étapes :</p>
+  <h2>Liste des postes</h2>
 
-<ol>
-  <li>Renseignement des <b>postes</b> (<i>tâches</i>)</li>
-  <li>Renseignement des <i>partitions</i> de postes : combien de staffs, et quand</li>
-  <li><b>Génération des <i>slots</i> - "cases" du planning</b>. Cette étape est automatique. Relancer cette étape
-  provoque la suppression du planning !</li>
-  <li><b>Génération d'un planning : assignation des staffs dans les cases, en respectant des contraintes</b></li>
-</ol>
+  <mat-action-list *ngIf="tasks">
+    <mat-list-item *ngFor="let task of tasks" mat-list-item [routerLink]="['.', 'task', task.id]">
+      <mat-icon matListIcon>assignment</mat-icon>
+      <p matLine>{{task.name}}</p>
+    </mat-list-item>
+    <mat-list-item [routerLink]="['.', 'task', 'create']">
+      <mat-icon matListIcon>add</mat-icon>
+      <p matLine>Créer une tâche</p>
+    </mat-list-item>
+  </mat-action-list>
 
-Vous pouvez tout au long du processus ajouter de nouvelles contraintes (untel absent à telle heure...) ou capacités
-(une telle tâche demande d'être doué en X, untel et untel sont doués en X).<br>
+  <mat-spinner *ngIf="!tasks"></mat-spinner>
 
+  <hr>
 
-<hr>
+  <h2>Contraintes</h2>
 
-<h2>Liste des tâches de planning</h2>
+  <p>Todo :)</p>
 
-<mat-action-list *ngIf="tasks">
-  <mat-list-item *ngFor="let task of tasks" mat-list-item [routerLink]="['.', 'task', task.id]">
-    <mat-icon matListIcon>assignment</mat-icon>
-    <p matLine>{{task.name}}</p>
-  </mat-list-item>
-  <mat-list-item [routerLink]="['.', 'task', 'create']">
-    <mat-icon matListIcon>add</mat-icon>
-    <p matLine>Créer une tâche</p>
-  </mat-list-item>
-</mat-action-list>
+  <hr>
 
-<mat-spinner *ngIf="!tasks"></mat-spinner>
+  <h2>Génération et preview du planning</h2>
 
-<hr>
+  <button mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
+    Générer le planning
+    <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20"
+                          class="spinner"></mat-progress-spinner>
+  </button>
 
-<h2>Contraintes</h2>
+  <br>
+  <br>
+  <br>
 
-<p>Todo :)</p>
-
-<hr>
-
-<h2>Génération et preview du planning</h2>
-
-<button mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
-  Générer le planning
-  <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
-</button>
+</ng-container>
+<ng-container *ngIf="!projectData">
+  <p>Chargement du projet...</p>
+  <mat-spinner></mat-spinner>
+</ng-container>

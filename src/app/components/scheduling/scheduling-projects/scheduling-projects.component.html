@@ -4,7 +4,7 @@
   <mat-list-item *ngFor="let p of myProjects" [routerLink]="['/', 'event', eventId, 'scheduling', p.projectId]">
     <mat-icon matListIcon>folder</mat-icon>
     <p matLine>{{p.projectTitle}}</p>
-    <p matLine>Maximum <b>{{p.maxTimePerStaff}} heures</b> de shift par staff</p>
+    <p matLine>Maximum <b>{{p.maxTimePerStaff}} heures</b> de shift par staff par jour</p>
   </mat-list-item>
   <mat-list-item *ngIf="myProjects.length == 0">
     <p matLine><i>Aucun projet enregistré...</i></p>

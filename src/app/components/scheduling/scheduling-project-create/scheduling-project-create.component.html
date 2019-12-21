@@ -4,15 +4,20 @@
 <form>
 
   <p *ngIf="project.copyOf">Le nom du projet de planning n'est volontairement pas copié, de sorte à ce que vous en
-    choisissiez un qui permette de différencier les projets entre eux.</p> <!-- En fait j'ai la flemme -->
+    choisissiez un qui permette de différencier les projets entre eux.</p> <!-- En fait j'ai la flemme / aussi la flemme de faire un btn editer -->
 
   <mat-form-field style="width: 100%;">
     <input matInput placeholder="Nom du projet" [(ngModel)]="project.name" name="name">
   </mat-form-field>
 
   <mat-form-field style="width: 100%;">
-    <input matInput type="number" placeholder="Maximum d'heures par staff au total"
+    <input matInput type="number" placeholder="Maximum d'heures par staff par jour"
            [(ngModel)]="project.maxHoursPerStaff" name="maxHoursPerStaff">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <input matInput type="number" placeholder="Durée minimum des pauses en minutes"
+           [(ngModel)]="project.minBreakMinutes" name="minBreakMinutes">
   </mat-form-field>
 
   <ng-container *ngIf="project.copyOf">

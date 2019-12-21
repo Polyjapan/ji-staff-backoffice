@@ -9,6 +9,7 @@ import {CreateUpdateTask, SchedulingTask} from '../data/scheduling/schedulingTas
 import {SchedulingTaskPartition} from '../data/scheduling/schedulingTaskPartition';
 import {TaskSlot} from '../data/scheduling/taskSlot';
 import {Period} from '../data/scheduling/period';
+import {SchedulingResult} from '../data/scheduling/schedulingResult';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -31,6 +32,9 @@ export class SchedulingService {
     }));
   }
 
+  getProject(project: number): Observable<SchedulingProject> {
+      return this.http.get<SchedulingProject>(this.BASE + '/projects/' + project);
+  }
 
   createProject(event: number, data: CreateSchedulingProject): Observable<number> {
     return this.http.post<number>(this.BASE + '/' + event + '/projects', data);
@@ -88,8 +92,8 @@ export class SchedulingService {
     return this.http.post<void>(this.BASE + '/projects/' + project + '/tasks/' + task + '/slots/generate', {});
   }
 
-  generateSchedule(project: number): Observable<void> {
-    return this.http.post<void>(this.BASE + '/projects/' + project + '/schedule/generate', {});
+  generateSchedule(project: number): Observable<SchedulingResult> {
+    return this.http.post<SchedulingResult>(this.BASE + '/projects/' + project + '/schedule/generate', {});
   }
 }
 
