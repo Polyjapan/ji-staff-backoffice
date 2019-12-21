@@ -8,6 +8,7 @@ import {map} from 'rxjs/operators';
 import {CreateUpdateTask, SchedulingTask} from '../data/scheduling/schedulingTask';
 import {SchedulingTaskPartition} from '../data/scheduling/schedulingTaskPartition';
 import {TaskSlot} from '../data/scheduling/taskSlot';
+import {Period} from '../data/scheduling/period';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -39,6 +40,10 @@ export class SchedulingService {
     return this.http.get<SchedulingTask>(this.BASE + '/projects/' + project + '/tasks/' + task);
   }
 
+  getTasks(project: number): Observable<SchedulingTask[]> {
+    return this.http.get<SchedulingTask[]>(this.BASE + '/projects/' + project + '/tasks');
+  }
+
   createTask(project: number, data: CreateUpdateTask): Observable<number> {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/tasks', data);
   }
@@ -47,11 +52,23 @@ export class SchedulingService {
     return this.http.put<void>(this.BASE + '/projects/' + project + '/tasks/' + task, data);
   }
 
+  private fixSlot(p: Period) {
+    if (typeof(p.day) === 'string') {
+      return;
+    }
+    const dateSlot = ((p.day) as unknown as Date);
+    // cancel tz effect
+    dateSlot.setTime(dateSlot.getTime() - dateSlot.getTimezoneOffset() * 60 * 1000);
+    p.day = dateSlot.toISOString();
+  }
+
   createTaskPartition(project: number, data: SchedulingTaskPartition): Observable<number> {
+    this.fixSlot(data.slot);
     return this.http.post<number>(this.BASE + '/projects/' + project + '/tasks/' + data.task + '/partitions', data);
   }
 
   updateTaskPartition(project: number, data: SchedulingTaskPartition): Observable<void> {
+    this.fixSlot(data.slot);
     return this.http.put<void>(this.BASE + '/projects/' + project + '/tasks/' + data.task + '/partitions/' + data.taskPartitionId, data);
   }
 
@@ -71,6 +88,9 @@ export class SchedulingService {
     return this.http.post<void>(this.BASE + '/projects/' + project + '/tasks/' + task + '/slots/generate', {});
   }
 
+  generateSchedule(project: number): Observable<void> {
+    return this.http.post<void>(this.BASE + '/projects/' + project + '/schedule/generate', {});
+  }
 }
 
 

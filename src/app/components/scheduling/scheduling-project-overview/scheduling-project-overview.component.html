@@ -15,3 +15,33 @@ Vous pouvez tout au long du processus ajouter de nouvelles contraintes (untel ab
 
 
 <hr>
+
+<h2>Liste des tâches de planning</h2>
+
+<mat-action-list *ngIf="tasks">
+  <mat-list-item *ngFor="let task of tasks" mat-list-item [routerLink]="['.', 'task', task.id]">
+    <mat-icon matListIcon>assignment</mat-icon>
+    <p matLine>{{task.name}}</p>
+  </mat-list-item>
+  <mat-list-item [routerLink]="['.', 'task', 'create']">
+    <mat-icon matListIcon>add</mat-icon>
+    <p matLine>Créer une tâche</p>
+  </mat-list-item>
+</mat-action-list>
+
+<mat-spinner *ngIf="!tasks"></mat-spinner>
+
+<hr>
+
+<h2>Contraintes</h2>
+
+<p>Todo :)</p>
+
+<hr>
+
+<h2>Génération et preview du planning</h2>
+
+<button mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
+  Générer le planning
+  <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+</button>
