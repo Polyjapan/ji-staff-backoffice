@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {SchedulingTask} from '../../../data/scheduling/schedulingTask';
 import Swal from 'sweetalert2';
 import {SchedulingProject} from '../../../data/scheduling/schedulingProject';
+import {displayPeriod} from '../../../data/scheduling/period';
 
 @Component({
   selector: 'app-scheduling-project-overview',
@@ -50,11 +51,14 @@ export class SchedulingProjectOverviewComponent implements OnInit {
             } else if (res.notFullSlots.length === 0) {
               Swal.fire('Planning généré', 'Bravo :o Le planning a bien été généré. Espérons qu\'il soit bien !', 'success');
             } else {
-              // const data = res.notFullSlots.map(slot => '<li>' + slot.)
+              const data = res.notFullSlots.map(slot => '<li>' + slot.task.name + ' ' + displayPeriod(slot.timeSlot) + '</li>').join('\n');
               Swal.fire({
                 title: 'Planning partiel généré',
-                html: `Le planning a été généré, mais certains shifts sont vides...`, // TODO: display which shifts
-                icon: 'warning'
+                html: `Le planning a été généré, mais certains shifts sont vides...<br>
+<ul>
+` + data + `
+</ul>
+`, icon: 'warning'
               });
             }
 
@@ -65,4 +69,9 @@ export class SchedulingProjectOverviewComponent implements OnInit {
     });
 
   }
+
+  get scheduleUrl(): string {
+    return this.backend.getScheduleUrl(this.project);
+  }
+
 }

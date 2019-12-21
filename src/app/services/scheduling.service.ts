@@ -10,6 +10,7 @@ import {SchedulingTaskPartition} from '../data/scheduling/schedulingTaskPartitio
 import {TaskSlot} from '../data/scheduling/taskSlot';
 import {Period} from '../data/scheduling/period';
 import {SchedulingResult} from '../data/scheduling/schedulingResult';
+import {ScheduleConstraint} from '../data/scheduling/constraints';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -94,6 +95,14 @@ export class SchedulingService {
 
   generateSchedule(project: number): Observable<SchedulingResult> {
     return this.http.post<SchedulingResult>(this.BASE + '/projects/' + project + '/schedule/generate', {});
+  }
+
+  getConstraints(project: number): Observable<ScheduleConstraint[]> {
+    return this.http.get<ScheduleConstraint[]>(this.BASE + '/projects/' + project + '/constraints');
+  }
+
+  getScheduleUrl(project: number) {
+    return this.BASE + '/projects/' + project + '/schedule/byStaff.html';
   }
 }
 

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SchedulingService} from '../../../../services/scheduling.service';
 import {TaskSlot} from '../../../../data/scheduling/taskSlot';
+import {displayPeriod, Period} from '../../../../data/scheduling/period';
 
 @Component({
   selector: 'app-scheduling-slots-show',
@@ -28,5 +29,9 @@ export class SchedulingSlotsShowComponent implements OnInit {
 
     this.backend.generateTaskSlots(this.project, this.task)
       .subscribe(_ => this.reload());
+  }
+
+  displayPeriod(timeSlot: Period) {
+    return displayPeriod(timeSlot);
   }
 }

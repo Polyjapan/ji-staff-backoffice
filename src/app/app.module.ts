@@ -62,6 +62,7 @@ import { SchedulingTaskCreateComponent } from './components/scheduling/schedulin
 import { SchedulingTaskPartitionsComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-partitions/scheduling-task-partitions.component';
 import { SchedulingTaskPartitionEditComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-partition-edit/scheduling-task-partition-edit.component';
 import { SchedulingSlotsShowComponent } from './components/scheduling/scheduling-task-flow/scheduling-slots-show/scheduling-slots-show.component';
+import { SchedulingConstraintsComponent } from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { SchedulingSlotsShowComponent } from './components/scheduling/scheduling
     SchedulingTaskCreateComponent,
     SchedulingTaskPartitionsComponent,
     SchedulingTaskPartitionEditComponent,
-    SchedulingSlotsShowComponent
+    SchedulingSlotsShowComponent,
+    SchedulingConstraintsComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,

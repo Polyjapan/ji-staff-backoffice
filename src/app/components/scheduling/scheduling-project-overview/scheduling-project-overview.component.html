@@ -6,13 +6,18 @@
   <h2>Liste des postes</h2>
 
   <mat-action-list *ngIf="tasks">
+
+    <mat-list-item *ngIf="tasks.length > 15" [routerLink]="['.', 'task', 'create']">
+      <mat-icon matListIcon>add</mat-icon>
+      <p matLine>Créer un poste</p>
+    </mat-list-item>
     <mat-list-item *ngFor="let task of tasks" mat-list-item [routerLink]="['.', 'task', task.id]">
       <mat-icon matListIcon>assignment</mat-icon>
       <p matLine>{{task.name}}</p>
     </mat-list-item>
     <mat-list-item [routerLink]="['.', 'task', 'create']">
       <mat-icon matListIcon>add</mat-icon>
-      <p matLine>Créer une tâche</p>
+      <p matLine>Créer un poste</p>
     </mat-list-item>
   </mat-action-list>
 
@@ -22,17 +27,24 @@
 
   <h2>Contraintes</h2>
 
-  <p>Todo :)</p>
+  <p>Les contraintes permettent d'ajouter certaines conditions spécifiques à un staff ou un poste lors de la génération
+  du planning.</p>
+
+  <button [routerLink]="['.', 'constraints']" mat-stroked-button>Gérer les contraintes</button>
 
   <hr>
 
   <h2>Génération et preview du planning</h2>
+
+  <p>Cliquer sur le bouton "Générer le planning" entraine automatiquement une regénération de l'ensemble du planning.</p>
 
   <button mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
     Générer le planning
     <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20"
                           class="spinner"></mat-progress-spinner>
   </button>
+
+  <a mat-raised-button [href]="scheduleUrl" color="primary" target="_blank">Voir le planning</a>
 
   <br>
   <br>

@@ -5,3 +5,6 @@ export class Period {
   end: string;
 }
 
+export function displayPeriod(period: Period): string {
+  return 'le ' + period.day + ' de ' + period.start + ' à ' + period.end;
+}

@@ -1,0 +1,29 @@
+<mat-spinner *ngIf="!constraints"></mat-spinner>
+
+<h2>Gestion des contraintes</h2>
+<button [routerLink]="['..']" mat-stroked-button>Retour au planning</button>
+<br>
+
+<mat-list>
+  <mat-list-item *ngFor="let constraint of constraints">
+    <ng-container [ngSwitch]="constraint.constraintType">
+      <p *ngSwitchCase="'BannedTaskConstraint'">
+        <b>{{ getStaff(constraint.constraint) }}</b> est interdit de <b>{{ getTask(constraint.constraint) }}</b>
+      </p>
+      <p *ngSwitchCase="'FixedTaskSlotConstraint'">
+        <b>{{ getStaff(constraint.constraint) }}</b> a une tache fixe attribuée.
+      </p>
+      <p *ngSwitchCase="'UnavailableConstraint'">
+        <b>{{ getStaff(constraint.constraint) }}</b> est indisponible <b>{{ getPeriod(constraint.constraint) }}</b>
+      </p>
+      <p *ngSwitchCase="'AssociationConstraint'">
+        <b>{{ getStaff(constraint.constraint, 'staff1') }}</b> {{ getBoolean(constraint.constraint, 'together') ? 'doit' : 'ne doit pas' }} être en shift avec <b>{{ getStaff(constraint.constraint, 'staff2') }}</b>
+      </p>
+      <p *ngSwitchDefault>
+        <b>Hmm. {{constraint.constraintType}}</b>
+      </p>
+
+    </ng-container>
+
+  </mat-list-item>
+</mat-list>

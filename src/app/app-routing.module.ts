@@ -15,6 +15,7 @@ import {StaffsListingComponent} from './components/events/staffs-listing/staffs-
 import {SchedulingProjectsComponent} from './components/scheduling/scheduling-projects/scheduling-projects.component';
 import {SchedulingProjectOverviewComponent} from './components/scheduling/scheduling-project-overview/scheduling-project-overview.component';
 import {SchedulingTaskFlowComponent} from './components/scheduling/scheduling-task-flow/scheduling-task-flow.component';
+import {SchedulingConstraintsComponent} from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
           {path: 'staffs', component: StaffsListingComponent},
           {path: 'scheduling', component: SchedulingProjectsComponent},
           {path: 'scheduling/:project', component: SchedulingProjectOverviewComponent}, // likely temporary
+          {path: 'scheduling/:project/constraints', component: SchedulingConstraintsComponent}, // likely temporary
           {path: 'scheduling/:project/task/create', component: SchedulingTaskFlowComponent}, // temporary
           {path: 'scheduling/:project/task/:task', component: SchedulingTaskFlowComponent}, // temporary
         ]

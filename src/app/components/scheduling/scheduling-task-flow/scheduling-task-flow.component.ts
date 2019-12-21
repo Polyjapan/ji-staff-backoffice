@@ -14,11 +14,6 @@ export class SchedulingTaskFlowComponent implements OnInit {
   loading = true;
 
   task = new SchedulingTask();
-  partitions;
-  slots;
-
-  start = '17:15';
-  date = '15/02/1999';
 
   constructor(private ar: ActivatedRoute, private backend: SchedulingService) {
     this.task.projectId = 1;
@@ -42,23 +37,5 @@ export class SchedulingTaskFlowComponent implements OnInit {
         this.loading = false;
       }
     });
-
-    /*
-    From URL params, detect if it's a NEW task or an EXISTING task (resp. CREATE/EDIT).
-    Get all the data from the server at each step.
-     */
-
-    /*
-    Use the completed attribute of the tasks
-     */
-
-    /*
-    Use modals for partition creation and edition as they need a lot of shitty checkboxes
-     */
-
-    /*
-    Use a big nice button on third step
-     */
   }
-
 }
