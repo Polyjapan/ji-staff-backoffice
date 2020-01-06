@@ -1,0 +1,113 @@
+<h2>Création d'une contrainte</h2>
+
+
+<form>
+
+  <ng-container [ngSwitch]="constraint.constraintType">
+    <ng-container *ngSwitchCase="'BannedTaskConstraint'">
+      <p>La contrainte suivante interdira à un staff d'avoir un shift dans un certain poste.</p>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff</mat-label>
+        <mat-select [(ngModel)]="btc(constraint).staffId" name="staffId" >
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Poste</mat-label>
+        <mat-select [(ngModel)]="btc(constraint).taskId" name="taskId">
+          <mat-option *ngFor="let task of data.tasks | keyvalue" [value]="task.key">
+            {{taskToText(task.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="'FixedTaskConstraint'">
+      <p>La contrainte suivante forcera un staff à être assigné à un poste donné. Il sera assigné le plus possible dans ce poste, en ignorant le maximum
+        d'heures et les pauses.</p>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff</mat-label>
+        <mat-select [(ngModel)]="ftc(constraint).staffId" name="staffId" >
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Poste</mat-label>
+        <mat-select [(ngModel)]="ftc(constraint).taskId" name="taskId">
+          <mat-option *ngFor="let task of data.tasks | keyvalue" [value]="task.key">
+            {{taskToText(task.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="'UnavailableConstraint'">
+      <p>La contrainte suivante signale l'absence d'un staff sur une certaine plage horaire.</p>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff</mat-label>
+        <mat-select [(ngModel)]="uc(constraint).staffId" name="staffId">
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%;">
+        <input matInput placeholder="Date" required name="date" [matDatepicker]="dayDatePicker" [(ngModel)]="uc(constraint).period.day">
+        <mat-datepicker-toggle matSuffix [for]="dayDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #dayDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field style="width: 45%; margin-right: 5%;">
+        <input matInput placeholder="Heure de début de la plage" required type="time" name="start" [(ngModel)]="uc(constraint).period.start">
+      </mat-form-field>
+
+      <mat-form-field style="width: 50%;">
+        <input matInput placeholder="Heure de fin de la plage" required type="time" name="end" [(ngModel)]="uc(constraint).period.end">
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="'AssociationConstraint'">
+      <p>La contrainte suivante forcera deux staffs à être toujours/jamais ensemble. La version "toujours" de la contrainte ne fonctionne pas
+      encore cependant, donc pour le moment c'est <b>jamais</b> qui est sélectionné.</p>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff 1</mat-label>
+        <mat-select [(ngModel)]="ac(constraint).staff1" name="staff1">
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff 2</mat-label>
+        <mat-select [(ngModel)]="ac(constraint).staff2" name="staff2">
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <b>Hmm. {{constraint.constraintType}}</b>
+    </ng-container>
+  </ng-container>
+
+  <br>
+
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="sending">
+    Créer
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+
+  </button>
+
+</form>
+
+<mat-card-footer>
+</mat-card-footer>

@@ -2,16 +2,19 @@
 
 <h2>Gestion des contraintes</h2>
 <button [routerLink]="['..']" mat-stroked-button>Retour au planning</button>
+<button (click)="openBottomSheet()" mat-stroked-button color="primary">Créer une contrainte</button>
 <br>
 
 <mat-list>
   <mat-list-item *ngFor="let constraint of constraints">
+    <button (click)="delete(constraint)" mat-icon-button><mat-icon>delete</mat-icon></button>
+
     <ng-container [ngSwitch]="constraint.constraintType">
       <p *ngSwitchCase="'BannedTaskConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est interdit de <b>{{ getTask(constraint.constraint) }}</b>
       </p>
-      <p *ngSwitchCase="'FixedTaskSlotConstraint'">
-        <b>{{ getStaff(constraint.constraint) }}</b> a une tache fixe attribuée.
+      <p *ngSwitchCase="'FixedTaskConstraint'">
+        <b>{{ getStaff(constraint.constraint) }}</b> est assigné à <b>{{ getTask(constraint.constraint) }}</b>
       </p>
       <p *ngSwitchCase="'UnavailableConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est indisponible <b>{{ getPeriod(constraint.constraint) }}</b>
@@ -22,6 +25,7 @@
       <p *ngSwitchDefault>
         <b>Hmm. {{constraint.constraintType}}</b>
       </p>
+
 
     </ng-container>
 

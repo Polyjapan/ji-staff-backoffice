@@ -10,7 +10,7 @@ import {SchedulingTaskPartition} from '../data/scheduling/schedulingTaskPartitio
 import {TaskSlot} from '../data/scheduling/taskSlot';
 import {Period} from '../data/scheduling/period';
 import {SchedulingResult} from '../data/scheduling/schedulingResult';
-import {ScheduleConstraint} from '../data/scheduling/constraints';
+import {ScheduleConstraint, UnavailableConstraint} from '../data/scheduling/constraints';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -100,6 +100,19 @@ export class SchedulingService {
   getConstraints(project: number): Observable<ScheduleConstraint[]> {
     return this.http.get<ScheduleConstraint[]>(this.BASE + '/projects/' + project + '/constraints');
   }
+
+  createConstraint(project: number, data: ScheduleConstraint): Observable<number> {
+    if (data.constraint instanceof UnavailableConstraint) {
+      this.fixSlot(((data.constraint) as UnavailableConstraint).period);
+    }
+    data.constraint.projectId = project;
+    return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints', data);
+  }
+
+  deleteConstraint(project: number, data: ScheduleConstraint): Observable<number> {
+    return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints/delete', data);
+  }
+
 
   getScheduleUrl(project: number) {
     return this.BASE + '/projects/' + project + '/schedule/byStaff.html';

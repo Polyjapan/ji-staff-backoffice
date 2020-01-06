@@ -63,6 +63,8 @@ import { SchedulingTaskPartitionsComponent } from './components/scheduling/sched
 import { SchedulingTaskPartitionEditComponent } from './components/scheduling/scheduling-task-flow/scheduling-task-partition-edit/scheduling-task-partition-edit.component';
 import { SchedulingSlotsShowComponent } from './components/scheduling/scheduling-task-flow/scheduling-slots-show/scheduling-slots-show.component';
 import { SchedulingConstraintsComponent } from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
+import {CreateConstraintTypeComponent} from './components/scheduling/scheduling-constraints/create-constraint-type.component';
+import { CreateConstraintComponent } from './components/scheduling/scheduling-constraints/create-constraint/create-constraint.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { SchedulingConstraintsComponent } from './components/scheduling/scheduli
     SchedulingTaskPartitionsComponent,
     SchedulingTaskPartitionEditComponent,
     SchedulingSlotsShowComponent,
-    SchedulingConstraintsComponent
+    SchedulingConstraintsComponent,
+    CreateConstraintTypeComponent,
+    CreateConstraintComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
@@ -107,7 +111,9 @@ import { SchedulingConstraintsComponent } from './components/scheduling/scheduli
     SchedulingProjectCreateComponent,
     CreateOrCopyProjectComponent,
     PickSchedulingCopyComponent,
-    SchedulingTaskPartitionEditComponent
+    SchedulingTaskPartitionEditComponent,
+    CreateConstraintTypeComponent,
+    CreateConstraintComponent
   ],
   imports: [
     BrowserModule,
