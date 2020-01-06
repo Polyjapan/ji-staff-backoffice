@@ -1,3 +1,5 @@
 <h2>Réponses au formulaire {{form ? form.name : '(chargement...)'}}</h2>
 
+<button mat-raised-button *ngIf="form" (click)="downloadList()"><mat-icon>save</mat-icon> Télécharger toutes les réponses</button>
+
 <app-applications-listing [form]="formId"></app-applications-listing>
