@@ -1,6 +1,16 @@
 <h2>Gestion d'un poste au planning</h2>
 <button [routerLink]="['../..']" mat-stroked-button>Retour au planning</button>
-<br>
+<button *ngIf="taskId" (click)="copy()" [disabled]="copying" mat-stroked-button style="margin-left: 20px;">
+  <mat-icon>file_copy</mat-icon>
+  Copier le poste
+  <mat-progress-spinner *ngIf="copying" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+</button>
+<button *ngIf="taskId" (click)="delete()" [disabled]="deleting" mat-stroked-button color="warn" style="margin-left: 20px;">
+  <mat-icon>delete</mat-icon>
+  Supprimer le poste
+  <mat-progress-spinner *ngIf="deleting" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+</button>
+<br><br>
 
 <mat-spinner *ngIf="loading"></mat-spinner>
 
@@ -15,7 +25,8 @@
   <mat-step>
     <ng-template matStepLabel>Plages horaires</ng-template>
 
-    <app-scheduling-task-partitions *ngIf="task.id" [task]="task.id" [project]="projectId"></app-scheduling-task-partitions>
+    <app-scheduling-task-partitions *ngIf="task.id" [task]="task.id"
+                                    [project]="projectId"></app-scheduling-task-partitions>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Génération des slots</ng-template>

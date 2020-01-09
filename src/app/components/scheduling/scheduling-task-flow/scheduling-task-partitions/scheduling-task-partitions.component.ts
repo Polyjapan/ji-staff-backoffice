@@ -11,7 +11,7 @@ import {SchedulingTaskPartition} from '../../../../data/scheduling/schedulingTas
   templateUrl: './scheduling-task-partitions.component.html',
   styleUrls: ['./scheduling-task-partitions.component.css']
 })
-export class SchedulingTaskPartitionsComponent implements OnInit {
+export class SchedulingTaskPartitionsComponent implements OnInit, OnChanges {
   @Input('task') task: number;
   @Input('project') project: number;
   partitions: MatTableDataSource<SchedulingTaskPartition>;
@@ -20,6 +20,10 @@ export class SchedulingTaskPartitionsComponent implements OnInit {
   constructor(private dialog: MatDialog, private backend: SchedulingService) { }
 
   ngOnInit() {
+    this.reloadTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
     this.reloadTable();
   }
 

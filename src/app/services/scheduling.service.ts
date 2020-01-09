@@ -54,6 +54,17 @@ export class SchedulingService {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/tasks', data);
   }
 
+  duplicateTask(project: number, taskId: number): Observable<number> {
+    return this.http.post<number>(this.BASE + '/projects/' + project + '/tasks/copy', taskId);
+  }
+
+  deleteTask(project: number, taskId: number): Observable<void> {
+    return this.http.delete<void>(this.BASE + '/projects/' + project + '/tasks/' + taskId, {
+      headers: {
+        'Content-Type': 'application/json'
+      }});
+  }
+
   updateTask(project: number, task: number, data: CreateUpdateTask): Observable<void> {
     return this.http.put<void>(this.BASE + '/projects/' + project + '/tasks/' + task, data);
   }
