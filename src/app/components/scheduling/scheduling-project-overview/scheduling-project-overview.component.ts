@@ -24,7 +24,7 @@ export class SchedulingProjectOverviewComponent implements OnInit {
     this.ar.paramMap.subscribe(map => {
       this.project = Number.parseInt(map.get('project'), 10);
     });
-    this.backend.getTasks(this.project).subscribe(data => this.tasks = data);
+    this.backend.getTasks(this.project).subscribe(data => this.tasks = data.sort((a, b) => a.name.localeCompare(b.name)));
     this.backend.getProject(this.project).subscribe(data => this.projectData = data);
   }
 
