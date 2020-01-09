@@ -74,12 +74,11 @@
       </mat-form-field>
     </ng-container>
     <ng-container *ngSwitchCase="'AssociationConstraint'">
-      <p>La contrainte suivante forcera deux staffs à être toujours/jamais ensemble. La version "toujours" de la contrainte ne fonctionne pas
-      encore cependant, donc pour le moment c'est <b>jamais</b> qui est sélectionné.</p>
+      <p>La contrainte suivante forcera deux staffs à être toujours/jamais ensemble.</p>
 
       <mat-form-field style="width: 100%;">
         <mat-label>Staff 1</mat-label>
-        <mat-select [(ngModel)]="ac(constraint).staff1" name="staff1">
+        <mat-select [(ngModel)]="ac(constraint).staff1" name="staff1" required>
           <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
             {{staffToText(staff.value)}}
           </mat-option>
@@ -87,10 +86,17 @@
       </mat-form-field>
       <mat-form-field style="width: 100%;">
         <mat-label>Staff 2</mat-label>
-        <mat-select [(ngModel)]="ac(constraint).staff2" name="staff2">
+        <mat-select [(ngModel)]="ac(constraint).staff2" name="staff2" required>
           <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
             {{staffToText(staff.value)}}
           </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <mat-label>Type de contrainte</mat-label>
+        <mat-select [(ngModel)]="ac(constraint).together" name="together" required>
+          <mat-option [value]="false">Ne jamais mettre ensemble</mat-option>
+          <mat-option [value]="true">Toujours mettre ensemble</mat-option>
         </mat-select>
       </mat-form-field>
     </ng-container>

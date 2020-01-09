@@ -13,5 +13,7 @@ export class CreateUpdateTask {
   name: string;
   minAge: number;
   minExperience: number;
+  addDifficulties: string[];
+  removeDifficulties: string[];
   difficulties: number[];
 }

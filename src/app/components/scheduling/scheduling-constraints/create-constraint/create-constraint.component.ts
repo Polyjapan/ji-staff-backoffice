@@ -64,7 +64,7 @@ export class CreateConstraintComponent implements OnInit {
 
   staffToText(staff: StaffListEntry) {
     const details = staff.user.details;
-    return details.firstName + ' ' + details.lastName + ' (' + staff.staffNumber + ')';
+    return staff.staffNumber + ' - ' + details.firstName + ' ' + details.lastName;
   }
 
   ac(constraint: ScheduleConstraint): AssociationConstraint {

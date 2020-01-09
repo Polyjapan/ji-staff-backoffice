@@ -1,19 +1,46 @@
 
 <form (change)="onEdit()" #form="ngForm">
   <mat-form-field style="width: 100%;">
-    <input matInput placeholder="Nom du poste" required name="name" [(ngModel)]="task.name">
+    <input matInput placeholder="Nom du poste" required name="name" [(ngModel)]="task.name" (ngModelChange)="onEdit()">
   </mat-form-field>
 
   <mat-form-field style="width: 45%; margin-right: 5%">
-    <input matInput placeholder="Age minimal" type="number" name="minAge" [(ngModel)]="task.minAge">
+    <input matInput placeholder="Age minimal" type="number" name="minAge" [(ngModel)]="task.minAge" (ngModelChange)="onEdit()">
   </mat-form-field>
 
   <mat-form-field style="width: 50%;">
-    <input matInput placeholder="Expérience minimale" type="number" name="minExperience" [(ngModel)]="task.minExperience">
+    <input matInput placeholder="Expérience minimale" type="number" name="minExperience" [(ngModel)]="task.minExperience" (ngModelChange)="onEdit()">
   </mat-form-field>
 
-  <mat-form-field style="width: 100%;">
-    <input matInput placeholder="Capacités requises" disabled name="capacities" [(ngModel)]="task.difficulties">
+  <mat-form-field style="width: 100%;" *ngIf="!availableCapabilities">
+    <input matInput placeholder="Capacités requises" disabled name="capacities" [ngModel]="task.difficulties">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;" *ngIf="availableCapabilities">
+    <mat-chip-list #capList aria-label="Capacités requises">
+      <mat-chip
+        *ngFor="let cap of task.difficulties"
+        [selectable]="true"
+        [removable]="true"
+        (removed)="remove(cap)">
+        {{cap}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Capacités requises (séparées par des virgules)"
+        #capInput
+        [formControl]="capCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="capList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        [matChipInputAddOnBlur]="true"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let cap of filteredCapabilities | async" [value]="cap">
+        {{cap}}
+      </mat-option>
+    </mat-autocomplete>
   </mat-form-field>
 
   <!-- button to save/continue -- don't save if untouched -->

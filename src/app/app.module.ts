@@ -17,6 +17,7 @@ import {RequireLoginComponent} from './components/accounts/require-login/require
 import {LoginFailedComponent} from './components/accounts/login-failed/login-failed.component';
 import {FlexModule} from '@angular/flex-layout';
 import {
+  MatAutocompleteModule,
   MatBottomSheetModule, MatCheckboxModule,
   MatChipsModule, MatDatepickerModule,
   MatDialogModule, MatExpansionModule,
@@ -158,7 +159,9 @@ import { CreateConstraintComponent } from './components/scheduling/scheduling-co
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatStepperModule
+    MatStepperModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     LoginService

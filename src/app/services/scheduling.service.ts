@@ -11,6 +11,7 @@ import {TaskSlot} from '../data/scheduling/taskSlot';
 import {Period} from '../data/scheduling/period';
 import {SchedulingResult} from '../data/scheduling/schedulingResult';
 import {ScheduleConstraint, UnavailableConstraint} from '../data/scheduling/constraints';
+import {Capability} from '../data/scheduling/capability';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -113,9 +114,16 @@ export class SchedulingService {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints/delete', data);
   }
 
-
   getScheduleUrl(project: number) {
     return this.BASE + '/projects/' + project + '/schedule/byStaff.html';
+  }
+
+  createCapability(cap: string): Observable<number> {
+    return this.http.post<number>(this.BASE + '/capabilities', cap);
+  }
+
+  getCapabilities(): Observable<Capability[]> {
+    return this.http.get<Capability[]>(this.BASE + '/capabilities');
   }
 }
 
