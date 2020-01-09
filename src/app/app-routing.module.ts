@@ -16,6 +16,8 @@ import {SchedulingProjectsComponent} from './components/scheduling/scheduling-pr
 import {SchedulingProjectOverviewComponent} from './components/scheduling/scheduling-project-overview/scheduling-project-overview.component';
 import {SchedulingTaskFlowComponent} from './components/scheduling/scheduling-task-flow/scheduling-task-flow.component';
 import {SchedulingConstraintsComponent} from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
+import {StaffsInputLevelsComponent} from './components/events/staffs-input-levels/staffs-input-levels.component';
+import {StaffInputCapabilitiesComponent} from './components/events/staff-input-capabilities/staff-input-capabilities.component';
 
 
 const routes: Routes = [
@@ -29,6 +31,8 @@ const routes: Routes = [
           {path: 'forms/:formId/applications', component: FormApplicationsListingComponent},
           {path: 'applications/:id', component: ApplicationComponent},
           {path: 'staffs', component: StaffsListingComponent},
+          {path: 'staffs/inputLevels', component: StaffsInputLevelsComponent},
+          {path: 'staffs/inputCapabilities', component: StaffInputCapabilitiesComponent},
           {path: 'scheduling', component: SchedulingProjectsComponent},
           {path: 'scheduling/:project', component: SchedulingProjectOverviewComponent}, // likely temporary
           {path: 'scheduling/:project/constraints', component: SchedulingConstraintsComponent}, // likely temporary

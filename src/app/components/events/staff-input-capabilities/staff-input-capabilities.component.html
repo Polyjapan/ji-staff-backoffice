@@ -1,0 +1,32 @@
+<h1>Saisie des capacités de staffs</h1>
+
+<a [routerLink]="['..']">Retour arrière</a>
+
+<p>Utilisez le formulaire suivant pour ajouter des capacités aux staffs. Merci de suivre le format suivant :</p>
+<pre>Numéro de staff,Capacité 1,Capacité 2,Capacité 3</pre>
+
+<p>Par exemple :</p>
+<pre>
+  1,Anglais,Espagnol
+  2,Fort
+  3,Electricien,Anglais,Japonais
+</pre>
+
+<p>Les staffs non renseignés n'ont aucune capacité.</p>
+<p>Pour vous aider, voici la liste des capacités :</p>
+<pre>{{caps}}</pre>
+<p><b>Merci d'utiliser uniquement les capacités présentes dans cette liste.</b></p>
+
+<form>
+  <mat-form-field style="width: 100%;">
+    <textarea matInput placeholder="Capacités de staffs" rows="4" [(ngModel)]="input" name="input"></textarea>
+  </mat-form-field>
+
+  <br>
+
+  <button mat-stroked-button [disabled]="sending" (click)="send()" style="width: 100%;">Ajouter les capacités
+
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+
+  </button>
+</form>

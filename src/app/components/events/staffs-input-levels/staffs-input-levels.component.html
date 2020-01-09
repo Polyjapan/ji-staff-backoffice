@@ -1,0 +1,29 @@
+<h1>Saisie des niveaux de staffs</h1>
+
+<a [routerLink]="['..']">Retour arrière</a>
+
+<p>Utilisez le formulaire suivant pour définir le niveau des staffs. Merci de suivre le format suivant :</p>
+<pre>Numéro de staff,Niveau</pre>
+
+<p>Par exemple :</p>
+<pre>
+  1,10
+  2,1
+  3,1
+</pre>
+
+<p>Les staffs non renseignés ont par défaut un niveau de 0.</p>
+
+<form>
+  <mat-form-field style="width: 100%;">
+    <textarea matInput placeholder="Niveaux de staffs" rows="4" [(ngModel)]="levels" name="levels"></textarea>
+  </mat-form-field>
+
+  <br>
+
+  <button mat-stroked-button [disabled]="sending" (click)="send()" style="width: 100%;">Modifier les niveaux
+
+    <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+
+  </button>
+</form>

@@ -137,6 +137,14 @@ export class BackendService {
     return this.http.post<void>(this.baseApiUrl + '/applications/comments/' + application, comment);
   }
 
+  setStaffLevels(event: number, levels: number[][]): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/staffs/' + event + '/levels', levels);
+  }
+
+  addStaffCapabilities(event: number, capabilities: number[][]): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/staffs/' + event + '/capabilities', capabilities);
+  }
+
   setState(application: number, state: ApplicationState): Observable<void> {
     return this.http.put<void>(this.baseApiUrl + '/applications/state/' + application, '"' + state + '"',
       {

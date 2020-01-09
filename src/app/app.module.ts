@@ -66,6 +66,8 @@ import { SchedulingSlotsShowComponent } from './components/scheduling/scheduling
 import { SchedulingConstraintsComponent } from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
 import {CreateConstraintTypeComponent} from './components/scheduling/scheduling-constraints/create-constraint-type.component';
 import { CreateConstraintComponent } from './components/scheduling/scheduling-constraints/create-constraint/create-constraint.component';
+import { StaffsInputLevelsComponent } from './components/events/staffs-input-levels/staffs-input-levels.component';
+import { StaffInputCapabilitiesComponent } from './components/events/staff-input-capabilities/staff-input-capabilities.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +103,9 @@ import { CreateConstraintComponent } from './components/scheduling/scheduling-co
     SchedulingSlotsShowComponent,
     SchedulingConstraintsComponent,
     CreateConstraintTypeComponent,
-    CreateConstraintComponent
+    CreateConstraintComponent,
+    StaffsInputLevelsComponent,
+    StaffInputCapabilitiesComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,

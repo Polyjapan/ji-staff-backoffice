@@ -1,6 +1,11 @@
 <h2>Liste des staffs</h2>
 
 <button mat-raised-button *ngIf="staffs" (click)="downloadList()"><mat-icon>save</mat-icon> Télécharger</button>
+<button mat-raised-button style="margin-left: 20px" [routerLink]="['.','inputLevels']">Insérer les niveaux</button>
+<button mat-raised-button style="margin-left: 20px" [routerLink]="['.','inputCapabilities']">Insérer les capacités</button>
+
+<br>
+<br>
 
 <mat-spinner *ngIf="!staffs"></mat-spinner>
 
@@ -20,6 +25,16 @@
     <td mat-cell *matCellDef="let staff"> {{staff.user.email}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="level">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Niveau</th>
+    <td mat-cell *matCellDef="let staff"> {{staff.level}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="capabilities">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Capacités</th>
+    <td mat-cell *matCellDef="let staff"> {{staff.capabilities}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions</th>
     <td mat-cell *matCellDef="let staff">
@@ -30,8 +45,8 @@
     </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="['id', 'user', 'email', 'actions']"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'user', 'email', 'actions']"></tr>
+  <tr mat-header-row *matHeaderRowDef="['id', 'user', 'email', 'level', 'capabilities', 'actions']"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: ['id', 'user', 'email', 'level', 'capabilities', 'actions']"></tr>
 
   <mat-paginator [pageSizeOptions]="[20, 50, 100, 200]" showFirstLastButtons></mat-paginator>
 </table>
