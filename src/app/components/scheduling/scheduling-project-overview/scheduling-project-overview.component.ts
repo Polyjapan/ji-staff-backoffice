@@ -74,4 +74,8 @@ export class SchedulingProjectOverviewComponent implements OnInit {
     return this.backend.getScheduleUrl(this.project);
   }
 
+  get scheduleByTaskUrl(): string {
+    return this.backend.getScheduleByTaskUrl(this.project);
+  }
+
 }

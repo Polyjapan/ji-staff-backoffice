@@ -129,6 +129,10 @@ export class SchedulingService {
     return this.BASE + '/projects/' + project + '/schedule/byStaff.html';
   }
 
+  getScheduleByTaskUrl(project: number) {
+    return this.BASE + '/projects/' + project + '/schedule/byTask.html';
+  }
+
   createCapability(cap: string): Observable<number> {
     return this.http.post<number>(this.BASE + '/capabilities', cap);
   }
