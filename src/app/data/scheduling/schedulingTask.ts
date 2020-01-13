@@ -7,6 +7,7 @@ export class SchedulingTask {
   minAge: number;
   minExperience: number;
   difficulties: string[];
+  taskType?: number;
 }
 
 export class CreateUpdateTask {
@@ -15,5 +16,5 @@ export class CreateUpdateTask {
   minExperience: number;
   addDifficulties: string[];
   removeDifficulties: string[];
-  difficulties: number[];
+  taskType?: number;
 }

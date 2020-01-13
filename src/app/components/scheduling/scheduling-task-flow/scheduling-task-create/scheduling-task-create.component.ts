@@ -45,7 +45,7 @@ export class SchedulingTaskCreateComponent implements OnInit {
       minExperience: self.task.minExperience,
       addDifficulties: self.addDifficulties,
       removeDifficulties: self.removeDifficulties,
-      difficulties: [] // todo
+      taskType: self.task.taskType
     };
   }
 

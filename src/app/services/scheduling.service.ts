@@ -140,6 +140,7 @@ export class SchedulingService {
   getCapabilities(): Observable<Capability[]> {
     return this.http.get<Capability[]>(this.BASE + '/capabilities');
   }
+
 }
 
 

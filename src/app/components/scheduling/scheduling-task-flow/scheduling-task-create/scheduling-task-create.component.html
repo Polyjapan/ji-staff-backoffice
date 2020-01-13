@@ -43,6 +43,8 @@
     </mat-autocomplete>
   </mat-form-field>
 
+  <app-select-task-type [(selected)]="task.taskType" (selectedChange)="onEdit()"></app-select-task-type>
+
   <!-- button to save/continue -- don't save if untouched -->
   <button mat-raised-button color="accent" type="submit" [disabled]="sending || form.invalid" (click)="send()">Enregistrer
     <mat-progress-spinner *ngIf="sending" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>

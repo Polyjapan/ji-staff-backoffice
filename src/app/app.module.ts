@@ -68,6 +68,8 @@ import {CreateConstraintTypeComponent} from './components/scheduling/scheduling-
 import { CreateConstraintComponent } from './components/scheduling/scheduling-constraints/create-constraint/create-constraint.component';
 import { StaffsInputLevelsComponent } from './components/events/staffs-input-levels/staffs-input-levels.component';
 import { StaffInputCapabilitiesComponent } from './components/events/staff-input-capabilities/staff-input-capabilities.component';
+import {CreateTaskTypeComponent} from './components/scheduling/select-task-type/create-task-type/create-task-type.component';
+import {SelectTaskTypeComponent} from './components/scheduling/select-task-type/select-task-type.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +107,9 @@ import { StaffInputCapabilitiesComponent } from './components/events/staff-input
     CreateConstraintTypeComponent,
     CreateConstraintComponent,
     StaffsInputLevelsComponent,
-    StaffInputCapabilitiesComponent
+    StaffInputCapabilitiesComponent,
+    CreateTaskTypeComponent,
+    SelectTaskTypeComponent
   ],
   entryComponents: [
     CreateOrCopyComponent,
@@ -118,7 +122,8 @@ import { StaffInputCapabilitiesComponent } from './components/events/staff-input
     PickSchedulingCopyComponent,
     SchedulingTaskPartitionEditComponent,
     CreateConstraintTypeComponent,
-    CreateConstraintComponent
+    CreateConstraintComponent,
+    CreateTaskTypeComponent
   ],
   imports: [
     BrowserModule,
