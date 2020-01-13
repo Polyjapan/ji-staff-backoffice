@@ -1,7 +1,8 @@
 <ng-container *ngIf="projectData">
   <h1>Gestion du planning {{projectData.projectTitle}}</h1>
   <p>Maximum <b>{{projectData.maxTimePerStaff}} heures</b> de staffing par jour, avec pauses
-    de <b>{{projectData.minBreakMinutes}} minutes</b> au minimum entre deux shifts.</p>
+    de <b>{{projectData.minBreakMinutes}} minutes</b> au minimum entre deux shifts, et avec au maximum
+  <b>{{projectData.maxSameShiftType}} shifts de même type</b> par jour.</p>
 
   <h2>Liste des postes</h2>
 

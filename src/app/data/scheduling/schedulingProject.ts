@@ -6,12 +6,14 @@ export class SchedulingProject {
   projectTitle: string;
   maxTimePerStaff: number;
   minBreakMinutes: number;
+  maxSameShiftType: number;
 }
 
 export class CreateSchedulingProject {
   name: string;
   maxHoursPerStaff: number;
   minBreakMinutes: number;
+  maxSameShiftType: number;
   copyOf?: number;
   copySlots?: boolean;
   copyConstraints?: boolean;

@@ -20,6 +20,11 @@
            [(ngModel)]="project.minBreakMinutes" name="minBreakMinutes">
   </mat-form-field>
 
+  <mat-form-field style="width: 100%;">
+    <input matInput type="number" min="1" placeholder="Nombre maximum de shifts de même catégorie par jour"
+           [(ngModel)]="project.maxSameShiftType" name="maxSameShiftType">
+  </mat-form-field>
+
   <ng-container *ngIf="project.copyOf">
     <mat-checkbox style="width: 100%;" [(ngModel)]="project.copySlots" name="copySlots">Copier les slots générés
     </mat-checkbox>
