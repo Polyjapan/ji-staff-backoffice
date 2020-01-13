@@ -1,6 +1,6 @@
 <h2>{{partition.taskPartitionId ? 'Modification' : 'Création' }} d'une plage horaire</h2>
 
-<form *ngIf="partition" #form="ngForm">
+<form *ngIf="partition" #form="ngForm" mat-dialog-content>
   <mat-form-field style="width: 100%">
     <input matInput type="number" placeholder="Nombre de staffs nécessaire" required name="staffsRequired" [(ngModel)]="partition.staffsRequired">
   </mat-form-field>
@@ -35,6 +35,36 @@
     Si vous sélectionnez cette option, les échanges de postes seront séparés. Le premier shift se terminera plus
     tôt pour la moitié des staffs. Le dernier shift durera potentiellement plus longtemps pour la moitié des staffs.
   </p>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Décalage des shifts alternés (en minutes)</mat-label>
+    <input [disabled]="!partition.alternateShifts" matInput placeholder="Par défaut, {{partition.shiftDuration ? partition.shiftDuration / 2 + ' minutes' : 'moitié de la durée normale du shift'}}" type="number" name="offset" [(ngModel)]="partition.alternateOffset">
+  </mat-form-field>
+
+  <mat-form-field style="width: 100%;">
+    <mat-label>Premier shift décalé</mat-label>
+    <mat-select [disabled]="!partition.alternateShifts" name="firstAlternated" [(ngModel)]="partition.firstAlternatedShift">
+      <mat-option [value]="Rule.SHORTER">Rendre le shift plus court (durée du décalage)</mat-option>
+      <mat-option [value]="Rule.LONGER">Rendre le shift plus long (durée normale + décalage)</mat-option>
+      <mat-option [value]="Rule.REMOVED">Supprimer le shift (durée du décalage)</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Dernier shift décalé</mat-label>
+    <mat-select [disabled]="!partition.alternateShifts" name="lastAlternated" [(ngModel)]="partition.lastAlternatedShift">
+      <mat-option [value]="Rule.SHORTER">Rendre le shift plus court (durée normale - décalage)</mat-option>
+      <mat-option [value]="Rule.LONGER">Rendre le shift plus long (2 * durée normale - décalage)</mat-option>
+      <mat-option [value]="Rule.REMOVED">Supprimer le shift (durée normale - décalage)</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Dernier shift non décalé</mat-label>
+    <mat-select name="lastNormal" [(ngModel)]="partition.lastNormalShift">
+      <mat-option [value]="Rule.SHORTER">Rendre le shift plus court</mat-option>
+      <mat-option [value]="Rule.LONGER">Rendre le shift plus long</mat-option>
+      <mat-option [value]="Rule.REMOVED">Supprimer le shift</mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="submit()" [disabled]="sending || form.invalid">
     Enregistrer !

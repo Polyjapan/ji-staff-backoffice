@@ -3,7 +3,7 @@
 <mat-dialog-content>
   <form (ngSubmit)="submit($event)" #ngform="ngForm">
     <mat-form-field style="width: 100%;">
-      <mat-label>Nom de l'accueil</mat-label>
+      <mat-label>Nom du type de tâche</mat-label>
       <input matInput placeholder="Surveillance" [(ngModel)]="taskType.type" name="name" required maxlength="50">
     </mat-form-field>
 

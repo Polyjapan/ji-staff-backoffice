@@ -3,7 +3,7 @@ import {Event} from '../../../../data/event';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Router} from '@angular/router';
 import {SchedulingService} from '../../../../services/scheduling.service';
-import {SchedulingTaskPartition} from '../../../../data/scheduling/schedulingTaskPartition';
+import {PartitionRule, SchedulingTaskPartition} from '../../../../data/scheduling/schedulingTaskPartition';
 import {Period} from '../../../../data/scheduling/period';
 
 @Component({
@@ -15,6 +15,7 @@ export class SchedulingTaskPartitionEditComponent implements OnInit {
   partition: SchedulingTaskPartition;
   project: number;
   sending: boolean = false;
+  Rule = PartitionRule;
 
   constructor(
     public dialogRef: MatDialogRef<SchedulingTaskPartitionEditComponent>,

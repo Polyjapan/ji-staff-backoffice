@@ -1,7 +1,7 @@
 <mat-form-field style="width: calc(100% - 40px);" *ngIf="types">
   <mat-label>{{label}}</mat-label>
 
-  <mat-select [ngModel]="selected" (ngModelChange)="changeValue($event)" name="desk" required>
+  <mat-select [ngModel]="selected" (ngModelChange)="changeValue($event)" name="desk">
     <mat-option [value]="undefined">
       Pas de type
     </mat-option>
