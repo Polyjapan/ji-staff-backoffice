@@ -13,6 +13,9 @@
       <p *ngSwitchCase="'BannedTaskConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est interdit de <b>{{ getTask(constraint.constraint) }}</b>
       </p>
+      <p *ngSwitchCase="'BannedTaskTypeConstraint'">
+        <b>{{ getStaff(constraint.constraint) }}</b> est interdit de <b>{{ getTaskType(constraint.constraint) }}</b>
+      </p>
       <p *ngSwitchCase="'FixedTaskConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est assigné à <b>{{ getTask(constraint.constraint) }}</b>
       </p>

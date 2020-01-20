@@ -8,6 +8,8 @@ export class ScheduleConstraint {
 export function buildScheduleConstraint(constraint: AbstractConstraint): ScheduleConstraint {
   if (constraint instanceof BannedTaskConstraint) {
     return {constraintType: 'BannedTaskConstraint', constraint};
+  } else if (constraint instanceof BannedTaskTypeConstraint) {
+    return {constraintType: 'BannedTaskTypeConstraint', constraint};
   } else if (constraint instanceof FixedTaskConstraint) {
     return {constraintType: 'FixedTaskConstraint', constraint};
   } else if (constraint instanceof AssociationConstraint) {
@@ -27,6 +29,11 @@ export class AbstractConstraint {
 export class BannedTaskConstraint extends AbstractConstraint {
   staffId: number;
   taskId: number;
+}
+
+export class BannedTaskTypeConstraint extends AbstractConstraint {
+  staffId: number;
+  taskTypeId: number;
 }
 
 export class FixedTaskConstraint extends AbstractConstraint {

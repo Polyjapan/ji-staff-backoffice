@@ -6,7 +6,7 @@ import {
   BannedTaskConstraint,
   FixedTaskConstraint,
   UnavailableConstraint,
-  buildScheduleConstraint
+  buildScheduleConstraint, BannedTaskTypeConstraint
 } from '../../../data/scheduling/constraints';
 import {SchedulingTask} from '../../../data/scheduling/schedulingTask';
 import {StaffListEntry} from '../../../data/staffs';
@@ -34,6 +34,7 @@ export class CreateConstraintTypeComponent implements OnInit {
     this.types.set('Staffs à mettre tjrs/jamais ensemble', new AssociationConstraint());
     this.types.set('Staff absent', new UnavailableConstraint());
     this.types.set('Staff interdit à un poste', new BannedTaskConstraint());
+    this.types.set('Staff interdit à un type de poste', new BannedTaskTypeConstraint());
     this.types.set('Staff forcé sur un poste', new FixedTaskConstraint());
   }
 

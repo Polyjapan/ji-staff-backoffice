@@ -9,7 +9,7 @@
 
       <mat-form-field style="width: 100%;">
         <mat-label>Staff</mat-label>
-        <mat-select [(ngModel)]="btc(constraint).staffId" name="staffId" >
+        <mat-select [(ngModel)]="btc(constraint).staffId" name="staffId">
           <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
             {{staffToText(staff.value)}}
           </mat-option>
@@ -25,13 +25,29 @@
         </mat-select>
       </mat-form-field>
     </ng-container>
+    <ng-container *ngSwitchCase="'BannedTaskTypeConstraint'">
+      <p>La contrainte suivante interdira à un staff d'avoir un shift dans un certain type de poste.</p>
+
+      <mat-form-field style="width: 100%;">
+        <mat-label>Staff</mat-label>
+        <mat-select [(ngModel)]="btc(constraint).staffId" name="staffId">
+          <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
+            {{staffToText(staff.value)}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <app-select-task-type [allowCreation]="false" [(selected)]="bttc(constraint).taskTypeId"
+                            label="Type de poste"></app-select-task-type>
+    </ng-container>
     <ng-container *ngSwitchCase="'FixedTaskConstraint'">
-      <p>La contrainte suivante forcera un staff à être assigné à un poste donné. Il sera assigné le plus possible dans ce poste, en ignorant le maximum
+      <p>La contrainte suivante forcera un staff à être assigné à un poste donné. Il sera assigné le plus possible dans
+        ce poste, en ignorant le maximum
         d'heures et les pauses.</p>
 
       <mat-form-field style="width: 100%;">
         <mat-label>Staff</mat-label>
-        <mat-select [(ngModel)]="ftc(constraint).staffId" name="staffId" >
+        <mat-select [(ngModel)]="ftc(constraint).staffId" name="staffId">
           <mat-option *ngFor="let staff of data.staffs | keyvalue" [value]="staff.key">
             {{staffToText(staff.value)}}
           </mat-option>
@@ -60,17 +76,20 @@
       </mat-form-field>
 
       <mat-form-field style="width: 100%;">
-        <input matInput placeholder="Date" required name="date" [matDatepicker]="dayDatePicker" [(ngModel)]="uc(constraint).period.day">
+        <input matInput placeholder="Date" required name="date" [matDatepicker]="dayDatePicker"
+               [(ngModel)]="uc(constraint).period.day">
         <mat-datepicker-toggle matSuffix [for]="dayDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #dayDatePicker></mat-datepicker>
       </mat-form-field>
 
       <mat-form-field style="width: 45%; margin-right: 5%;">
-        <input matInput placeholder="Heure de début de la plage" required type="time" name="start" [(ngModel)]="uc(constraint).period.start">
+        <input matInput placeholder="Heure de début de la plage" required type="time" name="start"
+               [(ngModel)]="uc(constraint).period.start">
       </mat-form-field>
 
       <mat-form-field style="width: 50%;">
-        <input matInput placeholder="Heure de fin de la plage" required type="time" name="end" [(ngModel)]="uc(constraint).period.end">
+        <input matInput placeholder="Heure de fin de la plage" required type="time" name="end"
+               [(ngModel)]="uc(constraint).period.end">
       </mat-form-field>
     </ng-container>
     <ng-container *ngSwitchCase="'AssociationConstraint'">

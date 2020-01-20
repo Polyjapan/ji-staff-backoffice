@@ -9,6 +9,7 @@ import {displayPeriod} from '../../../data/scheduling/period';
 import {MatBottomSheet} from '@angular/material';
 import {CreateConstraintTypeComponent} from './create-constraint-type.component';
 import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
+import {TaskTypesService} from '../../../services/taskTypes.service';
 
 @Component({
   selector: 'app-scheduling-constraints',
@@ -19,13 +20,14 @@ export class SchedulingConstraintsComponent implements OnInit, OnDestroy {
   project: number;
   eventId: number;
   constraints: ScheduleConstraint[];
+  taskTypes: Map<number, string>;
   staffs: Map<number, StaffListEntry>;
   tasks: Map<number, SchedulingTask>;
 
   private invalListener: SubscribedListener;
 
   constructor(private backend: SchedulingService, private staffsBackend: BackendService, private ar: ActivatedRoute,
-              private bottomSheet: MatBottomSheet, private inval: InvalidationService) {
+              private bottomSheet: MatBottomSheet, private inval: InvalidationService, private tts: TaskTypesService) {
   }
 
   openBottomSheet() {
@@ -46,6 +48,10 @@ export class SchedulingConstraintsComponent implements OnInit, OnDestroy {
     this.staffsBackend.getStaffs(this.eventId).subscribe(staffs => {
       this.staffs = new Map<number, StaffListEntry>();
       staffs.forEach(staff => this.staffs.set(staff.user.id, staff));
+    });
+    this.tts.getTaskTypes().subscribe(tts => {
+      this.taskTypes = new Map<number, string>();
+      tts.forEach(tt => this.taskTypes.set(tt.id, tt.type));
     });
     this.refreshConstraints();
     this.invalListener = this.inval.listen('constraints', () => this.refreshConstraints());
@@ -79,6 +85,16 @@ export class SchedulingConstraintsComponent implements OnInit, OnDestroy {
       } else {
         const task = this.tasks.get(taskId);
         return task.name;
+      }
+    });
+  }
+
+  getTaskType(constraint: AbstractConstraint, field: string = 'taskTypeId') {
+    return this.getFieldAsNum(constraint, field, taskId => {
+      if (!this.taskTypes || !this.taskTypes.has(taskId)) {
+        return 'tt' + taskId;
+      } else {
+        return this.taskTypes.get(taskId);
       }
     });
   }

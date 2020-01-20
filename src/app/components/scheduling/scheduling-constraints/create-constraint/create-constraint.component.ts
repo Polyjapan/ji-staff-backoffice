@@ -5,7 +5,7 @@ import {StaffListEntry} from '../../../../data/staffs';
 import {SchedulingTask} from '../../../../data/scheduling/schedulingTask';
 import {
   AbstractConstraint,
-  AssociationConstraint, BannedTaskConstraint, FixedTaskConstraint,
+  AssociationConstraint, BannedTaskConstraint, BannedTaskTypeConstraint, FixedTaskConstraint,
   ScheduleConstraint,
   UnavailableConstraint
 } from '../../../../data/scheduling/constraints';
@@ -77,6 +77,10 @@ export class CreateConstraintComponent implements OnInit {
 
   btc(constraint: ScheduleConstraint): BannedTaskConstraint {
     return this.constraint.constraint as BannedTaskConstraint;
+  }
+
+  bttc(constraint: ScheduleConstraint): BannedTaskTypeConstraint {
+    return this.constraint.constraint as BannedTaskTypeConstraint;
   }
 
   ftc(constraint: ScheduleConstraint): FixedTaskConstraint {
