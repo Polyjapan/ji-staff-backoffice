@@ -18,6 +18,8 @@ import {SchedulingTaskFlowComponent} from './components/scheduling/scheduling-ta
 import {SchedulingConstraintsComponent} from './components/scheduling/scheduling-constraints/scheduling-constraints.component';
 import {StaffsInputLevelsComponent} from './components/events/staffs-input-levels/staffs-input-levels.component';
 import {StaffInputCapabilitiesComponent} from './components/events/staff-input-capabilities/staff-input-capabilities.component';
+import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arrival.component';
+import {StaffsDepartureComponent} from './components/arrival-departure/staffs-departure.component';
 
 
 const routes: Routes = [
@@ -31,6 +33,8 @@ const routes: Routes = [
           {path: 'forms/:formId/applications', component: FormApplicationsListingComponent},
           {path: 'applications/:id', component: ApplicationComponent},
           {path: 'staffs', component: StaffsListingComponent},
+          {path: 'staffs/arrival', component: StaffsArrivalComponent},
+          {path: 'staffs/departure', component: StaffsDepartureComponent},
           {path: 'staffs/inputLevels', component: StaffsInputLevelsComponent},
           {path: 'staffs/inputCapabilities', component: StaffInputCapabilitiesComponent},
           {path: 'scheduling', component: SchedulingProjectsComponent},

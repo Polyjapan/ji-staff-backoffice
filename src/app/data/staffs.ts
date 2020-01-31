@@ -1,4 +1,4 @@
-import {UserProfile} from './user';
+import {ReducedUser, UserProfile} from './user';
 
 export class StaffListEntry {
   staffNumber: number;
@@ -6,4 +6,9 @@ export class StaffListEntry {
   user: UserProfile;
   level?: number;
   capabilities?: string[];
+}
+
+export class MissingStaffs {
+  time: string;
+  missing: ReducedUser[];
 }

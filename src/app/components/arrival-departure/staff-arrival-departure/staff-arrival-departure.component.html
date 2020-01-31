@@ -1,0 +1,24 @@
+<mat-spinner *ngIf="!status"></mat-spinner>
+
+<ng-container *ngIf="status">
+  <h1>{{type === 'arrival' ? 'Arrivée' : 'Départ'}} des staffs</h1>
+
+  <form (ngSubmit)="submit(field)">
+    <mat-form-field style="width: 50%; margin-right: 5px;">
+      <mat-label>ID du staff</mat-label>
+      <input matInput name="staffId" type="number" [(ngModel)]="textfield" [disabled]="working" #field>
+    </mat-form-field>
+
+    <button mat-stroked-button type="submit" [disabled]="working">Marquer {{type === 'arrival' ? 'arrivé' : 'parti'}}</button>
+  </form>
+
+  <hr>
+  <h2>Liste des staffs pas encore {{type === 'arrival' ? 'arrivés' : 'partis'}}</h2>
+  <h3>Depuis {{status.time}}</h3>
+
+  <p *ngIf="type !== 'arrival'">Les staffs pas encore marqués comme arrivés n'apparaissent pas sur cette liste.</p>
+
+  <ul>
+    <li *ngFor="let p of status.missing">{{p.firstName}} {{p.lastName}}</li>
+  </ul>
+</ng-container>

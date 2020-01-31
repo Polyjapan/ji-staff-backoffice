@@ -10,8 +10,8 @@ import {FormField} from '../data/formfield';
 import {ApplicationState} from '../data/state';
 import {ApplicationListing, ApplicationResult, CommentWithAuthor} from '../data/applications';
 import {Comment} from '../data/comment';
-import {StaffListEntry} from '../data/staffs';
-import {UserHistory} from '../data/user';
+import {MissingStaffs, StaffListEntry} from '../data/staffs';
+import {ReducedUser, UserHistory} from '../data/user';
 
 @Injectable({
   providedIn: 'root'
@@ -168,6 +168,22 @@ export class BackendService {
 
   getUserHistory(user: number): Observable<UserHistory> {
     return this.http.get<UserHistory>(this.baseApiUrl + '/users/' + user);
+  }
+
+  getNotArrivedStaffs(event: number): Observable<MissingStaffs> {
+    return this.http.get<MissingStaffs>(this.baseApiUrl + '/staffs/' + event + '/notArrived');
+  }
+
+  getNotLeftStaffs(event: number): Observable<MissingStaffs> {
+    return this.http.get<MissingStaffs>(this.baseApiUrl + '/staffs/' + event + '/notLeft');
+  }
+
+  staffArrived(event: number, staff: number): Observable<ReducedUser> {
+    return this.http.post<ReducedUser>(this.baseApiUrl + '/staffs/' + event + '/arrived', '' + staff);
+  }
+
+  staffLeft(event: number, staff: number): Observable<ReducedUser> {
+    return this.http.post<ReducedUser>(this.baseApiUrl + '/staffs/' + event + '/left', '' + staff);
   }
 
 }

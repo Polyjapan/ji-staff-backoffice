@@ -70,6 +70,9 @@ import { StaffsInputLevelsComponent } from './components/events/staffs-input-lev
 import { StaffInputCapabilitiesComponent } from './components/events/staff-input-capabilities/staff-input-capabilities.component';
 import {CreateTaskTypeComponent} from './components/scheduling/select-task-type/create-task-type/create-task-type.component';
 import {SelectTaskTypeComponent} from './components/scheduling/select-task-type/select-task-type.component';
+import { StaffArrivalDepartureComponent } from './components/arrival-departure/staff-arrival-departure/staff-arrival-departure.component';
+import {StaffsDepartureComponent} from './components/arrival-departure/staffs-departure.component';
+import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arrival.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +112,10 @@ import {SelectTaskTypeComponent} from './components/scheduling/select-task-type/
     StaffsInputLevelsComponent,
     StaffInputCapabilitiesComponent,
     CreateTaskTypeComponent,
-    SelectTaskTypeComponent
+    SelectTaskTypeComponent,
+    StaffArrivalDepartureComponent,
+    StaffsDepartureComponent,
+    StaffsArrivalComponent,
   ],
   entryComponents: [
     CreateOrCopyComponent,

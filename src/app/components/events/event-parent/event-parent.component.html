@@ -17,6 +17,12 @@
       <a mat-list-item [class.active]="subUrl === 'staffs'" [routerLink]="['staffs']">
         <mat-icon>list</mat-icon>
         Staffs</a>
+      <a mat-list-item [class.active]="subUrl === 'staffs/arrival'" [routerLink]="['staffs/arrival']">
+        <mat-icon>work</mat-icon>
+        Arrivée des staffs</a>
+      <a mat-list-item [class.active]="subUrl === 'staffs/departure'" [routerLink]="['staffs/departure']">
+        <mat-icon>work_off</mat-icon>
+        Départ des staffs</a>
       <a mat-list-item [class.active]="subUrl === 'scheduling'" [routerLink]="['scheduling']">
         <mat-icon>schedule</mat-icon>
         Planning</a>
