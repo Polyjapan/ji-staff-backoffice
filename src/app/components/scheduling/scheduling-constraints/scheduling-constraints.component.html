@@ -18,6 +18,7 @@
       </p>
       <p *ngSwitchCase="'FixedTaskConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est assigné à <b>{{ getTask(constraint.constraint) }}</b>
+        <ng-container *ngIf="getPeriod(constraint.constraint)">, <b>{{getPeriod(constraint.constraint)}}</b></ng-container>
       </p>
       <p *ngSwitchCase="'UnavailableConstraint'">
         <b>{{ getStaff(constraint.constraint) }}</b> est indisponible <b>{{ getPeriod(constraint.constraint) }}</b>

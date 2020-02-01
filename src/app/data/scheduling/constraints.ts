@@ -39,6 +39,7 @@ export class BannedTaskTypeConstraint extends AbstractConstraint {
 export class FixedTaskConstraint extends AbstractConstraint {
   staffId: number;
   taskId: number;
+  period?: Period;
 }
 
 export class UnavailableConstraint extends AbstractConstraint {

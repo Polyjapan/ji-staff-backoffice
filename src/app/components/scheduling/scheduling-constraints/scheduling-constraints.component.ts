@@ -4,7 +4,7 @@ import {SchedulingService} from '../../../services/scheduling.service';
 import {ActivatedRoute} from '@angular/router';
 import {StaffListEntry} from '../../../data/staffs';
 import {BackendService} from '../../../services/backend.service';
-import {AbstractConstraint, ScheduleConstraint, UnavailableConstraint} from '../../../data/scheduling/constraints';
+import {AbstractConstraint, FixedTaskConstraint, ScheduleConstraint, UnavailableConstraint} from '../../../data/scheduling/constraints';
 import {displayPeriod} from '../../../data/scheduling/period';
 import {MatBottomSheet} from '@angular/material';
 import {CreateConstraintTypeComponent} from './create-constraint-type.component';
@@ -100,8 +100,8 @@ export class SchedulingConstraintsComponent implements OnInit, OnDestroy {
   }
 
   getPeriod(constraint: AbstractConstraint) {
-    const ct = constraint as UnavailableConstraint;
-    return displayPeriod(ct.period);
+    const ct = (constraint as UnavailableConstraint | FixedTaskConstraint);
+    return ct.period ? displayPeriod(ct.period) : undefined;
   }
 
   private refreshConstraints() {

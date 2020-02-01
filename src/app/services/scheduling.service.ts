@@ -10,7 +10,7 @@ import {SchedulingTaskPartition} from '../data/scheduling/schedulingTaskPartitio
 import {TaskSlot} from '../data/scheduling/taskSlot';
 import {Period} from '../data/scheduling/period';
 import {SchedulingResult} from '../data/scheduling/schedulingResult';
-import {ScheduleConstraint, UnavailableConstraint} from '../data/scheduling/constraints';
+import {FixedTaskConstraint, ScheduleConstraint, UnavailableConstraint} from '../data/scheduling/constraints';
 import {Capability} from '../data/scheduling/capability';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
@@ -114,8 +114,8 @@ export class SchedulingService {
   }
 
   createConstraint(project: number, data: ScheduleConstraint): Observable<number> {
-    if (data.constraint instanceof UnavailableConstraint) {
-      this.fixSlot(((data.constraint) as UnavailableConstraint).period);
+    if (data.constraint instanceof UnavailableConstraint || (data.constraint instanceof FixedTaskConstraint && (data.constraint as FixedTaskConstraint).period)) {
+      this.fixSlot(((data.constraint) as UnavailableConstraint | FixedTaskConstraint).period);
     }
     data.constraint.projectId = project;
     return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints', data);

@@ -62,6 +62,29 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <p><b>Optionnel : </b>vous pouvez préciser une heure de début et de fin à l'assignation forcée. Attention, si vous
+        précisez un des champs, merci de remplir les deux autres.
+        <br>Seuls des shifts <b>entièrement compris dans la période</b> pourront être assignés. Par exemple, si
+        l'obligation court de 10h à 13h, un shift 9h30-11h ne pourra pas être assigné, de même qu'un 12h30-13h30.</p>
+
+      <mat-form-field style="width: 100%;">
+        <input matInput placeholder="Date" name="date" [matDatepicker]="dayDatePicker"
+               [(ngModel)]="ftc(constraint).period.day">
+        <mat-datepicker-toggle matSuffix [for]="dayDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #dayDatePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field style="width: 45%; margin-right: 5%;">
+        <input matInput placeholder="Heure de début de la plage" type="time" name="start"
+               [(ngModel)]="ftc(constraint).period.start">
+      </mat-form-field>
+
+      <mat-form-field style="width: 50%;">
+        <input matInput placeholder="Heure de fin de la plage" type="time" name="end"
+               [(ngModel)]="ftc(constraint).period.end">
+      </mat-form-field>
+
     </ng-container>
     <ng-container *ngSwitchCase="'UnavailableConstraint'">
       <p>La contrainte suivante signale l'absence d'un staff sur une certaine plage horaire.</p>

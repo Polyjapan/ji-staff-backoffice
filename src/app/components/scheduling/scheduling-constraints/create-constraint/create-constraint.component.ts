@@ -4,14 +4,17 @@ import {SchedulingService} from '../../../../services/scheduling.service';
 import {StaffListEntry} from '../../../../data/staffs';
 import {SchedulingTask} from '../../../../data/scheduling/schedulingTask';
 import {
-  AbstractConstraint,
-  AssociationConstraint, BannedTaskConstraint, BannedTaskTypeConstraint, FixedTaskConstraint,
+  AssociationConstraint,
+  BannedTaskConstraint,
+  BannedTaskTypeConstraint,
+  FixedTaskConstraint,
   ScheduleConstraint,
   UnavailableConstraint
 } from '../../../../data/scheduling/constraints';
 import {InvalidationService} from '../../../../services/invalidation.service';
 import Swal from 'sweetalert2';
 import {Period} from '../../../../data/scheduling/period';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-create-constraint',
@@ -36,6 +39,9 @@ export class CreateConstraintComponent implements OnInit {
     if (this.constraint.constraintType === 'UnavailableConstraint') {
       ((this.constraint.constraint) as UnavailableConstraint).period = new Period();
     }
+    if (this.constraint.constraintType === 'FixedTaskConstraint') {
+      ((this.constraint.constraint) as FixedTaskConstraint).period = new Period();
+    }
   }
 
   ngOnInit() {
@@ -44,6 +50,15 @@ export class CreateConstraintComponent implements OnInit {
   submit() {
     if (this.sending) {
       return;
+    }
+
+    // Scotch bis
+    if (this.constraint.constraintType === 'FixedTaskConstraint') {
+      const period = this.ftc(this.constraint).period;
+
+      if (isNullOrUndefined(period.day) || isNullOrUndefined(period.end) || isNullOrUndefined(period.start)) {
+        this.ftc(this.constraint).period = undefined;
+      }
     }
 
     this.sending = true;
@@ -59,6 +74,11 @@ export class CreateConstraintComponent implements OnInit {
       e.print();
       console.log(e);
       this.sending = false;
+      if (this.constraint.constraintType === 'FixedTaskConstraint') {
+        if (!this.ftc(this.constraint).period) {
+          this.ftc(this.constraint).period = new Period();
+        }
+      }
     }
   }
 
