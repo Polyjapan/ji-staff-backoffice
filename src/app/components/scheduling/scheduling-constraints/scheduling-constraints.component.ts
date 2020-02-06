@@ -4,12 +4,19 @@ import {SchedulingService} from '../../../services/scheduling.service';
 import {ActivatedRoute} from '@angular/router';
 import {StaffListEntry} from '../../../data/staffs';
 import {BackendService} from '../../../services/backend.service';
-import {AbstractConstraint, FixedTaskConstraint, ScheduleConstraint, UnavailableConstraint} from '../../../data/scheduling/constraints';
+import {
+  AbstractConstraint,
+  buildScheduleConstraint,
+  FixedTaskConstraint,
+  ScheduleConstraint,
+  UnavailableConstraint
+} from '../../../data/scheduling/constraints';
 import {displayPeriod} from '../../../data/scheduling/period';
-import {MatBottomSheet} from '@angular/material';
+import {MatBottomSheet, MatDialog} from '@angular/material';
 import {CreateConstraintTypeComponent} from './create-constraint-type.component';
 import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
 import {TaskTypesService} from '../../../services/taskTypes.service';
+import {CreateConstraintComponent} from './create-constraint/create-constraint.component';
 
 @Component({
   selector: 'app-scheduling-constraints',
@@ -27,13 +34,18 @@ export class SchedulingConstraintsComponent implements OnInit, OnDestroy {
   private invalListener: SubscribedListener;
 
   constructor(private backend: SchedulingService, private staffsBackend: BackendService, private ar: ActivatedRoute,
-              private bottomSheet: MatBottomSheet, private inval: InvalidationService, private tts: TaskTypesService) {
+              private bottomSheet: MatBottomSheet, private inval: InvalidationService, private tts: TaskTypesService,
+              private dialog: MatDialog) {
   }
 
   openBottomSheet() {
     this.bottomSheet.open(CreateConstraintTypeComponent, {
       data: {projectId: this.project, staffs: this.staffs, tasks: this.tasks}
     });
+  }
+
+  updateConstraint(c: ScheduleConstraint) {
+    this.dialog.open(CreateConstraintComponent, {data: {projectId: this.project, staffs: this.staffs, tasks: this.tasks, constraint: c}});
   }
 
   ngOnInit() {

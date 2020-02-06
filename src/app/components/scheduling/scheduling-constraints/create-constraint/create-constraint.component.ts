@@ -33,13 +33,13 @@ export class CreateConstraintComponent implements OnInit {
     this.constraint = data.constraint;
 
     // Scotch
-    if (this.constraint.constraintType === 'AssociationConstraint') {
+    if (this.constraint.constraintType === 'AssociationConstraint' && isNullOrUndefined(((this.constraint.constraint) as AssociationConstraint).together)) {
       ((this.constraint.constraint) as AssociationConstraint).together = false;
     }
-    if (this.constraint.constraintType === 'UnavailableConstraint') {
+    if (this.constraint.constraintType === 'UnavailableConstraint' && isNullOrUndefined(((this.constraint.constraint) as UnavailableConstraint).period)) {
       ((this.constraint.constraint) as UnavailableConstraint).period = new Period();
     }
-    if (this.constraint.constraintType === 'FixedTaskConstraint') {
+    if (this.constraint.constraintType === 'FixedTaskConstraint' && isNullOrUndefined(((this.constraint.constraint) as FixedTaskConstraint).period)) {
       ((this.constraint.constraint) as FixedTaskConstraint).period = new Period();
     }
   }
@@ -63,13 +63,15 @@ export class CreateConstraintComponent implements OnInit {
 
     this.sending = true;
     try {
-      this.backend
-        .createConstraint(this.data.projectId, this.constraint)
-        .subscribe(targetId => {
-          this.inval.invalidate('constraints');
-          this.dialogRef.close();
-          Swal.fire('Contrainte ajoutée', 'La contrainte a bien été ajoutée', 'success');
-        });
+      const act = this.constraint.constraint.constraintId ?
+        this.backend.updateConstraint(this.data.projectId, this.constraint) :
+        this.backend.createConstraint(this.data.projectId, this.constraint);
+
+      act.subscribe(targetId => {
+        this.inval.invalidate('constraints');
+        this.dialogRef.close();
+        Swal.fire('Contrainte ajoutée', 'La contrainte a bien été ajoutée', 'success');
+      });
     } catch (e) {
       e.print();
       console.log(e);

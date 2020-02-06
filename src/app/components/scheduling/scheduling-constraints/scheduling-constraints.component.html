@@ -8,6 +8,7 @@
 <mat-list>
   <mat-list-item *ngFor="let constraint of constraints">
     <button (click)="delete(constraint)" mat-icon-button><mat-icon>delete</mat-icon></button>
+    <button (click)="updateConstraint(constraint)" mat-icon-button><mat-icon>edit</mat-icon></button>
 
     <ng-container [ngSwitch]="constraint.constraintType">
       <p *ngSwitchCase="'BannedTaskConstraint'">

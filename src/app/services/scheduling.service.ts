@@ -35,7 +35,7 @@ export class SchedulingService {
   }
 
   getProject(project: number): Observable<SchedulingProject> {
-      return this.http.get<SchedulingProject>(this.BASE + '/projects/' + project);
+    return this.http.get<SchedulingProject>(this.BASE + '/projects/' + project);
   }
 
   createProject(event: number, data: CreateSchedulingProject): Observable<number> {
@@ -62,21 +62,12 @@ export class SchedulingService {
     return this.http.delete<void>(this.BASE + '/projects/' + project + '/tasks/' + taskId, {
       headers: {
         'Content-Type': 'application/json'
-      }});
+      }
+    });
   }
 
   updateTask(project: number, task: number, data: CreateUpdateTask): Observable<void> {
     return this.http.put<void>(this.BASE + '/projects/' + project + '/tasks/' + task, data);
-  }
-
-  private fixSlot(p: Period) {
-    if (typeof(p.day) === 'string') {
-      return;
-    }
-    const dateSlot = ((p.day) as unknown as Date);
-    // cancel tz effect
-    dateSlot.setTime(dateSlot.getTime() - dateSlot.getTimezoneOffset() * 60 * 1000);
-    p.day = dateSlot.toISOString();
   }
 
   createTaskPartition(project: number, data: SchedulingTaskPartition): Observable<number> {
@@ -121,6 +112,14 @@ export class SchedulingService {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints', data);
   }
 
+  updateConstraint(project: number, data: ScheduleConstraint): Observable<number> {
+    if (data.constraint instanceof UnavailableConstraint || (data.constraint instanceof FixedTaskConstraint && (data.constraint as FixedTaskConstraint).period)) {
+      this.fixSlot(((data.constraint) as UnavailableConstraint | FixedTaskConstraint).period);
+    }
+    data.constraint.projectId = project;
+    return this.http.put<number>(this.BASE + '/projects/' + project + '/constraints/' + data.constraint.constraintId, data);
+  }
+
   deleteConstraint(project: number, data: ScheduleConstraint): Observable<number> {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints/delete', data);
   }
@@ -139,6 +138,16 @@ export class SchedulingService {
 
   getCapabilities(): Observable<Capability[]> {
     return this.http.get<Capability[]>(this.BASE + '/capabilities');
+  }
+
+  private fixSlot(p: Period) {
+    if (typeof (p.day) === 'string') {
+      return;
+    }
+    const dateSlot = ((p.day) as unknown as Date);
+    // cancel tz effect
+    dateSlot.setTime(dateSlot.getTime() - dateSlot.getTimezoneOffset() * 60 * 1000);
+    p.day = dateSlot.toISOString();
   }
 
 }
