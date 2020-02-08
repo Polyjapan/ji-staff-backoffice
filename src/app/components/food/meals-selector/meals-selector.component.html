@@ -1,0 +1,34 @@
+<h1>Miam manager</h1>
+<p>Pour s'assurer que tout le monde mange une fois :D</p>
+
+<div fxLayout="row" fxLayoutGap="10px">
+  <div fxFlex>
+    <mat-card>
+      <mat-card-title>Liste des repas</mat-card-title>
+      <mat-card-content>
+        <mat-list *ngIf="meals" class="mat-elevation-z3">
+          <mat-list-item *ngFor="let item of meals" [routerLink]="[item.mealId]">{{item.name}} ({{item.date}})</mat-list-item>
+        </mat-list>
+        <mat-spinner *ngIf="!meals"></mat-spinner>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex>
+    <mat-card>
+      <mat-card-title>Créer un repas</mat-card-title>
+      <mat-card-content>
+        <form (ngSubmit)="createMeal()">
+
+          <mat-form-field style="width: 100%">
+            <input matInput name="mealName" placeholder="Nom du repas" [(ngModel)]="createMealName">
+          </mat-form-field>
+
+          <br>
+
+          <button mat-stroked-button (click)="createMeal()" [disabled]="creatingMeal">{{creatingMeal ? 'Création du repas...' : 'Créer le repas'}}</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<br>

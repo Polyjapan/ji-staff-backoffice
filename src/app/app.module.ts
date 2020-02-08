@@ -73,6 +73,8 @@ import {SelectTaskTypeComponent} from './components/scheduling/select-task-type/
 import { StaffArrivalDepartureComponent } from './components/arrival-departure/staff-arrival-departure/staff-arrival-departure.component';
 import {StaffsDepartureComponent} from './components/arrival-departure/staffs-departure.component';
 import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arrival.component';
+import { MealsDealerComponent } from './components/food/meals-dealer/meals-dealer.component';
+import { MealsSelectorComponent } from './components/food/meals-selector/meals-selector.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +118,8 @@ import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arri
     StaffArrivalDepartureComponent,
     StaffsDepartureComponent,
     StaffsArrivalComponent,
+    MealsDealerComponent,
+    MealsSelectorComponent,
   ],
   entryComponents: [
     CreateOrCopyComponent,

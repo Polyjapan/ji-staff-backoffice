@@ -11,7 +11,8 @@ import {ApplicationState} from '../data/state';
 import {ApplicationListing, ApplicationResult, CommentWithAuthor} from '../data/applications';
 import {Comment} from '../data/comment';
 import {MissingStaffs, StaffListEntry} from '../data/staffs';
-import {ReducedUser, UserHistory} from '../data/user';
+import {ReducedUser, UserHistory, UserProfile} from '../data/user';
+import {Meal, MealTaken} from '../data/meals';
 
 @Injectable({
   providedIn: 'root'
@@ -158,6 +159,10 @@ export class BackendService {
     return this.http.get<StaffListEntry[]>(this.baseApiUrl + '/staffs/' + event);
   }
 
+  getAdmins(): Observable<UserProfile[]> {
+    return this.http.get<UserProfile[]>(this.baseApiUrl + '/admins');
+  }
+
   exportStaffs(event: number): Observable<Blob> {
     return this.http.get(this.baseApiUrl + '/staffs/' + event + '.csv', {responseType: 'blob'});
   }
@@ -184,6 +189,27 @@ export class BackendService {
 
   staffLeft(event: number, staff: number): Observable<ReducedUser> {
     return this.http.post<ReducedUser>(this.baseApiUrl + '/staffs/' + event + '/left', '' + staff);
+  }
+
+  // Meals
+  getMeals(event: number): Observable<Meal[]> {
+    return this.http.get<Meal[]>(this.baseApiUrl + '/meals/byEvent/' + event);
+  }
+
+  getMeal(meal: number): Observable<Meal> {
+    return this.http.get<Meal>(this.baseApiUrl + '/meals/' + meal);
+  }
+
+  createMeal(meal: Meal): Observable<number> {
+    return this.http.post<number>(this.baseApiUrl + '/meals', meal);
+  }
+
+  getMealTakenBy(meal: number): Observable<MealTaken[]> {
+    return this.http.get<MealTaken[]>(this.baseApiUrl + '/meals/' + meal + '/takenBy');
+  }
+
+  mealTakenBy(meal: number, user: number): Observable<boolean> {
+    return this.http.post<boolean>(this.baseApiUrl + '/meals/' + meal + '/takenBy', user);
   }
 
 }

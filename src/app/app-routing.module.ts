@@ -20,6 +20,8 @@ import {StaffsInputLevelsComponent} from './components/events/staffs-input-level
 import {StaffInputCapabilitiesComponent} from './components/events/staff-input-capabilities/staff-input-capabilities.component';
 import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arrival.component';
 import {StaffsDepartureComponent} from './components/arrival-departure/staffs-departure.component';
+import {MealsSelectorComponent} from './components/food/meals-selector/meals-selector.component';
+import {MealsDealerComponent} from './components/food/meals-dealer/meals-dealer.component';
 
 
 const routes: Routes = [
@@ -33,6 +35,8 @@ const routes: Routes = [
           {path: 'forms/:formId/applications', component: FormApplicationsListingComponent},
           {path: 'applications/:id', component: ApplicationComponent},
           {path: 'staffs', component: StaffsListingComponent},
+          {path: 'meals', component: MealsSelectorComponent},
+          {path: 'meals/:meal', component: MealsDealerComponent},
           {path: 'staffs/arrival', component: StaffsArrivalComponent},
           {path: 'staffs/departure', component: StaffsDepartureComponent},
           {path: 'staffs/inputLevels', component: StaffsInputLevelsComponent},

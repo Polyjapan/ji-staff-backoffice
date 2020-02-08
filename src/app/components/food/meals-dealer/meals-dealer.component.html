@@ -1,0 +1,47 @@
+<h1>Distributeur de repas {{meal ? ': ' + meal : ''}}</h1>
+
+<P>Scanne les code barres des gens qui viennent ou indique leur nom. Valide avec Entrée pour check si la personne a déjà mangé.</P>
+
+<form (ngSubmit)="submit()">
+  <mat-form-field style="width: 100%;">
+    <mat-label>Indiquer un utilisateur</mat-label>
+    <input matInput placeholder="ID utilisateur (141) ou s + numéro staff (s19)" [formControl]="selected"
+           name="selectedUser" [matAutocomplete]="auto">
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunc">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{ displayFunc(option) }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<hr>
+<h1>Liste des gens</h1>
+
+<div fxLayout="row" fxLayoutGap="30px">
+  <div fxFlex>
+    <mat-card>
+      <mat-card-title>Pas encore mangé</mat-card-title>
+      <mat-card-content>
+        <mat-spinner *ngIf="!notTaken"></mat-spinner>
+        <mat-list *ngIf="notTaken">
+          <mat-list-item *ngFor="let el of notTaken">{{displayFunc(el)}}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div fxFlex>
+    <mat-card>
+      <mat-card-title>Déjà mangé</mat-card-title>
+
+      <mat-card-content>
+        <mat-spinner *ngIf="!taken"></mat-spinner>
+        <mat-list *ngIf="taken">
+          <mat-list-item *ngFor="let el of taken">{{displayFunc(el)}}</mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
