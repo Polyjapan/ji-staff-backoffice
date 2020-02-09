@@ -13,6 +13,7 @@ import {Comment} from '../data/comment';
 import {MissingStaffs, StaffListEntry} from '../data/staffs';
 import {ReducedUser, UserHistory, UserProfile} from '../data/user';
 import {Meal, MealTaken} from '../data/meals';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -208,10 +209,39 @@ export class BackendService {
     return this.http.get<MealTaken[]>(this.baseApiUrl + '/meals/' + meal + '/takenBy');
   }
 
-  mealTakenBy(meal: number, user: number): Observable<boolean> {
-    return this.http.post<boolean>(this.baseApiUrl + '/meals/' + meal + '/takenBy', user);
+  mealTakenBy(meal: number, user: number): Observable<{success: boolean, foodParticularities: string}> {
+    return this.http.post<{success: boolean, foodParticularities: string}>(this.baseApiUrl + '/meals/' + meal + '/takenBy', user);
   }
 
+  getStaffFoodParticularities(event: number): Observable<number> {
+    return this.http.get<number>(this.baseApiUrl + '/meals/particularities/staff/' + event);
+  }
+
+  getAdminFoodParticularities(): Observable<Map<number, string>> {
+    return this.http.get<Map<string, string>>(this.baseApiUrl + '/meals/particularities/admin')
+      .pipe(map(srcMap => {
+        const returnMap = new Map();
+        for (const k in srcMap) {
+          returnMap.set(Number.parseInt(k, 10), srcMap[k]);
+          console.log(k);
+        }
+        return returnMap;
+      }));
+  }
+
+  setStaffFoodParticularities(event: number, fieldId: number): Observable<void> {
+    return this.http.put<void>(this.baseApiUrl + '/meals/particularities/staff/' + event, fieldId);
+  }
+
+  setAdminFoodParticularities(mapping: Map<number, string>): Observable<void> {
+    const returnMap = {};
+    mapping.forEach((v, k) => {
+      returnMap[k.toString(10)] = v;
+    });
+
+    console.log(returnMap);
+    return this.http.post<void>(this.baseApiUrl + '/meals/particularities/admin', returnMap);
+  }
 }
 
 

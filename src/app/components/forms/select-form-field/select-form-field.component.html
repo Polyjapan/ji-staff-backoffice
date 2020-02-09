@@ -1,0 +1,19 @@
+<div fxLayout="row" fxLayoutGap="10px">
+  <mat-form-field fxFlex *ngIf="forms">
+    <mat-select placeholder="Choisir un formulaire..." (valueChange)="onSelectForm($event)">
+      <mat-option *ngFor="let f of forms" [value]="f">{{f.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex *ngIf="pages">
+    <mat-select placeholder="Choisir une page..." (valueChange)="onSelectPage($event)">
+      <mat-option *ngFor="let p of pages" [value]="p">{{p.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex *ngIf="fields">
+    <mat-select placeholder="Choisir un champ..." (valueChange)="onSelectField($event)">
+      <mat-option *ngFor="let f of fields" [value]="f">{{f.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -7,7 +7,8 @@
       <mat-card-title>Liste des repas</mat-card-title>
       <mat-card-content>
         <mat-list *ngIf="meals" class="mat-elevation-z3">
-          <mat-list-item *ngFor="let item of meals" [routerLink]="[item.mealId]">{{item.name}} ({{item.date}})</mat-list-item>
+          <mat-list-item *ngFor="let item of meals" [routerLink]="[item.mealId]">{{item.name}} ({{item.date}})
+          </mat-list-item>
         </mat-list>
         <mat-spinner *ngIf="!meals"></mat-spinner>
       </mat-card-content>
@@ -25,10 +26,42 @@
 
           <br>
 
-          <button mat-stroked-button (click)="createMeal()" [disabled]="creatingMeal">{{creatingMeal ? 'Création du repas...' : 'Créer le repas'}}</button>
+          <button mat-stroked-button (click)="createMeal()"
+                  [disabled]="creatingMeal">{{creatingMeal ? 'Création du repas...' : 'Créer le repas'}}</button>
         </form>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 <br>
+<mat-card style="width: 100%">
+  <mat-card-title>Gestion des particularités alimentaires</mat-card-title>
+  <mat-card-content>
+    <h3>Pour les staffs</h3>
+    <p>Il suffit de choisir un champ de formulaire qui contient les données alimentaires.</p>
+    <app-select-form-field (selectedFieldChange)="selectedField = $event"></app-select-form-field>
+    <button style="width: 100%" mat-stroked-button color="primary" (click)="updateStaffParticularities()"
+            [disabled]="updatingStaffParticularties" *ngIf="selectedField">Mettre à jour
+    </button>
+    <h3>Pour les comités/équipiers</h3>
+
+    <form *ngIf="foodParts">
+      <table style="width: 100%;">
+        <tr *ngFor="let part of adminMap | keyvalue">
+          <td style="text-align: right; width: 20%;">{{part.value}}</td>
+          <td>
+            <mat-form-field style="width: 100%;">
+              <input matInput [ngModel]="foodParts.get(part.key)" (ngModelChange)="foodParts.set(part.key, $event)"
+                     placeholder="Particularités alimentaires" [name]="'admin.' + part.key">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+
+      <button style="width: 100%" mat-stroked-button color="primary" (click)="updateAdminParticularities()"
+              [disabled]="updatingAdminParticularties">Mettre à jour
+      </button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

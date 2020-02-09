@@ -75,6 +75,7 @@ import {StaffsDepartureComponent} from './components/arrival-departure/staffs-de
 import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arrival.component';
 import { MealsDealerComponent } from './components/food/meals-dealer/meals-dealer.component';
 import { MealsSelectorComponent } from './components/food/meals-selector/meals-selector.component';
+import { SelectFormFieldComponent } from './components/forms/select-form-field/select-form-field.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { MealsSelectorComponent } from './components/food/meals-selector/meals-s
     StaffsArrivalComponent,
     MealsDealerComponent,
     MealsSelectorComponent,
+    SelectFormFieldComponent,
   ],
   entryComponents: [
     CreateOrCopyComponent,

@@ -52,7 +52,7 @@ export class MealsDealerComponent implements OnInit {
     // Check selected user
     const v = this.selected.value;
 
-    if (typeof v !== 'string' && v.userId && v.userProfile) {
+    if (typeof v !== 'string' && v.userId && v.profile) {
       this.sendWithUser(v as SelectableUser);
     } else if (this.selectable) {
       this.sendWithUser(this.selectable);
@@ -150,10 +150,12 @@ export class MealsDealerComponent implements OnInit {
         }
         this.sending = true;
         this.backend.mealTakenBy(this.mealId, user.userId).subscribe(rep => {
-          if (rep === false) {
-            Swal.fire('Johnny veut du rab', 'Cette personne a déjà mangé.', 'warning');
+          const food = 'Régime alimentaire : ' + rep.foodParticularities;
+
+          if (rep.success === false) {
+            Swal.fire('Johnny veut du rab', 'Cette personne a déjà mangé. ' + food, 'warning');
           } else {
-            Swal.fire('OK!', 'Tu peux donner son repas à cette personne :D', 'success');
+            Swal.fire('OK!', 'Tu peux donner son repas à cette personne :D. ' + food, 'success');
           }
 
           this.refreshEaten();
