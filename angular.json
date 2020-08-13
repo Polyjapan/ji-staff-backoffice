@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "JIStaffBackoffice"
+  "defaultProject": "JIStaffBackoffice",
+  "cli": {
+    "analytics": false
+  }
 }
