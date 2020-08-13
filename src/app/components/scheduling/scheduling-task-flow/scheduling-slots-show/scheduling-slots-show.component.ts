@@ -20,15 +20,9 @@ export class SchedulingSlotsShowComponent implements OnInit, OnChanges {
   }
 
   reload() {
+    this.slots = undefined;
     this.backend.getTaskSlots(this.project, this.task)
       .subscribe(slots => this.slots = slots);
-  }
-
-  regen() {
-    this.slots = undefined;
-
-    this.backend.generateTaskSlots(this.project, this.task)
-      .subscribe(_ => this.reload());
   }
 
   displayPeriod(timeSlot: Period) {

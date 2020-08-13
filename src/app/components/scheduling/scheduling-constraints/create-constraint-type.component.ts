@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatDialog} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
 import {
   AbstractConstraint,
   AssociationConstraint,

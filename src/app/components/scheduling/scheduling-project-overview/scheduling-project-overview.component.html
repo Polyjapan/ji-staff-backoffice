@@ -35,19 +35,11 @@
 
   <hr>
 
-  <h2>Génération et preview du planning</h2>
+  <h2>Génération du planning</h2>
 
-  <p>Cliquer sur le bouton "Générer le planning" entraine automatiquement une regénération de l'ensemble du planning.</p>
+  <p>Cliquer sur le bouton ci dessous pour accéder à l'historique des versions du planning, et, si tel est votre souhait, en générer un nouveau.</p>
 
-  <button mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
-    Générer le planning
-    <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20"
-                          class="spinner"></mat-progress-spinner>
-  </button>
-
-  <a mat-raised-button [href]="scheduleUrl" color="primary" target="_blank" style="margin-left: 20px; margin-right: 20px;">Voir le planning par staff</a>
-
-  <a mat-raised-button [href]="scheduleByTaskUrl" color="primary" target="_blank">Voir le planning par tache</a>
+  <button mat-stroked-button [routerLink]="['.', 'versions']" style="margin-left: 20px;">Voir toutes les versions du planning</button>
 
   <br>
   <br>

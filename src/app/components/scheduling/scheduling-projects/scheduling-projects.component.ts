@@ -3,7 +3,8 @@ import {Event} from '../../../data/event';
 import {SchedulingProject} from '../../../data/scheduling/schedulingProject';
 import {SchedulingService} from '../../../services/scheduling.service';
 import {ActivatedRoute} from '@angular/router';
-import {MatBottomSheet, MatDialog} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
 import {CreateOrCopyProjectComponent} from './create-or-copy.component';
 import {SchedulingProjectCreateComponent} from '../scheduling-project-create/scheduling-project-create.component';
 

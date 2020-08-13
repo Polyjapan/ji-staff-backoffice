@@ -3,7 +3,7 @@ import {BackendService} from '../../../services/backend.service';
 import {ActivatedRoute} from '@angular/router';
 import {ApplicationResult, CommentWithAuthor} from '../../../data/applications';
 import {ApplicationState, readableState} from '../../../data/state';
-import {MatButton} from '@angular/material';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-application',

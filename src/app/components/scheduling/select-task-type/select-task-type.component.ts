@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {isNumber} from 'util';
 import {CreateTaskTypeComponent} from './create-task-type/create-task-type.component';
 import {TaskTypesService} from '../../../services/taskTypes.service';

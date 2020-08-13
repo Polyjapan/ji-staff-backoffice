@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Event} from '../../../../data/event';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {SchedulingService} from '../../../../services/scheduling.service';
 import {PartitionRule, SchedulingTaskPartition} from '../../../../data/scheduling/schedulingTaskPartition';

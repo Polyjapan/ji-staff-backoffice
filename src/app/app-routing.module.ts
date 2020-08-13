@@ -22,6 +22,7 @@ import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arri
 import {StaffsDepartureComponent} from './components/arrival-departure/staffs-departure.component';
 import {MealsSelectorComponent} from './components/food/meals-selector/meals-selector.component';
 import {MealsDealerComponent} from './components/food/meals-dealer/meals-dealer.component';
+import {SchedulingVersionsComponent} from './components/scheduling/scheduling-versions/scheduling-versions.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
           {path: 'scheduling', component: SchedulingProjectsComponent},
           {path: 'scheduling/:project', component: SchedulingProjectOverviewComponent}, // likely temporary
           {path: 'scheduling/:project/constraints', component: SchedulingConstraintsComponent}, // likely temporary
+          {path: 'scheduling/:project/versions', component: SchedulingVersionsComponent}, // likely temporary
           {path: 'scheduling/:project/task/create', component: SchedulingTaskFlowComponent}, // temporary
           {path: 'scheduling/:project/task/:task', component: SchedulingTaskFlowComponent}, // temporary
         ]

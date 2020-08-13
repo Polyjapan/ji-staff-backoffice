@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
+import {MatTableDataSource} from '@angular/material/table';
 import {SchedulingTaskPartitionEditComponent} from '../scheduling-task-partition-edit/scheduling-task-partition-edit.component';
 import {SchedulingTask} from '../../../../data/scheduling/schedulingTask';
 import {SchedulingService} from '../../../../services/scheduling.service';

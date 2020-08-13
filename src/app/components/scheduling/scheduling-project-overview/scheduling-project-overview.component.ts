@@ -14,7 +14,6 @@ import {displayPeriod} from '../../../data/scheduling/period';
 export class SchedulingProjectOverviewComponent implements OnInit {
   project: number;
   tasks: SchedulingTask[];
-  generatingSchedule = false;
   projectData: SchedulingProject;
 
   constructor(private backend: SchedulingService, private ar: ActivatedRoute) {
@@ -26,56 +25,6 @@ export class SchedulingProjectOverviewComponent implements OnInit {
     });
     this.backend.getTasks(this.project).subscribe(data => this.tasks = data.sort((a, b) => a.name.localeCompare(b.name)));
     this.backend.getProject(this.project).subscribe(data => this.projectData = data);
-  }
-
-  regenSchedule() {
-    if (this.generatingSchedule) {
-      return;
-    }
-
-    Swal.fire({
-      title: 'Veux tu vraiment faire ça ?',
-      text: 'Attention, si un planning a déjà été généré il sera effacé!',
-      icon: 'warning',
-      showConfirmButton: true,
-      showCancelButton: true
-
-    }).then(alertResult => {
-      if (alertResult.value && !this.generatingSchedule) {
-        this.generatingSchedule = true;
-
-        this.backend.generateSchedule(this.project)
-          .subscribe(res => {
-            if (res.averageHoursPerStaff < 0.1) {
-              Swal.fire('Wow...', 'Impossible de trouver un planning avec ces paramètres.', 'error');
-            } else if (res.notFullSlots.length === 0) {
-              Swal.fire('Planning généré', 'Bravo :o Le planning a bien été généré. Espérons qu\'il soit bien !', 'success');
-            } else {
-              const data = res.notFullSlots.map(slot => '<li>' + slot.task.name + ' ' + displayPeriod(slot.timeSlot) + '</li>').join('\n');
-              Swal.fire({
-                title: 'Planning partiel généré',
-                html: `Le planning a été généré, mais certains shifts sont vides...<br>
-<ul>
-` + data + `
-</ul>
-`, icon: 'warning'
-              });
-            }
-
-            this.generatingSchedule = false;
-          });
-
-      }
-    });
-
-  }
-
-  get scheduleUrl(): string {
-    return this.backend.getScheduleUrl(this.project);
-  }
-
-  get scheduleByTaskUrl(): string {
-    return this.backend.getScheduleByTaskUrl(this.project);
   }
 
 }

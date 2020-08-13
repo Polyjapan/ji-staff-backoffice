@@ -12,6 +12,7 @@ import {Period} from '../data/scheduling/period';
 import {SchedulingResult} from '../data/scheduling/schedulingResult';
 import {FixedTaskConstraint, ScheduleConstraint, UnavailableConstraint} from '../data/scheduling/constraints';
 import {Capability} from '../data/scheduling/capability';
+import {ScheduleVersion} from '../data/scheduling/version';
 
 type SchedulingMap = [Event, SchedulingProject[]][];
 
@@ -92,10 +93,6 @@ export class SchedulingService {
     return this.http.get<TaskSlot[]>(this.BASE + '/projects/' + project + '/tasks/' + task + '/slots');
   }
 
-  generateTaskSlots(project: number, task: number): Observable<void> {
-    return this.http.post<void>(this.BASE + '/projects/' + project + '/tasks/' + task + '/slots/generate', {});
-  }
-
   generateSchedule(project: number): Observable<SchedulingResult> {
     return this.http.post<SchedulingResult>(this.BASE + '/projects/' + project + '/schedule/generate', {});
   }
@@ -124,12 +121,14 @@ export class SchedulingService {
     return this.http.post<number>(this.BASE + '/projects/' + project + '/constraints/delete', data);
   }
 
-  getScheduleUrl(project: number) {
-    return this.BASE + '/projects/' + project + '/schedule/byStaff.html';
+  getScheduleUrl(project: number, version?: number) {
+    const versionSuppl = version ? '?version=' + version : '';
+    return this.BASE + '/projects/' + project + '/schedule/byStaff.html' + versionSuppl;
   }
 
-  getScheduleByTaskUrl(project: number) {
-    return this.BASE + '/projects/' + project + '/schedule/byTask.html';
+  getScheduleByTaskUrl(project: number, version?: number) {
+    const versionSuppl = version ? '?version=' + version : '';
+    return this.BASE + '/projects/' + project + '/schedule/byTask.html' + versionSuppl;
   }
 
   createCapability(cap: string): Observable<number> {
@@ -138,6 +137,18 @@ export class SchedulingService {
 
   getCapabilities(): Observable<Capability[]> {
     return this.http.get<Capability[]>(this.BASE + '/capabilities');
+  }
+
+  getVersions(project: number): Observable<ScheduleVersion[]> {
+    return this.http.get<ScheduleVersion[]>(this.BASE + '/projects/' + project + '/schedule/versions');
+  }
+
+  setActiveVersion(project: number, version: number): Observable<void> {
+    return this.http.post<void>(this.BASE + '/projects/' + project + '/schedule/versions/active', version.toString(10));
+  }
+
+  setTag(project: number, version: number, tag: string): Observable<void> {
+    return this.http.post<void>(this.BASE + '/projects/' + project + '/schedule/versions/' + version + '/tag', tag);
   }
 
   private fixSlot(p: Period) {

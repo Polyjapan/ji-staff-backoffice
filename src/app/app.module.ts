@@ -16,15 +16,6 @@ import {MatListModule} from '@angular/material/list';
 import {RequireLoginComponent} from './components/accounts/require-login/require-login.component';
 import {LoginFailedComponent} from './components/accounts/login-failed/login-failed.component';
 import {FlexModule} from '@angular/flex-layout';
-import {
-  MatAutocompleteModule,
-  MatBottomSheetModule, MatCheckboxModule,
-  MatChipsModule, MatDatepickerModule,
-  MatDialogModule, MatExpansionModule,
-  MatFormFieldModule,
-  MatInputModule, MatNativeDateModule, MatPaginatorModule,
-  MatProgressBarModule, MatProgressSpinnerModule, MatSlideToggleModule, MatSortModule, MatStepperModule, MatTabsModule
-} from '@angular/material';
 import {LoggedinComponent} from './components/loggedin.component';
 import {JwtModule} from '@auth0/angular-jwt';
 import {AuthModule, tokenGetter} from './services/auth.module';
@@ -76,6 +67,24 @@ import {StaffsArrivalComponent} from './components/arrival-departure/staffs-arri
 import { MealsDealerComponent } from './components/food/meals-dealer/meals-dealer.component';
 import { MealsSelectorComponent } from './components/food/meals-selector/meals-selector.component';
 import { SelectFormFieldComponent } from './components/forms/select-form-field/select-form-field.component';
+import { SchedulingVersionsComponent } from './components/scheduling/scheduling-versions/scheduling-versions.component';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSortModule} from '@angular/material/sort';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -122,6 +131,7 @@ import { SelectFormFieldComponent } from './components/forms/select-form-field/s
     MealsDealerComponent,
     MealsSelectorComponent,
     SelectFormFieldComponent,
+    SchedulingVersionsComponent,
   ],
   imports: [
     BrowserModule,

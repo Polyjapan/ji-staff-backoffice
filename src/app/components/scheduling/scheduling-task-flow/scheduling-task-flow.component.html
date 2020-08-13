@@ -29,7 +29,7 @@
                                     [project]="projectId"></app-scheduling-task-partitions>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Génération des slots</ng-template>
+    <ng-template matStepLabel>Prévisualisation des slots</ng-template>
 
     <app-scheduling-slots-show *ngIf="task.id" [task]="task.id" [project]="projectId"></app-scheduling-slots-show>
   </mat-step>

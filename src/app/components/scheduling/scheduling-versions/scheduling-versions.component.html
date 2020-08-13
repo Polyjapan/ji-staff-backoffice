@@ -1,0 +1,84 @@
+<h1>Liste des versions du planning</h1>
+
+
+<ng-container *ngIf="$versions | async as versions; else loading">
+
+  <p>Voici l'historique de toutes les versions du planning. Vous pouvez à tout instant consulter n'importe quelle version du planning ou en générer une nouvelle.<br>
+  Vous pouvez choisir quelle version du planning est affichée par défaut en la définissant "Par défaut". Si vous ne choisissez aucune version "Par défaut", la dernière version générée sera systématiquement affichée.<br>
+  Vous pouvez également définir un "tag" sur une version du planning, afin de les nommer. Ceci est purement facultatif.</p>
+
+  <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start">
+    <button fxFlex mat-raised-button (click)="reload()">Recharger la liste</button>
+
+
+    <button fxFlex mat-raised-button color="warn" (click)="regenSchedule()" [disabled]="generatingSchedule">
+      Générer le planning
+      <mat-progress-spinner *ngIf="generatingSchedule" mode="indeterminate" diameter="20" class="spinner"></mat-progress-spinner>
+    </button>
+
+
+    <a fxFlex mat-raised-button [href]="scheduleUrl(undefined)" color="primary" target="_blank">Voir le planning par staff par défaut</a>
+
+    <a fxFlex mat-raised-button [href]="scheduleByTaskUrl(undefined)" color="primary" target="_blank">Voir le planning par tache par défaut</a>
+
+  </div>
+
+  <br>
+
+  <p>
+    Pour le planning de chaque staff, l'addresse est la suivante : <code>{{scheduleUrl().replace('.html', '/[id_staff].html')}}</code> (remplacez <code>[id_staff]</code> par un numéro de staff, par exemple <code>/53.html</code>)
+  </p>
+
+  <br>
+
+  <table mat-table [dataSource]="versions">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tag">
+      <th mat-header-cell *matHeaderCellDef> Tag </th>
+      <td mat-cell *matCellDef="let element"> {{element.tag}} <button mat-icon-button (click)="setTag(element)"><mat-icon>edit</mat-icon></button></td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Heure de génération </th>
+      <td mat-cell *matCellDef="let element"> {{element.generationTime.toLocaleString()}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visibility">
+      <th mat-header-cell *matHeaderCellDef> Par défaut ? </th>
+      <td mat-cell *matCellDef="let element"> {{element.visible ? 'Oui' : 'Non' }} <button mat-raised-button *ngIf="!element.visible" style="margin-left: 5px;" (click)="setDefault(element)">Définir</button>  </td>
+    </ng-container>
+
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef> Visualiser </th>
+      <td mat-cell *matCellDef="let element">
+
+        <a mat-raised-button [href]="scheduleUrl(element)" color="primary" target="_blank" style="margin-right: 5px;">Par staff</a>
+
+        <a mat-raised-button [href]="scheduleByTaskUrl(element)" color="primary" target="_blank">Par tache</a>
+
+      </td>
+    </ng-container>
+
+    <!--
+  generationTime: Date;
+  tag?: string;
+  visible: boolean; -->
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['id', 'tag', 'date', 'visibility', 'view']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id', 'tag', 'date', 'visibility', 'view'];"></tr>
+  </table>
+</ng-container>
+
+<ng-template #loading>
+  <p>Chargement...</p>
+  <mat-spinner></mat-spinner>
+</ng-template>

@@ -4,11 +4,12 @@ import {BackendService} from '../../../services/backend.service';
 import 'rxjs-compat/add/operator/mergeMap';
 import {Event} from '../../../data/event';
 import 'rxjs-compat/add/operator/filter';
-import {MatDialog, MatSlideToggleChange} from '@angular/material';
 import {EventCreateComponent, EventCreateData} from '../event-create/event-create.component';
 import {InvalidationService} from '../../../services/invalidation.service';
 import {Form} from '../../../data/form';
 import {ApplicationState} from '../../../data/state';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-event-home',

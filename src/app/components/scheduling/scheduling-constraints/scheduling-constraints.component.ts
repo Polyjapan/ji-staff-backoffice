@@ -12,7 +12,8 @@ import {
   UnavailableConstraint
 } from '../../../data/scheduling/constraints';
 import {displayPeriod} from '../../../data/scheduling/period';
-import {MatBottomSheet, MatDialog} from '@angular/material';
+import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import {MatDialog} from '@angular/material/dialog';
 import {CreateConstraintTypeComponent} from './create-constraint-type.component';
 import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
 import {TaskTypesService} from '../../../services/taskTypes.service';

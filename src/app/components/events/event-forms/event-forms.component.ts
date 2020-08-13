@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {BackendService} from '../../../services/backend.service';
 import {Form} from '../../../data/form';
-import {MatDialog} from '@angular/material';
+import {MatDialog} from '@angular/material/dialog';
 import {FormCreateComponent} from '../../forms/form-create/form-create.component';
 import {InvalidationService, SubscribedListener} from '../../../services/invalidation.service';
 import {Event} from '../../../data/event';

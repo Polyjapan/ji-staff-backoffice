@@ -2,8 +2,9 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BackendService} from '../../../services/backend.service';
 import {StaffListEntry} from '../../../data/staffs';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
 import * as FileSaver from 'file-saver';
+import {MatSort} from '@angular/material/sort';
 
 @Component({
   selector: 'app-staffs-listing',

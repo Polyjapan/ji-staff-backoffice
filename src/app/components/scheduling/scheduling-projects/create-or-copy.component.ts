@@ -1,9 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {Event} from '../../../data/event';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef, MatDialog} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {SchedulingProjectCreateComponent} from '../scheduling-project-create/scheduling-project-create.component';
 import {SchedulingProject} from '../../../data/scheduling/schedulingProject';
 import {PickSchedulingCopyComponent} from './pick-copy.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-or-copy-project',

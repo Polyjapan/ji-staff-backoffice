@@ -1,6 +1,8 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {CreateUpdateTask, SchedulingTask} from '../../../../data/scheduling/schedulingTask';
-import {MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatStep, MatStepper} from '@angular/material';
+import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {MatStep, MatStepper} from '@angular/material/stepper';
 import {SchedulingService} from '../../../../services/scheduling.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {Observable} from 'rxjs';
@@ -13,12 +15,12 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./scheduling-task-create.component.css']
 })
 export class SchedulingTaskCreateComponent implements OnInit {
-  @Input('task') task: SchedulingTask;
-  @Input('stepper') stepper: MatStepper;
-  @Input('step') step: MatStep;
+  @Input() task: SchedulingTask;
+  @Input() stepper: MatStepper;
+  @Input() step: MatStep;
 
-  dirty: boolean = false;
-  sending: boolean = false;
+  dirty = false;
+  sending = false;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   @ViewChild('auto') matAutocomplete: MatAutocomplete;

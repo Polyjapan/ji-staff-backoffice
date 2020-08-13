@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import {TaskType} from '../../../../data/scheduling/taskType';
 import {TaskTypesService} from '../../../../services/taskTypes.service';

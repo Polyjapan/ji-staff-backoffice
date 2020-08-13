@@ -1,12 +1,13 @@
 import {Component, Inject} from '@angular/core';
 import {Event} from '../../../data/event';
-import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef, MatDialog} from '@angular/material';
+import {MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {CoCData} from './create-or-copy.component';
 import {SchedulingProject} from '../../../data/scheduling/schedulingProject';
 import {
   SchedulingProjectCreateComponent,
   SchedulingProjectCreateData
 } from '../scheduling-project-create/scheduling-project-create.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-scheduling-pick-copy',
