@@ -3,8 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {BackendService} from '../../../services/backend.service';
 import {Router} from '@angular/router';
 import {InvalidationService} from '../../../services/invalidation.service';
-import {Event} from '../../../data/event';
-import {EventCreateData} from '../../events/event-create/event-create.component';
 import {Form} from '../../../data/form';
 import {slugify} from '../../../utils';
 
@@ -15,6 +13,9 @@ import {slugify} from '../../../utils';
 })
 export class FormCreateComponent implements OnInit {
 
+  form: Form;
+  sending: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<FormCreateComponent>,
     @Inject(MAT_DIALOG_DATA) data: Form,
@@ -24,9 +25,6 @@ export class FormCreateComponent implements OnInit {
     this.form = data;
   }
 
-  form: Form;
-  sending: boolean;
-
   public static emptyForm(event: number): Form {
     const form = new Form();
     form.eventId = event;
@@ -34,6 +32,7 @@ export class FormCreateComponent implements OnInit {
     form.maxAge = -1;
     form.requiresStaff = false;
     form.hidden = false;
+    form.isMain = false;
 
     return form;
   }

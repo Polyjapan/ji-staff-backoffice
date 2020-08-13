@@ -5,17 +5,13 @@
     <mat-divider></mat-divider>
 
     <mat-action-list *ngIf="ev">
-      <mat-list-item *ngFor="let e of ev" [routerLink]="['/', 'event', e.eventId]">
-        <mat-icon matListIcon>{{e.isActive ? "folder_open" : "folder"}}</mat-icon>
+      <mat-list-item *ngFor="let e of ev" [routerLink]="['/', 'event', e.id]">
+        <mat-icon matListIcon>{{e.visibility === Visibility.PUBLIC || e.visibility === Visibility.INTERNAL ? "folder_open" : "folder"}}</mat-icon>
         <p matLine>{{e.name}}</p>
-        <p matLine>Débute le <b>{{e.eventBegin}}</b> - Actuellement <b>{{e.isActive ? "actif" : "inactif"}}</b></p>
+        <p matLine>Débute le <b>{{e.start.toLocaleDateString()}}</b> - Actuellement <b>{{e.visibility}}</b></p>
       </mat-list-item>
       <mat-list-item *ngIf="ev.length == 0">
         <p matLine><i>Aucune édition enregistrée...</i></p>
-      </mat-list-item>
-      <mat-list-item (click)="openBottomSheet()">
-        <mat-icon matListIcon>create_new_folder</mat-icon>
-        <p matLine>Nouvel événement</p>
       </mat-list-item>
     </mat-action-list>
 

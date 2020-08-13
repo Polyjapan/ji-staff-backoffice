@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from '../../../services/backend.service';
-import {Event} from '../../../data/event';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
-import {CreateOrCopyComponent} from './create-or-copy.component';
-import {EventCreateComponent} from '../event-create/event-create.component';
+import {Event, Visibility} from '../../../data/event';
 import {ActivatedRoute} from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-pick-edition',
@@ -14,8 +10,9 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class PickEditionComponent implements OnInit {
   ev: Event[] = undefined;
+  Visibility = Visibility;
 
-  constructor(private backend: BackendService, private bottomSheet: MatBottomSheet, private dialog: MatDialog, private route: ActivatedRoute) {
+  constructor(private backend: BackendService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -24,16 +21,11 @@ export class PickEditionComponent implements OnInit {
   }
 
   reload() {
-    this.backend.getEditions().subscribe(ev => this.ev = ev.sort((a, b) => (a.isActive) ? (b.isActive ? 0 : -1) : 1));
-  }
-
-  openBottomSheet() {
-    if (this.ev.length > 0) {
-      this.bottomSheet.open(CreateOrCopyComponent, {
-        data: {ev: this.ev}
-      });
-    } else {
-      this.dialog.open(EventCreateComponent);
-    }
+    this.backend.getEditions().subscribe(ev => this.ev = ev
+      .sort((a, b) => -a.id + b.id)
+      .map(e => {
+        e.start = new Date(e.start as any as string);
+        return e;
+      }));
   }
 }

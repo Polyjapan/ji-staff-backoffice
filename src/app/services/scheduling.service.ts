@@ -14,7 +14,7 @@ import {FixedTaskConstraint, ScheduleConstraint, UnavailableConstraint} from '..
 import {Capability} from '../data/scheduling/capability';
 import {ScheduleVersion} from '../data/scheduling/version';
 
-type SchedulingMap = [Event, SchedulingProject[]][];
+type SchedulingMap = [number, SchedulingProject[]][];
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +25,9 @@ export class SchedulingService {
   constructor(private http: HttpClient) {
   }
 
-  getProjects(): Observable<Map<Event, SchedulingProject[]>> {
+  getProjects(): Observable<Map<number, SchedulingProject[]>> {
     return this.http.get<SchedulingMap>(this.BASE + '/projects').pipe(map(sched => {
-      const retMap = new Map<Event, SchedulingProject[]>();
+      const retMap = new Map<number, SchedulingProject[]>();
 
       sched.forEach(evdata => retMap.set(evdata[0], evdata[1]));
 

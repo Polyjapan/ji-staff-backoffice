@@ -30,6 +30,9 @@
     les staffs
   </mat-checkbox>
 
+  <mat-checkbox name="mainForm" [(ngModel)]="form.isMain">Formulaire principal de l'événement
+  </mat-checkbox>
+
   <mat-form-field>
     <input matInput type="datetime-local" placeholder="Fermeture automatique (facultatif)" [(ngModel)]="form.closeDate"
            name="closeDate">

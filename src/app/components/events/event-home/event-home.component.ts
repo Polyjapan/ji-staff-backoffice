@@ -4,12 +4,10 @@ import {BackendService} from '../../../services/backend.service';
 import 'rxjs-compat/add/operator/mergeMap';
 import {Event} from '../../../data/event';
 import 'rxjs-compat/add/operator/filter';
-import {EventCreateComponent, EventCreateData} from '../event-create/event-create.component';
 import {InvalidationService} from '../../../services/invalidation.service';
 import {Form} from '../../../data/form';
 import {ApplicationState} from '../../../data/state';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-event-home',
@@ -20,11 +18,11 @@ export class EventHomeComponent implements OnInit {
   forms: Form[];
   event: Event;
   states: Map<ApplicationState, number>;
-  updatingActivation = false;
+  copying = false;
   ApplicationState = ApplicationState;
 
-  constructor(private ar: ActivatedRoute, private back: BackendService, private dialog: MatDialog,
-              private invalidate: InvalidationService) {
+
+  constructor(private ar: ActivatedRoute, private back: BackendService, private invalidate: InvalidationService) {
   }
 
   get totalApplications() {
@@ -50,35 +48,52 @@ export class EventHomeComponent implements OnInit {
       .subscribe(ev => {
         this.event = ev;
         this.refreshForms();
-        this.back.getEditionStats(this.event.eventId).subscribe(map => {
+        this.back.getEditionStats(this.event.id).subscribe(map => {
           this.states = new Map();
 
           for (const pair of map) {
             this.states.set(pair[0], pair[1]);
           }
         });
-        this.invalidate.listen('forms-' + this.event.eventId, (tag) => this.refreshForms());
-      });
-  }
-
-  edit() {
-    const create: EventCreateData = {event: this.event};
-    this.dialog.open(EventCreateComponent, {data: create});
-  }
-
-  toggleActivate($event: MatSlideToggleChange) {
-    console.log($event);
-    this.updatingActivation = true;
-
-    this.back.updateActive(this.event.eventId, $event.checked)
-      .subscribe(u => {
-        this.invalidate.invalidate('event-' + this.event.eventId);
-        this.updatingActivation = false;
+        this.invalidate.listen('forms-' + this.event.id, (tag) => this.refreshForms());
       });
   }
 
   private refreshForms() {
     this.forms = undefined;
-    this.back.getForms(this.event.eventId).subscribe(forms => this.forms = forms);
+    this.back.getForms(this.event.id).subscribe(forms => this.forms = forms);
+  }
+
+  copy() {
+    if (this.copying) {
+      return;
+    }
+    this.copying = true;
+
+    this.back.getEditions().subscribe(events => {
+      const map = new Map<string, string>();
+      events.filter(e => e.id !== this.event.id)
+        .forEach(ev => map.set(ev.id.toString(10), ev.name));
+
+      const box = Swal.fire({
+        title: 'Choisir l\'événement à cloner',
+        input: 'select',
+        inputOptions: map,
+        showLoaderOnConfirm: true
+      });
+
+      box.then(v => {
+        if (v.isConfirmed) {
+          this.back.cloneEvent(Number.parseInt(v.value as string, 10), this.event.id).subscribe(res => {
+            Swal.close();
+            this.refreshForms();
+            Swal.fire('Parfait', 'Les formulaires ont bien été copiés !', 'success');
+            this.copying = false;
+          });
+        } else {
+          this.copying = false;
+        }
+      });
+    });
   }
 }

@@ -69,7 +69,7 @@ export class EventFormsComponent implements OnInit {
   }
 
   delete(form: Form) {
-    if (this.event.mainForm === form.formId)
+    if (form.isMain)
       return;
 
     if (confirm('Voulez vous vraiment supprimer ce formulaire ? Cette action est irréversible.')) {
@@ -84,7 +84,8 @@ export class EventFormsComponent implements OnInit {
       .subscribe(a => {
         this.inval.invalidate(`event-${form.eventId}`);
         this.settingDefault = false;
-        this.event.mainForm = form.formId;
+        this.forms.filter(f => f.isMain = true).forEach(f => f.isMain = false);
+        form.isMain = true;
       });
   }
 

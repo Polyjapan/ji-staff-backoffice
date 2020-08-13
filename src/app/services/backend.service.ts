@@ -37,24 +37,10 @@ export class BackendService {
     return this.http.get<[ApplicationState, number][]>(this.baseApiUrl + '/stats/' + id);
   }
 
-  createEdition(edition: Event, copyOf?: number): Observable<number> {
-    // TODO: better check the date, or the server will do it for us
-    return this.http.post<number>(this.baseApiUrl + '/editions', {
-      copyOf,
-      name: edition.name,
-      date: (typeof edition.eventBegin === 'string') ?
-        edition.eventBegin :
-        (edition.eventBegin.getFullYear() + '-' + edition.eventBegin.getMonth() + '-' + edition.eventBegin.getDate())
+  cloneEvent(source: number, target: number): Observable<void> {
+    return this.http.post<void>(this.baseApiUrl + '/editions/clone', {
+      source, target
     });
-  }
-
-  updateEdition(edition: Event): Observable<void> {
-    return this.http.put<void>(this.baseApiUrl + '/editions/' + edition.eventId,
-      {name: edition.name, date: edition.eventBegin});
-  }
-
-  updateActive(id: number, active: boolean): Observable<void> {
-    return this.http.put<void>(this.baseApiUrl + '/editions/' + id + '/active', active);
   }
 
   setDefaultForm(eventId: number, formId: number): Observable<void> {

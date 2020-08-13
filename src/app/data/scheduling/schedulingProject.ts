@@ -15,6 +15,5 @@ export class CreateSchedulingProject {
   minBreakMinutes: number;
   maxSameShiftType: number;
   copyOf?: number;
-  copySlots?: boolean;
   copyConstraints?: boolean;
 }

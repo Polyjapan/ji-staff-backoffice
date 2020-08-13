@@ -2,6 +2,7 @@
 export class Form {
   formId?: number;
   eventId: number;
+  isMain: boolean;
   internalName: string;
   name: string;
   shortDescription: string;

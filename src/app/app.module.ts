@@ -23,9 +23,6 @@ import {LoginService} from './services/login.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {PickEditionComponent} from './components/events/pick-edition/pick-edition.component';
 import {environment} from '../environments/environment';
-import {EventCreateComponent} from './components/events/event-create/event-create.component';
-import {CreateOrCopyComponent} from './components/events/pick-edition/create-or-copy.component';
-import {PickCopyComponent} from './components/events/pick-edition/pick-copy.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TestComponent} from './components/test.component';
 import {EventParentComponent} from './components/events/event-parent/event-parent.component';
@@ -93,9 +90,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     LoginFailedComponent,
     LoggedinComponent,
     PickEditionComponent,
-    EventCreateComponent,
-    CreateOrCopyComponent,
-    PickCopyComponent,
     TestComponent,
     EventParentComponent,
     EventHomeComponent,

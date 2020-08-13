@@ -1,7 +1,9 @@
 <h3>Résumé de l'événement</h3>
-<p>Actif : <mat-slide-toggle (change)="toggleActivate($event)" [disabled]="updatingActivation" [checked]="event.isActive"></mat-slide-toggle> <mat-spinner diameter="17" style="display: inline-block;" *ngIf="updatingActivation"></mat-spinner></p>
+<p>Visibilité : {{event.visibility}}</p>
 
-<button mat-raised-button (click)="edit()"><mat-icon>create</mat-icon> Modifier l'événement</button>
+<h3>Clonage</h3>
+<p>Vous pouvez copier les formulaires d'un autre événement ici.</p>
+<button mat-stroked-button (click)="copy()">Choisir un événement à cloner</button>
 
 <br>
 <h3>Statistiques</h3>

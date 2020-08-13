@@ -7,6 +7,7 @@ import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateOrCopyProjectComponent} from './create-or-copy.component';
 import {SchedulingProjectCreateComponent} from '../scheduling-project-create/scheduling-project-create.component';
+import {BackendService} from '../../../services/backend.service';
 
 @Component({
   selector: 'app-scheduling-projects',
@@ -19,7 +20,7 @@ export class SchedulingProjectsComponent implements OnInit {
   eventId: number;
 
   constructor(private service: SchedulingService, private bottomSheet: MatBottomSheet,
-              private dialog: MatDialog,
+              private dialog: MatDialog, private backend: BackendService,
               private ar: ActivatedRoute) {
   }
 
@@ -40,14 +41,18 @@ export class SchedulingProjectsComponent implements OnInit {
       this.events = new Map<number, Event>();
 
       res.forEach((v, k) => {
-        console.log(k);
-        console.log(v);
-        this.projects.set(k.eventId, v);
-        this.events.set(k.eventId, k);
+        this.projects.set(k, v);
       });
 
       console.log(res);
       console.log(this.projects.get(1));
+    });
+
+    this.backend.getEditions().subscribe(events => {
+      this.events = new Map<number, Event>();
+      events.forEach(e => {
+        this.events.set(e.id, e);
+      });
     });
     this.ar.data.subscribe(data => this.eventId = data.eventId);
   }

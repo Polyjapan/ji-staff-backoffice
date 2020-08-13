@@ -1,8 +1,10 @@
+export enum Visibility {
+  DRAFT = 'Draft', INTERNAL = 'Internal', PUBLIC = 'Public', ARCHIVED = 'Archived'
+}
 
 export class Event {
-  eventId?: number;
-  eventBegin: Date;
+  id?: number;
+  start: Date;
   name: string;
-  mainForm?: number;
-  isActive: boolean;
+  visibility: Visibility;
 }
