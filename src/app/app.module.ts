@@ -123,20 +123,6 @@ import { SelectFormFieldComponent } from './components/forms/select-form-field/s
     MealsSelectorComponent,
     SelectFormFieldComponent,
   ],
-  entryComponents: [
-    CreateOrCopyComponent,
-    EventCreateComponent,
-    PickCopyComponent,
-    FormCreateComponent,
-    FormPageCreateComponent,
-    SchedulingProjectCreateComponent,
-    CreateOrCopyProjectComponent,
-    PickSchedulingCopyComponent,
-    SchedulingTaskPartitionEditComponent,
-    CreateConstraintTypeComponent,
-    CreateConstraintComponent,
-    CreateTaskTypeComponent
-  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

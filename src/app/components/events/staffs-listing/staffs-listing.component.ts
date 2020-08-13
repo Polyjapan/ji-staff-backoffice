@@ -13,7 +13,7 @@ import * as FileSaver from 'file-saver';
 export class StaffsListingComponent implements OnInit {
   evId: number;
   staffs: MatTableDataSource<StaffListEntry>;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private ar: ActivatedRoute, private backend: BackendService, private router: Router) {
   }

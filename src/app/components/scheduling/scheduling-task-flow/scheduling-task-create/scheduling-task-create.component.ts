@@ -21,8 +21,8 @@ export class SchedulingTaskCreateComponent implements OnInit {
   sending: boolean = false;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
-  @ViewChild('capInput', {static: false}) capInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('capInput') capInput: ElementRef<HTMLInputElement>;
 
   capCtrl = new FormControl();
   availableCapabilities: string[];
