@@ -1,6 +1,7 @@
 # Stage 1
-FROM node:10-alpine as build-step
+FROM node:15-alpine as build-step
 
+RUN apk add git
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json /app
