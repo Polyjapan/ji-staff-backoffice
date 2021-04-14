@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SchedulingTaskPartitionEditComponent } from './scheduling-task-partition-edit.component';
 
@@ -6,7 +6,7 @@ describe('SchedulingTaskPartitionEditComponent', () => {
   let component: SchedulingTaskPartitionEditComponent;
   let fixture: ComponentFixture<SchedulingTaskPartitionEditComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SchedulingTaskPartitionEditComponent ]
     })

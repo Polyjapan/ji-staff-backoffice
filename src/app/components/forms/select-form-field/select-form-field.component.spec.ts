@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SelectFormFieldComponent } from './select-form-field.component';
 
@@ -6,7 +6,7 @@ describe('SelectFormFieldComponent', () => {
   let component: SelectFormFieldComponent;
   let fixture: ComponentFixture<SelectFormFieldComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SelectFormFieldComponent ]
     })

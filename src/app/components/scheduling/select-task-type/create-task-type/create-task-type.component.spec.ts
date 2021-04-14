@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { CreateTaskTypeComponent } from './create-task-type.component';
 
@@ -6,7 +6,7 @@ describe('CreateAccredTypeComponent', () => {
   let component: CreateTaskTypeComponent;
   let fixture: ComponentFixture<CreateTaskTypeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CreateTaskTypeComponent ]
     })

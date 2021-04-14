@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FormPageCreateComponent } from './form-page-create.component';
 
@@ -6,7 +6,7 @@ describe('FormPageCreateComponent', () => {
   let component: FormPageCreateComponent;
   let fixture: ComponentFixture<FormPageCreateComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ FormPageCreateComponent ]
     })

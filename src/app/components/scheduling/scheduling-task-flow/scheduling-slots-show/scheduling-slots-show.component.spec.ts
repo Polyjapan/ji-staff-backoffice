@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SchedulingSlotsShowComponent } from './scheduling-slots-show.component';
 
@@ -6,7 +6,7 @@ describe('SchedulingSlotsShowComponent', () => {
   let component: SchedulingSlotsShowComponent;
   let fixture: ComponentFixture<SchedulingSlotsShowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SchedulingSlotsShowComponent ]
     })

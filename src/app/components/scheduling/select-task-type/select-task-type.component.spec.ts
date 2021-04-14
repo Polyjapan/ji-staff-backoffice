@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SelectTaskTypeComponent } from './select-task-type.component';
 
@@ -6,7 +6,7 @@ describe('SelectLenderComponent', () => {
   let component: SelectTaskTypeComponent;
   let fixture: ComponentFixture<SelectTaskTypeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SelectTaskTypeComponent ]
     })

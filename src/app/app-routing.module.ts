@@ -57,15 +57,12 @@ const routes: Routes = [
   },
   {path: 'require-login', component: RequireLoginComponent},
   {path: 'login-failed', component: LoginFailedComponent},
-  {
-    path: '**',
-    canActivate: [PermissionAuthGuard],
-    redirectTo: ''
-  }
+  { path: '**',
+    redirectTo: '' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
