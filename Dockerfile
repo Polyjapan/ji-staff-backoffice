@@ -11,5 +11,5 @@ RUN npm run prod
 
 # Stage 2
 FROM nginx:1.17.1-alpine
-COPY --from=build-step /app/dist/ji-admin /usr/share/nginx/html
+COPY --from=build-step /app/dist/JIStaffBackoffice /usr/share/nginx/html
 COPY ./docker/nginx_default.conf /etc/nginx/conf.d/default.conf
